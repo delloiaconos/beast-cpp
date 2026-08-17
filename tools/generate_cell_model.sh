@@ -8,7 +8,7 @@
 #
 # Usage:
 #
-#   NAME=R0R2C2 tools/generate_cell_model.sh
+#   NAME=R0R1C1 tools/generate_cell_model.sh
 #
 # Optional variables:
 #
@@ -62,6 +62,19 @@ info()
     echo "[generate-cell-model] $*"
 }
 
+# -----------------------------------------------------------------------------
+# Project paths
+# -----------------------------------------------------------------------------
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+TEMPLATE_INCLUDE_DIR="$ROOT_DIR/template/include/cell_models"
+TEMPLATE_SOURCE_DIR="$ROOT_DIR/template/src/cell_models"
+
+OUTPUT_INCLUDE_DIR="$ROOT_DIR/include/beast/cell_models/"
+OUTPUT_SOURCE_DIR="$ROOT_DIR/src/cell_models/"
+
 
 # -----------------------------------------------------------------------------
 # Validate NAME
@@ -90,20 +103,6 @@ fi
 UPPER_NAME=$(printf '%s' "$NAME" | tr '[:lower:]' '[:upper:]')
 
 # -----------------------------------------------------------------------------
-# Project paths
-# -----------------------------------------------------------------------------
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-
-TEMPLATE_INCLUDE_DIR="$ROOT_DIR/template/include/cell_models"
-TEMPLATE_SOURCE_DIR="$ROOT_DIR/template/src/cell_models"
-
-OUTPUT_INCLUDE_DIR="$ROOT_DIR/include/beast/cell_models/"
-OUTPUT_SOURCE_DIR="$ROOT_DIR/src/cell_models/"
-
-
-# -----------------------------------------------------------------------------
 # Configuration
 # -----------------------------------------------------------------------------
 
@@ -111,6 +110,7 @@ M4="${M4:-m4}"
 FORCE="${FORCE:-0}"
 BEAST_YEAR="${BEAST_YEAR:-$(date +%Y)}"
 
+BEAST_INCLUDE_BASEPATH="beast/cell_models"
 
 # Try to obtain author from Git if it was not explicitly provided.
 if [ -z "${BEAST_AUTHOR:-}" ]; then
@@ -118,9 +118,9 @@ if [ -z "${BEAST_AUTHOR:-}" ]; then
         git -C "$ROOT_DIR" config user.name 2>/dev/null || true
     )"
 fi
-
-BEAST_AUTHOR="${BEAST_AUTHOR:-Unknown Author}"
-
+if [ -z "$BEAST_AUTHOR" ]; then
+    BEAST_AUTHOR="BEAST contributors"
+fi
 
 # Try to obtain repository URL from Git if it was not explicitly provided.
 if [ -z "${BEAST_REPOSITORY:-}" ]; then
@@ -128,10 +128,9 @@ if [ -z "${BEAST_REPOSITORY:-}" ]; then
         git -C "$ROOT_DIR" config --get remote.origin.url 2>/dev/null || true
     )"
 fi
-
-BEAST_REPOSITORY="${BEAST_REPOSITORY:-Unknown Repository}"
-
-BEAST_INCLUDE_BASEPATH="beast/cell_models"
+if [ -z "$BEAST_REPOSITORY" ]; then
+    BEAST_REPOSITORY="https://github.com/delloiaconos/beast-cpp.git"
+fi
 
 # -----------------------------------------------------------------------------
 # Check dependencies
