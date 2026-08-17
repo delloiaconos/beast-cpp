@@ -30,8 +30,8 @@ changecom()dnl
  * GNU General Public License v3.0.
  */
 
-#ifndef __CELL_MODEL_$$BEAST_UPPER_NAME$$_H__
-#define __CELL_MODEL_$$BEAST_UPPER_NAME$$_H__
+#ifndef __CELL_MODEL_$$BEAST_UPNAME$$_H__
+#define __CELL_MODEL_$$BEAST_UPNAME$$_H__
 
 #include <beast/common/architecture.h>
 #include <beast/numerics/Matrix.h>
@@ -74,4 +74,4 @@ public:
     t_size CoerceState(Vector* const xx) override;
 };
 
-#endif // __CELL_MODEL_$$BEAST_UPPER_NAME$$_H__
+#endif // __CELL_MODEL_$$BEAST_UPNAME$$_H__

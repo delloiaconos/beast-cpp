@@ -29,28 +29,28 @@ changecom()dnl
  * GNU General Public License v3.0.
  */
 
-#ifndef __ESTIMATOR_$$BEAST_UPPER_NAME$$_DEBUG_H__
-#define __ESTIMATOR_$$BEAST_UPPER_NAME$$_DEBUG_H__
+#ifndef __ESTIMATOR_$$BEAST_UPNAME$$_DEBUG_H__
+#define __ESTIMATOR_$$BEAST_UPNAME$$_DEBUG_H__
 
-/* Debug Masks for Estimator "$$BEAST_UPPER_NAME$$" */
+/* Debug Masks for Estimator "$$BEAST_UPNAME$$" */
 
-#define DBGMSK_ESTIMATOR_$$BEAST_UPPER_NAME$$_ENABLE        	0x80
-#define DBGMSK_ESTIMATOR_$$BEAST_UPPER_NAME$$_CLASS        	    0x01
-#define DBGMSK_ESTIMATOR_$$BEAST_UPPER_NAME$$_COERCE			0x02
-#define DBGMSK_ESTIMATOR_$$BEAST_UPPER_NAME$$_STEPBYSTEP		0x04
+#define DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_ENABLE        	0x80
+#define DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_CLASS        	    0x01
+#define DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_COERCE			0x02
+#define DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_STEPBYSTEP		0x04
 
 
-#define DEBUG_ESTIMATOR_$$BEAST_UPPER_NAME$$       ( DBGMSK_ESTIMATOR_$$BEAST_UPPER_NAME$$_ENABLE )
+#define DEBUG_ESTIMATOR_$$BEAST_UPNAME$$       ( DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_ENABLE )
 
-#define ESTIMATOR_$$BEAST_UPPER_NAME$$_CHKDBG( dbg )      ( \
-                            defined( DEBUG_ESTIMATOR_$$BEAST_UPPER_NAME$$ ) && \
-                            ( DEBUG_ESTIMATOR_$$BEAST_UPPER_NAME$$ & DBGMSK_ESTIMATOR_$$BEAST_UPPER_NAME$$_ENABLE ) && \ 
-                            ( DEBUG_ESTIMATOR_$$BEAST_UPPER_NAME$$ & (dbg) ) )
+#define ESTIMATOR_$$BEAST_UPNAME$$_CHKDBG( dbg )      ( \
+                            defined( DEBUG_ESTIMATOR_$$BEAST_UPNAME$$ ) && \
+                            ( DEBUG_ESTIMATOR_$$BEAST_UPNAME$$ & DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_ENABLE ) && \ 
+                            ( DEBUG_ESTIMATOR_$$BEAST_UPNAME$$ & (dbg) ) )
 
-#if ESTIMATOR_$$BEAST_UPPER_NAME$$_CHKDBG( DBGMSK_$$BEAST_UPPER_NAME$$_ENABLE )
+#if ESTIMATOR_$$BEAST_UPNAME$$_CHKDBG( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
        #include <stdio.h>
        #include <stdlib.h>
        #define $$BEAST_CLASS_NAME$$_dprint( fmt ) do{ fprintf(fdbg, "$$BEAST_CLASS_NAME$$ :" fmt "\n"); fflush( fdbg ); } while(0)
 #endif
 
-#endif // __ESTIMATOR_$$BEAST_UPPER_NAME$$_DEBUG_H__
+#endif // __ESTIMATOR_$$BEAST_UPNAME$$_DEBUG_H__

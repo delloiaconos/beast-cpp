@@ -30,8 +30,8 @@ changecom()dnl
  * GNU General Public License v3.0.
  */
 
-#ifndef __ESTIMATOR_$$BEAST_UPPER_NAME$$_H__
-#define __ESTIMATOR_$$BEAST_UPPER_NAME$$_H__
+#ifndef __ESTIMATOR_$$BEAST_UPNAME$$_H__
+#define __ESTIMATOR_$$BEAST_UPNAME$$_H__
 
 #include <$$BEAST_INCLUDE_BASEPATH$$/Estimator.h>
 
@@ -74,4 +74,4 @@ private:
     Vector u_;
 };
 
-#endif // __ESTIMATOR_$$BEAST_UPPER_NAME$$_H__
+#endif // __ESTIMATOR_$$BEAST_UPNAME$$_H__
