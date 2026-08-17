@@ -17,6 +17,8 @@ beast-cpp/
 ├── apps/            Independent command-line utilities
 ├── tests/           Library and integration tests
 ├── docs/            User and Doxygen documentation
+├── template/        M4 class templates
+├── tools/           Developer helper scripts
 ├── CMakeLists.txt   CMake project definition
 └── Makefile         Convenience wrapper around CMake
 ```
@@ -34,7 +36,8 @@ The project requires:
 
 For the convenience commands shown below, GNU Make or a compatible `make`
 implementation is also expected. Doxygen is optional and is required only when
-generating the API documentation.
+generating the API documentation. GNU M4 is optional and is required only for
+the class-generation commands.
 
 ## Quick start
 
@@ -58,6 +61,13 @@ make release
 
 The Makefile is only a developer-friendly front end. CMake remains the source
 of truth for targets, dependencies, and installation rules.
+
+Generate a new model or estimator skeleton with GNU M4:
+
+```bash
+make generate-cell-model NAME=R0R2C2
+make generate-estimator NAME=UKF
+```
 
 ## Utilities
 
