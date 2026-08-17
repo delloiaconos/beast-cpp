@@ -68,6 +68,7 @@ Estimator_OpenLoop::~Estimator_OpenLoop()
 
 t_float Estimator_OpenLoop::initialize( Vector &x0, Vector &p0, Vector &unew, Vector &yXPnew, t_float tnew )
 {
+	(void) yXPnew;
 
 	pPold   = p0;
 	xPold   = x0;
@@ -75,12 +76,13 @@ t_float Estimator_OpenLoop::initialize( Vector &x0, Vector &p0, Vector &unew, Ve
 	told   = tnew;
 	uold   = unew;
 
-
 	return (t_float) 0.0;
 }
 
 t_float Estimator_OpenLoop::step( Vector &unew, Vector &yXPnew, t_float tnew )
 {
+	(void) yXPnew;
+
 	t_float deltat;
 #if _ARCHITECTURE_ == ARCH_NIOS
 	 deltat = tnew;
@@ -94,10 +96,6 @@ t_float Estimator_OpenLoop::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	 // Copy new State!
 	 xPold = xMnew;
-
-#if DBGCHK_OPENLOOP( DBGMSK_OPENLOOP_STEPBYSTEP )
-
-#endif
 
     return (t_float) 0;
 }

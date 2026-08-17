@@ -32,7 +32,7 @@
 
 
 /* Tipi di debug disponibili */
-#define DBGMSK_OPENLOOP_ENABLE          	0x80
+#define DBGMSK_OPENLOOP_ENABLE          0x80
 #define DBGMSK_OPENLOOP_CLASS        	0x01
 #define DBGMSK_OPENLOOP_COERCE			0x02
 #define DBGMSK_OPENLOOP_STEPBYSTEP		0x04
@@ -46,8 +46,12 @@
  * Per disabilitare togliere DBGMSK_OPENLOOP_ENABLE oppure commentare la definizione.
  */
 //#define DEBUG_OPENLOOP       ( DBGMSK_OPENLOOP_ENABLE | DBGMSK_OPENLOOP_OUT_LX | DBGMSK_OPENLOOP_OUT_LP )
+#define DEBUG_OPENLOOP		0x00
 
-#define DBGCHK_OPENLOOP( dbg )      (defined(DEBUG_OPENLOOP) && ( DEBUG_OPENLOOP & DBGMSK_OPENLOOP_ENABLE ) &&  ( DEBUG_OPENLOOP & (dbg) )  )
+#define DBGCHK_OPENLOOP( dbg )      ( \
+					defined( DEBUG_OPENLOOP ) && \
+					( DEBUG_OPENLOOP & DBGMSK_OPENLOOP_ENABLE ) && \
+					( DEBUG_OPENLOOP & (dbg) ) )
 
 #if DBGCHK_OPENLOOP( DBGMSK_OPENLOOP_ENABLE )
 	#include <stdio.h>
