@@ -151,7 +151,7 @@ fi
 
 declare -A HEADER_FILES=(
     ["Estimator.h.m4"]="Estimator_${NAME}.h"
-    #["Estimator_debug.h.m4"]="Estimator_${NAME}_debug.h"
+    ["Estimator_debug.h.m4"]="Estimator_${NAME}_debug.h"
 )
 
 
@@ -202,7 +202,7 @@ generate_file()
     "$M4" \
         -D"BEAST_NAME=$NAME" \
         -D"BEAST_UPPER_NAME=$UPPER_NAME" \
-        -D"BEAST_CLASS_NAME=Estimator_${UPPER_NAME}" \
+        -D"BEAST_CLASS_NAME=Estimator_${NAME}" \
         -D"BEAST_AUTHOR=$BEAST_AUTHOR" \
         -D"BEAST_REPOSITORY=$BEAST_REPOSITORY" \
         -D"BEAST_YEAR=$BEAST_YEAR" \

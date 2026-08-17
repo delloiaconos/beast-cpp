@@ -1,6 +1,5 @@
 changequote(`$', `$')dnl
 changecom()dnl
-
 // SPDX-License-Identifier: GPL-3.0-only
 
 /**
