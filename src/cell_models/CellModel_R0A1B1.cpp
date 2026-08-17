@@ -289,7 +289,9 @@ t_size CellModel_R0A1B1::f0( const Vector &xold, const Vector &pold, const Vecto
 
 
 t_size CellModel_R0A1B1::g0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const res )
-{   
+{
+	(void) deltat;
+	
 	t_float ocv0old;
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
     CellModel_R0A1B1_dprint( "CALL: CellModel_R0A1B1::y0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const ynew )" );
@@ -303,6 +305,10 @@ t_size CellModel_R0A1B1::g0( const Vector &xold, const Vector &pold, const Vecto
 
 t_size CellModel_R0A1B1::f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
+	(void) xold;
+	(void) uold;
+	(void) deltat;
+
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
     CellModel_R0A1B1_dprint( "CALL: CellModel_R0A1B1::f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
@@ -317,6 +323,9 @@ t_size CellModel_R0A1B1::f1x( const Vector &xold, const Vector &pold, const Vect
 
 t_size CellModel_R0A1B1::f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
+	(void) pold;
+	(void) deltat;
+
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
     CellModel_R0A1B1_dprint( "CALL: CellModel_R0A1B1::f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
@@ -334,6 +343,10 @@ t_size CellModel_R0A1B1::f1p( const Vector &xold, const Vector &pold, const Vect
 
 t_size CellModel_R0A1B1::g1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
+	(void) pold;
+	(void) uold;
+	(void) deltat;
+
 	t_float ocv1old;
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
@@ -351,6 +364,10 @@ t_size CellModel_R0A1B1::g1x( const Vector &xold, const Vector &pold, const Vect
 
 t_size CellModel_R0A1B1::g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const res )
 {
+	(void) xold;
+	(void) pold;
+	(void) deltat;
+
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
     CellModel_R0A1B1_dprint( "CALL: CellModel_R0A1B1::g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif

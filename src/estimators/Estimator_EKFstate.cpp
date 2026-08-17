@@ -74,7 +74,8 @@ Estimator_EKFstate::~Estimator_EKFstate()
 
 t_float Estimator_EKFstate::initialize( Vector &x0, Vector &p0, Vector &unew, Vector &yXPnew, t_float tnew )
 {
-
+	(void) yXPnew;
+	
 	pPold   = p0;
 	xPold   = x0;
 

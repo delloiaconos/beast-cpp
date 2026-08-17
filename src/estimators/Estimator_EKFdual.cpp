@@ -87,7 +87,8 @@ Estimator_EKFdual::~Estimator_EKFdual()
 
 t_float Estimator_EKFdual::initialize( Vector &x0, Vector &p0, Vector &unew, Vector &yXPnew, t_float tnew )
 {
-
+	(void) yXPnew;
+	
 	pPold   = p0;
 	xPold   = x0;
 

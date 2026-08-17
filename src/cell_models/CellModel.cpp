@@ -52,6 +52,7 @@ CellModel::~CellModel()
 #if _ARCHITECTURE_ == ARCH_PC
 CellModel::CellModel( char * basepath )
 {
+	(void) basepath;
 /*	strcpy( _basepath, basepath );
 	Nx = 0;
 	Np = 0;
@@ -66,41 +67,73 @@ CellModel::CellModel( char * basepath )
 
 t_size CellModel::f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const xnew )
 {
+	(void) xold;
+	(void) pold;
+	(void) uold;
+	(void) deltat;
+	(void) xnew;
 	return (t_size) 0;
 }
 
 t_size CellModel::f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const dnew )
 {
+	(void) xold;
+	(void) pold;
+	(void) uold;
+	(void) deltat;
+	(void) dnew; 
 	return (t_size) 0;
 }
 
 t_size CellModel::f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const dnew )
 {
+	(void) xold;
+	(void) pold;
+	(void) uold;
+	(void) deltat;
+	(void) dnew;
 	return (t_size) 0;
 }
 
 t_size CellModel::g0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const ynew )
 {
+	(void) xold;
+	(void) pold;
+	(void) uold;
+	(void) deltat;
+	(void) ynew;
 	return (t_size) 0;
 }
 
 t_size CellModel::g1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const dnew )
 {
+	(void) xold;
+	(void) pold;
+	(void) uold;
+	(void) deltat;
+	(void) dnew;
 	return (t_size) 0;
 }
 
 t_size CellModel::g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const dnew )
 {
+	(void) xold;
+	(void) pold;
+	(void) uold;
+	(void) deltat;
+	(void) dnew;
 	return (t_size) 0;
 }
 
 t_size CellModel::CoercePars( Vector * const pp )
 {
+	(void) pp;
 	return (t_size) 0;
 }
 
 t_size CellModel::CoerceState( Vector * const xx )
 {
+	(void) xx;
 	return (t_size) 0;
 }
 

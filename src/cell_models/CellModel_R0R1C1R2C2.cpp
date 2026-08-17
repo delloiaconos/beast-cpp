@@ -288,6 +288,8 @@ CellModel_R0R1C1R2C2::~CellModel_R0R1C1R2C2()
 
 t_size CellModel_R0R1C1R2C2::g0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const res )
 {   
+	(void) deltat;
+	
 	t_float ocv0old;
 
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_CLASS )
@@ -301,6 +303,10 @@ t_size CellModel_R0R1C1R2C2::g0( const Vector &xold, const Vector &pold, const V
 
 t_size CellModel_R0R1C1R2C2::g1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
+	(void) pold;
+	(void) uold;
+	(void) deltat;
+
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_CLASS )
     CellModel_R0R1C1R2C2_dprint( "CALL: y1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
@@ -313,6 +319,10 @@ t_size CellModel_R0R1C1R2C2::g1x( const Vector &xold, const Vector &pold, const 
 
 t_size CellModel_R0R1C1R2C2::g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
+	(void) xold;
+	(void) pold;
+	(void) deltat;
+
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_CLASS )
     CellModel_R0R1C1R2C2_dprint( "CALL: y1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
@@ -357,9 +367,11 @@ t_size CellModel_R0R1C1R2C2::f0( const Vector &xold, const Vector &pold, const V
 
 t_size CellModel_R0R1C1R2C2::f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
+	(void) xold;
+	(void) uold;
+	
 	t_float tau1, alpha1;
 	t_float tau2, alpha2;
-
 
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_CLASS )
     CellModel_R0R1C1R2C2_dprint( "CALL: f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
