@@ -201,6 +201,7 @@ t_size Estimator_EKFstate::getP( Vector * const P)
 #ifdef ESTIMATOR_GET_GAINS
 t_size Estimator_EKFstate::getLx( Vector * const Lx )
 {
+	(void) Lx;
 	return Nx;
 }
 #endif
@@ -208,6 +209,7 @@ t_size Estimator_EKFstate::getLx( Vector * const Lx )
 #ifdef ESTIMATOR_GET_GAINS
 t_size Estimator_EKFstate::getLp( Vector * const Lp )
 {
+	(void) Lp;
 	return Np;
 }
 #endif
@@ -223,6 +225,7 @@ t_size Estimator_EKFstate::getSx( Vector * const Sx )
 #ifdef ESTIMATOR_GET_COV
 t_size Estimator_EKFstate::getSp( Vector * const Sp )
 {
+	(void) Sp;
 	return (t_size) 0;
 }
 #endif

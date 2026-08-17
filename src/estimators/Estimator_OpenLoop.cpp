@@ -119,6 +119,7 @@ t_size Estimator_OpenLoop::getP( Vector * const P)
 #ifdef ESTIMATOR_GET_GAINS
 t_size Estimator_OpenLoop::getLx( Vector * const Lx )
 {
+	(void) Lx;
 	return (t_size) 0;
 }
 
@@ -127,6 +128,7 @@ t_size Estimator_OpenLoop::getLx( Vector * const Lx )
 #ifdef ESTIMATOR_GET_GAINS
 t_size Estimator_OpenLoop::getLp( Vector * const Lp )
 {
+	(void) Lp;
 	return (t_size) 0;
 }
 #endif
@@ -134,6 +136,7 @@ t_size Estimator_OpenLoop::getLp( Vector * const Lp )
 #ifdef ESTIMATOR_GET_COV
 t_size Estimator_OpenLoop::getSx( Vector * const Sx )
 {
+	(void) Sx;
 	return (t_size) 0;
 }
 #endif
@@ -141,6 +144,7 @@ t_size Estimator_OpenLoop::getSx( Vector * const Sx )
 #ifdef ESTIMATOR_GET_COV
 t_size Estimator_OpenLoop::getSp( Vector * const Sp )
 {
+	(void) Sp;
 	return (t_size) 0;
 }
 #endif

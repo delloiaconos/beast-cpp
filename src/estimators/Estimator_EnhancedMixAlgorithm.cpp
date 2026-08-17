@@ -175,6 +175,7 @@ t_size Estimator_EnhancedMixAlgorithm::getLp( Vector * const Lp )
 #ifdef ESTIMATOR_GET_COV
 t_size Estimator_EnhancedMixAlgorithm::getSx( Vector * const Sx )
 {
+	(void) Sx;
 	return (t_size) 0;
 }
 #endif
@@ -182,6 +183,7 @@ t_size Estimator_EnhancedMixAlgorithm::getSx( Vector * const Sx )
 #ifdef ESTIMATOR_GET_COV
 t_size Estimator_EnhancedMixAlgorithm::getSp( Vector * const Sp )
 {
+	(void) Sp;
 	return (t_size) 0;
 }
 #endif

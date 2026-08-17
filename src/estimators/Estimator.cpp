@@ -59,23 +59,31 @@ Estimator::~Estimator()
 
 t_float Estimator::initialize( Vector &x0, Vector &p0, Vector &unew, Vector &yXPnew, t_float tnew )
 {
+   (void) x0;
+   (void) p0;
+   (void) unew;
+   (void) yXPnew;
 	told = tnew;
 	return (t_float) 0.0;
 }
 
 t_float Estimator::step( Vector &unew, Vector &yXPnew, t_float tnew )
 {
+   (void) unew;
+   (void) yXPnew;
 	told = tnew;
 	return (t_float) 0.0;
 }
 
 t_size Estimator::getX( Vector * const X)
 {
+   (void) X;
 	return Nx;
 }
 
 t_size Estimator::getP( Vector * const P)
 {
+   (void) P;
 	return Np;
 }
 
@@ -83,6 +91,7 @@ t_size Estimator::getP( Vector * const P)
 #ifdef ESTIMATOR_GET_GAINS
 t_size Estimator::getLx( Vector * const Lx )
 {
+   (void) Lx;
 	return Nx;
 }
 #endif
@@ -90,6 +99,7 @@ t_size Estimator::getLx( Vector * const Lx )
 #ifdef ESTIMATOR_GET_GAINS
 t_size Estimator::getLp( Vector * const Lp )
 {
+   (void) Lp;
 	return Np;
 }
 #endif
@@ -97,6 +107,7 @@ t_size Estimator::getLp( Vector * const Lp )
 #ifdef ESTIMATOR_GET_COV
 t_size Estimator::getSx( Vector * const Sx )
 {
+   (void) Sx;
 	return (t_size) 0;
 }
 #endif
@@ -104,6 +115,7 @@ t_size Estimator::getSx( Vector * const Sx )
 #ifdef ESTIMATOR_GET_COV
 t_size Estimator::getSp( Vector * const Sp )
 {
+   (void) Sp;
 	return (t_size) 0;
 }
 #endif
