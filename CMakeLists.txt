@@ -6,22 +6,28 @@ option(BEAST_BUILD_APPS "Build BEAST command-line utilities" ON)
 option(BEAST_BUILD_TESTS "Build BEAST tests" ON)
 option(BEAST_BUILD_DOCS "Enable BEAST Doxygen documentation target" OFF)
 
+file(GLOB CELL_MODEL_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/cell_models/CellModel_*.cpp"
+)
+
+file(GLOB ESTIMATOR_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/estimators/Estimator_*.cpp"
+)
+
 add_library(beast
     src/common/Exception.cpp
+
     src/numerics/Matrix.cpp
     src/numerics/Matrix_functions.cpp
     src/numerics/gaussj.cpp
     src/numerics/interpolation.c
+
     src/cell_models/CellModel.cpp
-    src/cell_models/CellModel_R0A1B1.cpp
-    src/cell_models/CellModel_R0R1C1.cpp
-    src/cell_models/CellModel_R0R1C1R2C2.cpp
+    ${CELL_MODEL_SOURCES}
+
     src/estimators/Estimator.cpp
-    src/estimators/Estimator_EKFdual.cpp
-    src/estimators/Estimator_EKFstate.cpp
-    src/estimators/Estimator_MixAlgorithm.cpp
-    src/estimators/Estimator_EnhancedMixAlgorithm.cpp
-    src/estimators/Estimator_OpenLoop.cpp
+    ${ESTIMATOR_SOURCES}
+
     src/runtime/cell_model_factory.cpp
     src/runtime/estimator_factory.cpp
     src/runtime/estimator_runner.cpp
