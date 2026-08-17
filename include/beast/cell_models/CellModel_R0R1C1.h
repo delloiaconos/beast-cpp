@@ -68,13 +68,13 @@ public:
     t_size	CoercePars( Vector * const pp );
     t_size	CoerceState( Vector * const xx );
 
-#if R0R1C1_DBG( DBGMSK_R0R1C1_ENABLE )
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_ENABLE )
 private:  
     void inline CellModel_DebugInit( void );
     FILE * fdbg;
 #endif
 
-#if R0R1C1_DBG( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
 private:
     FILE *fFun;
 #endif

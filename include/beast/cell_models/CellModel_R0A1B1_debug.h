@@ -44,10 +44,10 @@
  */
 //#define DEBUG_R0A1B1       ( DBGMSK_R0A1B1_ENABLE | DBGMSK_R0A1B1_OCV )
 
-#define R0A1B1_DBG( dbg )      (defined(DEBUG_R0A1B1) && ( DEBUG_R0A1B1 & DBGMSK_R0A1B1_ENABLE ) &&  ( DEBUG_R0A1B1 & (dbg) )  )
+#define DBGCHK_R0A1B1( dbg )      (defined(DEBUG_R0A1B1) && ( DEBUG_R0A1B1 & DBGMSK_R0A1B1_ENABLE ) &&  ( DEBUG_R0A1B1 & (dbg) )  )
 
 
-#if R0A1B1_DBG( DBGMSK_R0A1B1_ENABLE )
+#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
        #include stdio.h
        #include stdlib.h
        #define CellModel_R0A1B1_dprint( fmt ) do{ fprintf(fdbg, "CellModel_R0A1B1 :" fmt "\n"); fflush( fdbg ); } while(0)

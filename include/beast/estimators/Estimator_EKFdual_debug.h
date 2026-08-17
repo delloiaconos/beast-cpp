@@ -46,9 +46,9 @@
  */
 //#define DEBUG_EKFDUAL       ( DBGMSK_EKFDUAL_ENABLE | DBGMSK_EKFDUAL_OUT_LX | DBGMSK_EKFDUAL_OUT_LP )
 
-#define EKFDUAL_DBG( dbg )      (defined(DEBUG_EKFDUAL) && ( DEBUG_EKFDUAL & DBGMSK_EKFDUAL_ENABLE ) &&  ( DEBUG_EKFDUAL & (dbg) )  )
+#define DBGCHK_EKFDUAL( dbg )      (defined(DEBUG_EKFDUAL) && ( DEBUG_EKFDUAL & DBGMSK_EKFDUAL_ENABLE ) &&  ( DEBUG_EKFDUAL & (dbg) )  )
 
-#if EKFDUAL_DBG( DBGMSK_EKFDUAL_ENABLE )
+#if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_ENABLE )
 	#include <stdio.h>
 	#include <stdlib.h>
 	#define Estimator_EKFdual_dprint( fmt ) do{ fprintf(fdbg, "Estimator_EKFdual :" fmt "\n"); fflush( fdbg ); } while(0)

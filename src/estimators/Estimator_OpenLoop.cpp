@@ -95,7 +95,7 @@ t_float Estimator_OpenLoop::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	 // Copy new State!
 	 xPold = xMnew;
 
-#if OPENLOOP_DBG( DBGMSK_OPENLOOP_STEPBYSTEP )
+#if DBGCHK_OPENLOOP( DBGMSK_OPENLOOP_STEPBYSTEP )
 
 #endif
 

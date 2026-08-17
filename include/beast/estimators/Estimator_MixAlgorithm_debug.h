@@ -46,10 +46,10 @@
  */
 //#define DEBUG_MIXALGORITHM       ( DBGMSK_MIXALGORITHM_ENABLE | DBGMSK_MIXALGORITHM_OCV )
 
-#define MIXALGORITHM_DBG( dbg )      (defined(DEBUG_MIXALGORITHM) && ( DEBUG_MIXALGORITHM & DBGMSK_MIXALGORITHM_ENABLE ) &&  ( DEBUG_MIXALGORITHM & (dbg) )  )
+#define DBGCHK_MIXALGORITHM( dbg )      (defined(DEBUG_MIXALGORITHM) && ( DEBUG_MIXALGORITHM & DBGMSK_MIXALGORITHM_ENABLE ) &&  ( DEBUG_MIXALGORITHM & (dbg) )  )
 
 
-#if MIXALGORITHM_DBG( DBGMSK_MIXALGORITHM_ENABLE )
+#if DBGCHK_MIXALGORITHM( DBGMSK_MIXALGORITHM_ENABLE )
 	#include <stdio.h>
 	#include <stdlib.h>
 	#define Estimator_MixAlgorithm_dprint( fmt ) do{ fprintf(fdbg, "Estimator_MixAlgorithm :" fmt "\n"); fflush( fdbg ); } while(0)

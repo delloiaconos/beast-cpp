@@ -46,10 +46,10 @@
  */
 //#define DEBUG_EKFSTATE       ( DBGMSK_EKFSTATE_ENABLE | DBGMSK_EKFSTATE_OCV )
 
-#define EKFSTATE_DBG( dbg )      (defined(DEBUG_EKFSTATE) && ( DEBUG_EKFSTATE & DBGMSK_EKFSTATE_ENABLE ) &&  ( DEBUG_EKFSTATE & (dbg) )  )
+#define DBGCHK_EKFSTATE( dbg )      (defined(DEBUG_EKFSTATE) && ( DEBUG_EKFSTATE & DBGMSK_EKFSTATE_ENABLE ) &&  ( DEBUG_EKFSTATE & (dbg) )  )
 
 
-#if EKFSTATE_DBG( DBGMSK_EKFSTATE_ENABLE )
+#if DBGCHK_EKFSTATE( DBGMSK_EKFSTATE_ENABLE )
 	#include <stdio.h>
 	#include <stdlib.h>
 	#define Estimator_EKFstate_dprint( fmt ) do{ fprintf(fdbg, "Estimator_EKFstate :" fmt "\n"); fflush( fdbg ); } while(0)

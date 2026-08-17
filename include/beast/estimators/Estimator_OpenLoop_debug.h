@@ -47,9 +47,9 @@
  */
 //#define DEBUG_OPENLOOP       ( DBGMSK_OPENLOOP_ENABLE | DBGMSK_OPENLOOP_OUT_LX | DBGMSK_OPENLOOP_OUT_LP )
 
-#define OPENLOOP_DBG( dbg )      (defined(DEBUG_OPENLOOP) && ( DEBUG_OPENLOOP & DBGMSK_OPENLOOP_ENABLE ) &&  ( DEBUG_OPENLOOP & (dbg) )  )
+#define DBGCHK_OPENLOOP( dbg )      (defined(DEBUG_OPENLOOP) && ( DEBUG_OPENLOOP & DBGMSK_OPENLOOP_ENABLE ) &&  ( DEBUG_OPENLOOP & (dbg) )  )
 
-#if OPENLOOP_DBG( DBGMSK_OPENLOOP_ENABLE )
+#if DBGCHK_OPENLOOP( DBGMSK_OPENLOOP_ENABLE )
 	#include <stdio.h>
 	#include <stdlib.h>
 	#define Estimator_OpenLoop_dprint( fmt ) do{ fprintf(fdbg, "Estimator_OpenLoop :" fmt "\n"); fflush( fdbg ); } while(0)

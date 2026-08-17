@@ -68,7 +68,7 @@ public:
     t_size	CoercePars( Vector * const pp );
     t_size	CoerceState( Vector * const xx );
 
-#if R0R1C1R2C2_DBG( DBGMSK_R0R1C1R2C2_ENABLE )
+#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_ENABLE )
 private:  
     void inline CellModel_DebugInit( void );
     FILE * fdbg;
