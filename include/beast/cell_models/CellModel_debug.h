@@ -29,7 +29,8 @@
 #ifndef __CELL_MODEL_DEBUG_H__
 #define __CELL_MODEL_DEBUG_H__
 
-#define DBGMSK_CELL_MODEL_INFO  0x01
+#define DBGMSK_CELL_MODEL_INFO      0x01
+
 
 #define DEBUG_CELL_MODEL        ( DBGMSK_CELL_MODEL_INFO )
 

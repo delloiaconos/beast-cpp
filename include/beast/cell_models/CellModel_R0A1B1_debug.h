@@ -30,11 +30,10 @@
 #define __CELL_MODEL_R0R1C1_DEBUG_H__
 
 
-
 /* Tipi di debug disponibili */
-#define DBGMSK_R0A1B1_ENABLE          0x80
+#define DBGMSK_R0A1B1_ENABLE       0x80
 #define DBGMSK_R0A1B1_CLASS        0x01
-#define DBGMSK_R0A1B1_COERCE		0x02
+#define DBGMSK_R0A1B1_COERCE       0x02
 
 
 /* Imposta debug
