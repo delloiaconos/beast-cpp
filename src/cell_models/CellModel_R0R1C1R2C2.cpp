@@ -49,7 +49,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2()
 #endif
    
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-   R0R1C1R2C2_dprint( "CALL: CellModel_R0R1C1R2C2()" );
+   CellModel_R0R1C1R2C2_dprint( "CALL: CellModel_R0R1C1R2C2()" );
 #endif   
    Nx = 3;
    Np = 5;
@@ -108,7 +108,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2( char * basepath )
 #endif
    
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-   R0R1C1R2C2_dprint( "CALL: CellModel_R0R1C1R2C2( char * basepath )" );
+   CellModel_R0R1C1R2C2_dprint( "CALL: CellModel_R0R1C1R2C2( char * basepath )" );
 #endif   
 
    Nx = 3;
@@ -270,7 +270,7 @@ void inline CellModel_R0R1C1R2C2::CellModel_DebugInit( void )
    fdbg = fopen( "CellModel_R0R1C1R2C2_dbg.txt", "wt" );
 
 #if R0R1C1R2C2_DBG( DBG_H0F0A_CLASS )
-   R0R1C1R2C2_dprint( "CALL: CellModel_DebugInit()" );
+   CellModel_R0R1C1R2C2_dprint( "CALL: CellModel_DebugInit()" );
 #endif
 }
 #endif
@@ -279,7 +279,7 @@ void inline CellModel_R0R1C1R2C2::CellModel_DebugInit( void )
 CellModel_R0R1C1R2C2::~CellModel_R0R1C1R2C2()
 {
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-   R0R1C1R2C2_dprint( "CALL: ~CellModel_R0R1C1R2C2()" );
+   CellModel_R0R1C1R2C2_dprint( "CALL: ~CellModel_R0R1C1R2C2()" );
 #endif
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_ENB )
     fclose( fdbg );
@@ -291,7 +291,7 @@ t_size CellModel_R0R1C1R2C2::g0( const Vector &xold, const Vector &pold, const V
 	t_float ocv0old;
 
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-    R0R1C1R2C2_dprint( "CALL: y0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const res )" );
+    CellModel_R0R1C1R2C2_dprint( "CALL: y0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const res )" );
 #endif
     ocv0old  = interpxy( lutsoc, lutocv0, lutlen, xold.get(1,1));
     res->setv(1,1, ocv0old -pold.get(1,1)*uold.get(1,1)+xold.get(2,1) + xold.get(3,1));
@@ -302,7 +302,7 @@ t_size CellModel_R0R1C1R2C2::g0( const Vector &xold, const Vector &pold, const V
 t_size CellModel_R0R1C1R2C2::g1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-    R0R1C1R2C2_dprint( "CALL: y1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
+    CellModel_R0R1C1R2C2_dprint( "CALL: y1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
     res->setv(1,1, interpxy( lutsoc, lutocv1, lutlen, xold.get(1,1) ) );
@@ -314,7 +314,7 @@ t_size CellModel_R0R1C1R2C2::g1x( const Vector &xold, const Vector &pold, const 
 t_size CellModel_R0R1C1R2C2::g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-    R0R1C1R2C2_dprint( "CALL: y1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
+    CellModel_R0R1C1R2C2_dprint( "CALL: y1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
     res->setv(1,1, - uold.get(1,1) );
@@ -334,7 +334,7 @@ t_size CellModel_R0R1C1R2C2::f0( const Vector &xold, const Vector &pold, const V
 	t_float u;
 
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-    R0R1C1R2C2_dprint( "CALL: f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const res )" );
+    CellModel_R0R1C1R2C2_dprint( "CALL: f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const res )" );
 #endif
 
     u = uold.get(1,1);
@@ -362,7 +362,7 @@ t_size CellModel_R0R1C1R2C2::f1x( const Vector &xold, const Vector &pold, const 
 
 
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-    R0R1C1R2C2_dprint( "CALL: f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
+    CellModel_R0R1C1R2C2_dprint( "CALL: f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
     tau1   = pold.get(2,1)*pold.get(3,1);
@@ -392,7 +392,7 @@ t_size CellModel_R0R1C1R2C2::f1p( const Vector &xold, const Vector &pold, const 
 	t_float tau2, alpha2, adtrc2;
 
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-    R0R1C1R2C2_dprint( "CALL: f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
+    CellModel_R0R1C1R2C2_dprint( "CALL: f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
     tau1   = pold.get(2,1)*pold.get(3,1);
@@ -428,12 +428,12 @@ t_size	CellModel_R0R1C1R2C2::CoercePars( Vector * const pp )
 {
 	t_size cntCoerce = 0;
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-    R0R1C1R2C2_dprint( "CALL: CoercePars( Vector * const pp )" );
+    CellModel_R0R1C1R2C2_dprint( "CALL: CoercePars( Vector * const pp )" );
 #endif
     if( pp->get(1,1) <= (t_float) 0.0 ) {
     	pp->setv(1,1, CellModel::CellModel::Zero );
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_COERCE )
-    	dbg_print( "WARNING: parameter p(1,1)=R0<=0 CORRECTED TO ZERO" );
+    	CellModel_R0R1C1R2C2_dprint( "WARNING: parameter p(1,1)=R0<=0 CORRECTED TO ZERO" );
 #endif
     	cntCoerce++;
     }
@@ -441,7 +441,7 @@ t_size	CellModel_R0R1C1R2C2::CoercePars( Vector * const pp )
 	if( pp->get(2,1) < (t_float) 0.0 ) {
 		pp->setv(2,1, CellModel::CellModel::Zero );
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_COERCE )
-		dbg_print( "WARNING: parameter p(2,1)=R1<=0 CORRECTED TO ZERO" );
+		CellModel_R0R1C1R2C2_dprint( "WARNING: parameter p(2,1)=R1<=0 CORRECTED TO ZERO" );
 #endif
 		cntCoerce++;
 	}
@@ -450,7 +450,7 @@ t_size	CellModel_R0R1C1R2C2::CoercePars( Vector * const pp )
 	{
 		pp->setv(3,1, CellModel::Zero );
     #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_COERCE )
-		dbg_print( "WARNING: parameter p(3,1)=C1<0 CORRECTED TO ZERO" );
+		CellModel_R0R1C1R2C2_dprint( "WARNING: parameter p(3,1)=C1<0 CORRECTED TO ZERO" );
     #endif
 		cntCoerce++;
 	}
@@ -459,7 +459,7 @@ t_size	CellModel_R0R1C1R2C2::CoercePars( Vector * const pp )
 	{
 		pp->setv(4,1, CellModel::Zero );
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_COERCE )
-		dbg_print( "WARNING: parameter p(4,1)=R2<0 CORRECTED TO ZERO" );
+		CellModel_R0R1C1R2C2_dprint( "WARNING: parameter p(4,1)=R2<0 CORRECTED TO ZERO" );
 #endif
 		cntCoerce++;
 	}
@@ -468,7 +468,7 @@ t_size	CellModel_R0R1C1R2C2::CoercePars( Vector * const pp )
 	{
 		pp->setv(5,1, CellModel::Zero );
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_COERCE )
-		dbg_print( "WARNING: parameter p(5,1)=C2<0 CORRECTED TO ZERO" );
+		CellModel_R0R1C1R2C2_dprint( "WARNING: parameter p(5,1)=C2<0 CORRECTED TO ZERO" );
 #endif
 		cntCoerce++;
 	}
@@ -480,19 +480,19 @@ t_size	CellModel_R0R1C1R2C2::CoerceState( Vector * const xx )
 {
 	t_size cntCoerce = 0;
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-    R0R1C1R2C2_dprint( "CALL: CoerceState( Vector * const xx )" );
+    CellModel_R0R1C1R2C2_dprint( "CALL: CoerceState( Vector * const xx )" );
 #endif
 
 	if( xx->get(1,1) > (t_float) 1 ) {
 		xx->setv(1,1, 1);
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_COERCE )
-	    dbg_print( "WARNING: state x(1,1)=SOC>1. CORRECTED TO 1" );
+	    CellModel_R0R1C1R2C2_dprint( "WARNING: state x(1,1)=SOC>1. CORRECTED TO 1" );
 #endif
 	    cntCoerce++;
 	} else if( xx->get(1,1) < (t_float) 0.0 ) {
 		xx->setv(1,1, 1);
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_COERCE )
-	    dbg_print( "WARNING: state x(1,1)=SOC<0. CORRECTED TO ZERO" );
+	    CellModel_R0R1C1R2C2_dprint( "WARNING: state x(1,1)=SOC<0. CORRECTED TO ZERO" );
 #endif
 	    cntCoerce++;
 	}
@@ -507,7 +507,7 @@ t_size CellModel_R0R1C1R2C2::CellModel_Info( char * strCellModel )
 	char strThisModel[] = "R0R1C1R2C2";
 
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
-    R0R1C1R2C2_dprint( "CALL: CellModel_Info( char * strCellModel )" );
+    CellModel_R0R1C1R2C2_dprint( "CALL: CellModel_Info( char * strCellModel )" );
 #endif
 	/* AUTO genereted Class Member */
     strcpy( strCellModel, strThisModel );

@@ -48,7 +48,7 @@ CellModel_R0R1C1::CellModel_R0R1C1()
 #endif
    
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-   R0R1C1_dprint( "CALL: CellModel_R0R1C1()" );
+   CellModel_R0R1C1_dprint( "CALL: CellModel_R0R1C1()" );
 #endif   
 
    Nx = 2;
@@ -104,7 +104,7 @@ CellModel_R0R1C1::CellModel_R0R1C1( char * basepath )
 #endif
    
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-   R0R1C1_dprint( "CALL: CellModel_R0R1C1( char * basepath )" );
+   CellModel_R0R1C1_dprint( "CALL: CellModel_R0R1C1( char * basepath )" );
 #endif   
 
    Nx = 2;
@@ -273,7 +273,7 @@ void inline CellModel_R0R1C1::CellModel_DebugInit( void )
    fdbg = fopen( "CellModel_R0R1C1_dbg.txt", "wt" );
 
 #if R0R1C1_DBG( DBG_H0F0A_CLASS )
-   R0R1C1_dprint( "CALL: CellModel_DebugInit()" );
+   CellModel_R0R1C1_dprint( "CALL: CellModel_DebugInit()" );
 #endif
 
 #if R0R1C1_DBG( DBG_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
@@ -286,7 +286,7 @@ void inline CellModel_R0R1C1::CellModel_DebugInit( void )
 CellModel_R0R1C1::~CellModel_R0R1C1()
 {
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-   R0R1C1_dprint( "CALL: ~CellModel_R0R1C1()" );
+   CellModel_R0R1C1_dprint( "CALL: ~CellModel_R0R1C1()" );
 #endif
 
 #if R0R1C1_DBG( DBG_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
@@ -303,7 +303,7 @@ t_size CellModel_R0R1C1::g0( const Vector &xold, const Vector &pold, const Vecto
 {   
 	t_float ocv0old;
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-    R0R1C1_dprint( "CALL: y0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const ynew )" );
+    CellModel_R0R1C1_dprint( "CALL: y0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const ynew )" );
 #endif
     ocv0old  = interpxy( lutsoc, lutocv0, lutlen, xold.get(1,1));
     res->setv(1,1, ocv0old -pold.get(1,1)*uold.get(1,1)+xold.get(2,1) );
@@ -314,7 +314,7 @@ t_size CellModel_R0R1C1::g0( const Vector &xold, const Vector &pold, const Vecto
 t_size CellModel_R0R1C1::g1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-    R0R1C1_dprint( "CALL: y1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
+    CellModel_R0R1C1_dprint( "CALL: y1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
     res->setv(1,1, interpxy( lutsoc, lutocv1, lutlen, xold.get(1,1) ) );
@@ -326,7 +326,7 @@ t_size CellModel_R0R1C1::g1x( const Vector &xold, const Vector &pold, const Vect
 t_size CellModel_R0R1C1::g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-    R0R1C1_dprint( "CALL: y1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
+    CellModel_R0R1C1_dprint( "CALL: y1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
     res->setv(1,1, - uold.get(1,1) );
@@ -341,7 +341,7 @@ t_size CellModel_R0R1C1::f0( const Vector &xold, const Vector &pold, const Vecto
 	t_float deltaSOC, tauloc, alphaloc;
 	t_float u;
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-    R0R1C1_dprint( "CALL: f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const xnew )" );
+    CellModel_R0R1C1_dprint( "CALL: f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const xnew )" );
 #endif
     u = uold.get(1,1);
     CoulombCountingConstant = eta*deltat/Qnom;
@@ -360,7 +360,7 @@ t_size CellModel_R0R1C1::f1x( const Vector &xold, const Vector &pold, const Vect
 	t_float tauloc, alphaloc;
 
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-    R0R1C1_dprint( "CALL: f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
+    CellModel_R0R1C1_dprint( "CALL: f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
     tauloc   = pold.get(2,1)*pold.get(3,1);
@@ -379,7 +379,7 @@ t_size CellModel_R0R1C1::f1p( const Vector &xold, const Vector &pold, const Vect
 {
 	t_float alphaloc, tauloc, adtrc;
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-    R0R1C1_dprint( "CALL: f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
+    CellModel_R0R1C1_dprint( "CALL: f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
     tauloc   = pold.get(2,1)*pold.get(3,1);
@@ -399,7 +399,7 @@ t_size	CellModel_R0R1C1::CoercePars( Vector * const pp )
 {
 	t_size cntCoerce = 0;
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-    R0R1C1_dprint( "CALL: CoercePars( Vector * const pp )" );
+    CellModel_R0R1C1_dprint( "CALL: CoercePars( Vector * const pp )" );
 #endif
 
 	if( pp->get(1,1) <= (t_float) 0.0 ) {
@@ -434,7 +434,7 @@ t_size	CellModel_R0R1C1::CoerceState( Vector * const xx )
 {
 	t_size cntCoerce = 0;
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-    R0R1C1_dprint( "CALL: CoerceState( Vector * const xx )" );
+    CellModel_R0R1C1_dprint( "CALL: CoerceState( Vector * const xx )" );
 #endif
 
 	if( xx->get(1,1) > (t_float) 1 ) {
@@ -460,7 +460,7 @@ t_size CellModel_R0R1C1::CellModel_Info( char * strCellModel )
 	char strThisModel[] = "R0R1C1";
 
 #if R0R1C1_DBG( DBG_R0R1C1_CLASS )
-    R0R1C1_dprint( "CALL: CellModel_Info( char * strCellModel )" );
+    CellModel_R0R1C1_dprint( "CALL: CellModel_Info( char * strCellModel )" );
 #endif
 	/* AUTO genereted Class Member */
     strcpy( strCellModel, strThisModel );
