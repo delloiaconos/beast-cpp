@@ -141,7 +141,7 @@ t_size CellModel::CheckInputDim( const Vector &uu )
 
 
 #if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
-t_size CellModel::CellModel_Info( char * strCellModel )
+t_size CellModel::Info( char * strCellModel )
 {
 	*strCellModel = '\0';
 	return (t_size) 0;

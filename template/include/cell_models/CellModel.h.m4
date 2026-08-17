@@ -69,7 +69,7 @@ public:
     
 #if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 public:
-    t_size CellModel_Info( char * strCellModel );
+    t_size Info( char * strCellModel );
 #endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO
 
 };

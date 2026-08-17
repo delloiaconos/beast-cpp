@@ -151,10 +151,10 @@ t_size $$BEAST_CLASS_NAME$$::CoerceState(Vector* const xx)
 }
 
 #if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
-t_size $$BEAST_CLASS_NAME$$::CellModel_Info( char * strCellModel )
+t_size $$BEAST_CLASS_NAME$$::Info( char * strCellModel )
 {
 #if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
-	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::CellModel_Info( char * strCellModel )" );
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::Info( char * strCellModel )" );
 #endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
 	char strThisModel[] = "$$UPNAME$$";
     

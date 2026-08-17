@@ -76,7 +76,7 @@ private:
 
 #if _ARCHITECTURE_ == ARCH_PC || defined DBGMSK_CELL_MODEL_INFO
 public:
-	t_size CellModel_Info( char * strCellModel );
+	t_size Info( char * strCellModel );
 #endif 
 
 private:
