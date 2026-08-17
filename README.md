@@ -86,11 +86,6 @@ The generated HTML entry point is normally:
 build/docs/html/index.html
 ```
 
-## Project migration
-
-`MIGRATION.md` describes the main architectural changes from the original
-single-application layout to the current library-plus-utilities structure.
-
 ## License
 
 BEAST is distributed under the **GNU General Public License version 3.0**.
