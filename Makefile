@@ -1,4 +1,4 @@
-# Convenience wrapper around the CMake build.
+# Convenience wrapper around the CMake build and BEAST developer tools.
 # CMakeLists.txt remains the source of truth for build targets and dependencies.
 
 BUILD_DIR ?= build
@@ -8,6 +8,14 @@ BEAST_BUILD_TESTS ?= ON
 BEAST_BUILD_DOCS ?= OFF
 CMAKE ?= cmake
 CTEST ?= ctest
+M4 ?= m4
+
+# Metadata used by the M4 class generators. Values can be overridden on the
+# make command line. Empty git values are handled by the generator scripts.
+BEAST_AUTHOR ?= $(shell git config user.name 2>/dev/null)
+BEAST_YEAR ?= $(shell date +%Y)
+BEAST_REPOSITORY ?= $(shell git config --get remote.origin.url 2>/dev/null)
+FORCE ?= 0
 
 CMAKE_CONFIGURE_ARGS = \
 	-S . \
@@ -18,7 +26,8 @@ CMAKE_CONFIGURE_ARGS = \
 	-DBEAST_BUILD_DOCS="$(BEAST_BUILD_DOCS)"
 
 .PHONY: all configure build test docs clean distclean rebuild install \
-	beast-estimator beast-model-info debug release help
+	beast-estimator beast-model-info debug release \
+	generate-cell-model help
 
 all: build
 
@@ -37,6 +46,18 @@ docs:
 	@printf '%s\n' \
 		'Documentation generated:' \
 		'  $(BUILD_DIR)/docs/html/index.html'
+
+generate-cell-model:
+	@test -n "$(NAME)" || { \
+		echo 'Usage: make generate-cell-model NAME=<model-name>'; \
+		exit 2; \
+	}
+	@M4="$(M4)" \
+		BEAST_AUTHOR="$(BEAST_AUTHOR)" \
+		BEAST_YEAR="$(BEAST_YEAR)" \
+		BEAST_REPOSITORY="$(BEAST_REPOSITORY)" \
+		FORCE="$(FORCE)" \
+		./tools/generate_cell_model.sh "$(NAME)"
 
 beast-estimator: configure
 	$(CMAKE) --build "$(BUILD_DIR)" --target beast-estimator --parallel
@@ -69,7 +90,7 @@ release:
 
 help:
 	@printf '%s\n' \
-		'BEAST C++ build wrapper' \
+		'BEAST C++ build and developer-tool wrapper' \
 		'' \
 		'Usage:' \
 		'  make                    Configure and build the project' \
@@ -77,6 +98,10 @@ help:
 		'  make build              Configure and build all enabled targets' \
 		'  make test               Build and run CTest' \
 		'  make docs               Generate Doxygen HTML documentation' \
+		'  make generate-cell-model NAME=R0R2C2' \
+		'                          Generate CellModel_R0R2C2 .h/.cpp skeletons' \
+		'  make generate-estimator NAME=UKF' \
+		'                          Generate Estimator_UKF .h/.cpp skeletons' \
 		'  make beast-estimator    Build only the estimator utility' \
 		'  make beast-model-info   Build only the model-info utility' \
 		'  make debug              Build with CMAKE_BUILD_TYPE=Debug' \
@@ -87,16 +112,23 @@ help:
 		'  make install            Build and run cmake --install' \
 		'  make help               Show this help' \
 		'' \
-		'Variables:' \
+		'Build variables:' \
 		'  BUILD_DIR=build         CMake build directory' \
 		'  BUILD_TYPE=Debug        CMake build type' \
 		'  BEAST_BUILD_APPS=ON     Enable command-line utilities' \
 		'  BEAST_BUILD_TESTS=ON    Enable tests' \
 		'  BEAST_BUILD_DOCS=OFF    Enable the CMake Doxygen target' \
 		'' \
+		'Generator variables:' \
+		'  M4=m4                   M4 executable' \
+		'  BEAST_AUTHOR=<name>     Doxygen author (defaults to git user.name)' \
+		'  BEAST_YEAR=<year>       Header year (defaults to current year)' \
+		'  BEAST_REPOSITORY=<url>  Repository reference (defaults to git origin)' \
+		'  FORCE=1                 Allow overwriting generated files' \
+		'' \
 		'Examples:' \
 		'  make release' \
 		'  make test BUILD_TYPE=Release' \
 		'  make docs' \
-		'  make docs BUILD_DIR=build-docs' \
+		'  make generate-cell-model NAME=R0R2C2' \
 		'  make build BUILD_DIR=build-ci BEAST_BUILD_TESTS=OFF'
