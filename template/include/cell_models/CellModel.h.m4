@@ -56,22 +56,22 @@ public:
 
     ~$$BEAST_CLASS_NAME$$() override;
 
-    t_size f0(const Vector& xold, const Vector& pold, const Vector& uold,
-              t_float deltat, Vector* const xnew) override;
-    t_size f1x(const Vector& xold, const Vector& pold, const Vector& uold,
-               t_float deltat, Matrix* const dnew) override;
-    t_size f1p(const Vector& xold, const Vector& pold, const Vector& uold,
-               t_float deltat, Matrix* const dnew) override;
+    t_size f0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const xnew);
+    t_size f1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const dnew);
+    t_size f1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const dnew);
 
-    t_size g0(const Vector& xold, const Vector& pold, const Vector& uold,
-              t_float deltat, Vector* const ynew) override;
-    t_size g1x(const Vector& xold, const Vector& pold, const Vector& uold,
-               t_float deltat, Matrix* const dnew) override;
-    t_size g1p(const Vector& xold, const Vector& pold, const Vector& uold,
-               t_float deltat, Matrix* const dnew) override;
+    t_size g0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const ynew);
+    t_size g1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const dnew);
+    t_size g1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const dnew);
 
-    t_size CoercePars(Vector* const pp) override;
-    t_size CoerceState(Vector* const xx) override;
+    t_size CoercePars(Vector* const pp);
+    t_size CoerceState(Vector* const xx);
+    
+#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+public:
+    t_size CellModel_Info( char * strCellModel );
+#endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO
+
 };
 
 #endif // __CELL_MODEL_$$BEAST_UPNAME$$_H__

@@ -149,3 +149,15 @@ t_size $$BEAST_CLASS_NAME$$::CoerceState(Vector* const xx)
     // TODO: Constrain model states to their valid domain.
     return static_cast<t_size>(0);
 }
+
+#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+t_size $$BEAST_CLASS_NAME$$::CellModel_Info( char * strCellModel )
+{
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::CellModel_Info( char * strCellModel )" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+	char strThisModel[] = "$$UPNAME$$";
+
+	return (t_size) strcpy( strCellModel, strThisModel );;
+}
+#endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO
