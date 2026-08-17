@@ -32,11 +32,11 @@ changecom()dnl
 #ifndef __CELL_MODEL_$$BEAST_UPNAME$$_DEBUG_H__
 #define __CELL_MODEL_$$BEAST_UPNAME$$_DEBUG_H__
 
-/* Debug Masks for Cell Model "$$BEAST_UPNAME$$" */
+/* Debug Masks for Cell Model "$$BEAST_NAME$$" */
 
-#define DBGMSK_$$BEAST_UPNAME$$_ENABLE       0x80
-#define DBGMSK_$$BEAST_UPNAME$$_CLASS        0x01
-#define DBGMSK_$$BEAST_UPNAME$$_FUNCS        0x02
+#define DBGMSK_$$BEAST_UPNAME$$_ENABLE           0x80
+#define DBGMSK_$$BEAST_UPNAME$$_CLASS            0x01
+#define DBGMSK_$$BEAST_UPNAME$$_FUNCS            0x02
 
 #define DEBUG_$$BEAST_UPNAME$$       ( \
                             DBGMSK_$$BEAST_UPNAME$$_ENABLE | \
