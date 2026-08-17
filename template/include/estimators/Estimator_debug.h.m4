@@ -32,22 +32,24 @@ changecom()dnl
 #ifndef __ESTIMATOR_$$BEAST_UPNAME$$_DEBUG_H__
 #define __ESTIMATOR_$$BEAST_UPNAME$$_DEBUG_H__
 
-/* Debug Masks for Estimator "$$BEAST_UPNAME$$" */
+/* Debug Masks for Estimator "$$BEAST_NAME$$" */
 
-#define DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_ENABLE        	0x80
-#define DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_CLASS        	    0x01
-#define DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_COERCE			0x02
-#define DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_STEPBYSTEP		0x04
+#define DBGMSK_$$BEAST_UPNAME$$_ENABLE           0x80
+#define DBGMSK_$$BEAST_UPNAME$$_CLASS            0x01
+#define DBGMSK_$$BEAST_UPNAME$$_COERCE           0x02
+#define DBGMSK_$$BEAST_UPNAME$$_STEPBYSTEP       0x04
 
 
-#define DEBUG_ESTIMATOR_$$BEAST_UPNAME$$       ( DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_ENABLE )
+#define DEBUG_$$BEAST_UPNAME$$       ( \
+                            DBGMSK_$$BEAST_UPNAME$$_ENABLE | \
+                            DBGMSK_$$BEAST_UPNAME$$_CLASS )
 
-#define ESTIMATOR_$$BEAST_UPNAME$$_CHKDBG( dbg )      ( \
-                            defined( DEBUG_ESTIMATOR_$$BEAST_UPNAME$$ ) && \
-                            ( DEBUG_ESTIMATOR_$$BEAST_UPNAME$$ & DBGMSK_ESTIMATOR_$$BEAST_UPNAME$$_ENABLE ) && \ 
-                            ( DEBUG_ESTIMATOR_$$BEAST_UPNAME$$ & (dbg) ) )
+#define CHKDBG_$$BEAST_UPNAME$$( dbg )      ( \
+                            defined( DEBUG_$$BEAST_UPNAME$$ ) && \
+                            ( DEBUG_$$BEAST_UPNAME$$ & DBGMSK_$$BEAST_UPNAME$$_ENABLE ) && \ 
+                            ( DEBUG_$$BEAST_UPNAME$$ & (dbg) ) )
 
-#if ESTIMATOR_$$BEAST_UPNAME$$_CHKDBG( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
+#if CHKDBG_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
        #include <stdio.h>
        #include <stdlib.h>
        #define $$BEAST_CLASS_NAME$$_dprint( fmt ) do{ fprintf(fdbg, "$$BEAST_CLASS_NAME$$ :" fmt "\n"); fflush( fdbg ); } while(0)
