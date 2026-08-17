@@ -202,7 +202,7 @@ generate_file()
     "$M4" \
         -D"BEAST_NAME=$NAME" \
         -D"BEAST_UPPER_NAME=$UPPER_NAME" \
-        -D"BEAST_CLASS_NAME=CellModel_${UPPER_NAME}" \
+        -D"BEAST_CLASS_NAME=CellModel_${NAME}" \
         -D"BEAST_AUTHOR=$BEAST_AUTHOR" \
         -D"BEAST_REPOSITORY=$BEAST_REPOSITORY" \
         -D"BEAST_YEAR=$BEAST_YEAR" \
