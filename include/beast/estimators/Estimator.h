@@ -1,0 +1,59 @@
+/* 
+ * Modified by SDI 2013-10-10
+ * Created by Salvatore Dello Iacono 2013-10-09
+ */
+
+#ifndef __ESTIMATOR_H__
+#define __ESTIMATOR_H__
+
+
+#include <beast/cell_models/CellModel.h>
+
+#include <beast/numerics/Matrix.h>
+#include <beast/numerics/Vector.h>
+
+#include <beast/common/architecture.h>
+
+#define ESTIMATOR_GET_GAINS 1
+#define ESTIMATOR_GET_COV	1
+
+
+class Estimator
+{
+public:
+	Estimator();
+	Estimator( CellModel * cell );
+
+	virtual ~Estimator();
+
+	virtual t_float initialize( Vector &x0, Vector &p0, Vector &unew, Vector &yXPnew, t_float tnew );
+	virtual t_float step( Vector &unew, Vector &yXPnew, t_float tnew ); // make an update with: Input U, Measurements M
+
+	virtual t_size getX( Vector * const X ); // returns state matrix (should be a vector)
+	virtual t_size getP( Vector * const P ); // returns parameters matrix (should be a vector)
+
+#ifdef ESTIMATOR_GET_GAINS
+public:
+	virtual t_size getLx( Vector * const Lx ); // returns State Gain
+	virtual t_size getLp( Vector * const Lp ); // returns Parameters Gain
+#endif
+
+#ifdef ESTIMATOR_GET_GAINS
+public:
+	virtual t_size getSx( Vector * const Sx ); // returns State Gain
+	virtual t_size getSp( Vector * const Sp ); // returns Parameters Gain
+#endif
+
+public:
+	CellModel * Cell;
+
+	t_float told;
+
+	t_size Nx;
+	t_size Np;
+	t_size Nu;
+	t_size Ny;
+
+};
+
+#endif //__ESTIMATOR_H__
