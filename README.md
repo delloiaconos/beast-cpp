@@ -1,127 +1,97 @@
-# beast-cpp
+# BEAST C++
 
-BEAST: Battery Estimation Algorithms Software Toolkit, C++ implementation.
+**BEAST — Battery Estimation Architecture and Simulation Toolkit**
 
-## Project layout
+`beast-cpp` is the C++ implementation of BEAST, a framework for battery modeling,
+simulation, and state/parameter estimation. The repository is organized around a
+reusable C++ library plus independent command-line utilities that link against it.
 
-```text
-include/beast/          Public library headers
-src/                    Reusable BEAST implementation (no main functions)
-  common/
-  numerics/
-  cell_models/
-  estimators/
-  runtime/
-apps/                   Independent command-line utilities
-  estimator/
-  model-info/
-tests/                  Library tests
-```
+The equivalent Python implementation is maintained separately as `beast-py`.
 
-The central rule is that `src/` builds **libbeast**. Every command-line utility has its own
-`main.cpp` under `apps/` and links to the library. This allows any number of utilities without
-mixing application entry points into reusable code.
-
-## Build
-
-A top-level `Makefile` wraps the CMake workflow for day-to-day development. CMake remains the source of truth for targets and dependencies.
-
-```bash
-make          # configure and build
-make test     # build and run tests
-make release  # Release build
-make clean    # clean compiled files
-make rebuild  # recreate the build from scratch
-make help     # list all wrapper targets and variables
-```
-
-You can invoke CMake directly when needed:
-
-```bash
-cmake -S . -B build
-cmake --build build
-ctest --test-dir build --output-on-failure
-```
-
-The Makefile accepts build overrides, for example:
-
-```bash
-make build BUILD_TYPE=Release BUILD_DIR=build-release
-make build BEAST_BUILD_TESTS=OFF
-```
-
-Generated utilities:
-
-- `beast-estimator` - runs the estimator workflow that was previously implemented by `src/main.cpp` and `src/EstimatorLoop.cpp`.
-- `beast-model-info` - prints the cell models and estimators registered by the runtime factories; it also demonstrates a second independent `main`.
-
-## Estimator utility
-
-```bash
-./build/beast-estimator \
-  -i <experiment-input-dir> \
-  -o <output-dir> \
-  -m R0R1C1 \
-  -e EKFDUAL \
-  -d <model-data-dir>
-```
-
-Required experiment files:
-
-- `MD_t_all.in`
-- `MD_u_all.in`
-- `MD_yXP_all.in`
-
-Required model files:
-
-- `MD_x0.in`
-- `MD_p0.in`
-- `MD_COV_sxWvec.in`
-- `MD_COV_sxVvec.in`
-- `MD_COV_spRvec.in`
-- `MD_COV_spEvec.in`
-- `MD_pfix_Qn_Ah.in`
-- `MD_pfix_eta.in`
-- `MD_pfix_soc.in`
-- `MD_pfix_ocv0.in`
-- `MD_pfix_ocv1.in`
-
-Outputs are written to the selected output directory.
-
-## Add a new utility
-
-Create a new entry point, for example:
+## Repository structure
 
 ```text
-apps/my-tool/main.cpp
+beast-cpp/
+├── include/beast/   Public library headers
+├── src/             Reusable BEAST implementation
+├── apps/            Independent command-line utilities
+├── tests/           Library and integration tests
+├── docs/            User and Doxygen documentation
+├── CMakeLists.txt   CMake project definition
+└── Makefile         Convenience wrapper around CMake
 ```
 
-and add:
+A central project rule is that `src/` contains reusable library code and no
+application entry points. Each utility owns its `main.cpp` under `apps/` and
+links against the `beast` library.
 
-```cmake
-add_executable(beast-my-tool apps/my-tool/main.cpp)
-target_link_libraries(beast-my-tool PRIVATE beast::beast)
+## Requirements
+
+The project requires:
+
+- a C++17-compatible compiler;
+- CMake 3.16 or newer.
+
+For the convenience commands shown below, GNU Make or a compatible `make`
+implementation is also expected. Doxygen is optional and is required only when
+generating the API documentation.
+
+## Quick start
+
+Configure and build the project from the repository root:
+
+```bash
+make
 ```
 
-No changes to the library source tree are required just to add another `main`.
+Build and run the tests:
 
-## Architectural changes from the original project
+```bash
+make test
+```
 
-- Replaced `inc/` with a conventional `include/beast/` public include tree.
-- Removed the library dependency on `main.h`.
-- Moved estimator execution into `beast::run_estimator`.
-- Added cell-model and estimator factories.
-- Added `OPENLOOP` to runtime estimator selection.
-- Removed the unused compile-time `CellModel_selection.h` and `Estimator_selection.h` mechanism.
-- Replaced manual ownership in the estimator runner with RAII.
-- Corrected exception catches to match exceptions thrown by value.
-- Corrected the estimator input loop so EOF does not trigger one extra invalid estimator step.
-- Corrected legacy `Matrix` array deallocation and assignment ownership issues.
-- Added CMake targets for a reusable library and multiple executables.
+Build a release configuration:
 
-## Compatibility note
+```bash
+make release
+```
 
-The numerical, cell-model, and estimator algorithms remain the legacy implementation. The current
-refactor intentionally focuses on project boundaries and build structure rather than rewriting the
-algorithms. This makes it easier to compare behavior with the prior beast-cpp / beast-py code before
-performing deeper modernization.
+The Makefile is only a developer-friendly front end. CMake remains the source
+of truth for targets, dependencies, and installation rules.
+
+## Utilities
+
+The current command-line applications are:
+
+- `beast-estimator` — runs the battery estimation workflow;
+- `beast-model-info` — reports the cell models and estimators registered by BEAST.
+
+After a default build, executables are generated in the selected CMake build
+directory, normally `build/`.
+
+## Documentation
+
+Detailed build, execution, testing, installation, and documentation instructions
+are available in [docs/USAGE.md](docs/USAGE.md).
+
+Generate the Doxygen documentation with:
+
+```bash
+make docs
+```
+
+The generated HTML entry point is normally:
+
+```text
+build/docs/html/index.html
+```
+
+## Project migration
+
+`MIGRATION.md` describes the main architectural changes from the original
+single-application layout to the current library-plus-utilities structure.
+
+## License
+
+BEAST is distributed under the **GNU General Public License version 3.0**.
+See [LICENSE](LICENSE) for the complete license text.
