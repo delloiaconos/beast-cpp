@@ -50,7 +50,7 @@
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_ENB )
        #include stdio.h
        #include stdlib.h
-       #define R0R1C1R2C2_dprint( fmt ) do{ fprintf(fdbg, "R0R1C1R2C2 :" fmt "\n"); fflush( fdbg ); } while(0)
+       #define CellModel_R0R1C1R2C2_dprint( fmt ) do{ fprintf(fdbg, "CellModel_R0R1C1R2C2 :" fmt "\n"); fflush( fdbg ); } while(0)
 #endif
 
 
