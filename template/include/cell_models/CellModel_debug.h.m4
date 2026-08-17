@@ -34,21 +34,21 @@ changecom()dnl
 
 /* Debug Masks for Cell Model "$$BEAST_UPNAME$$" */
 
-#define DBGMSK_CELL_MODEL_$$BEAST_UPNAME$$_ENABLE       0x80
-#define DBGMSK_CELL_MODEL_$$BEAST_UPNAME$$_CLASS        0x01
-#define DBGMSK_CELL_MODEL_$$BEAST_UPNAME$$_FUNCS        0x02
+#define DBGMSK_$$BEAST_UPNAME$$_ENABLE       0x80
+#define DBGMSK_$$BEAST_UPNAME$$_CLASS        0x01
+#define DBGMSK_$$BEAST_UPNAME$$_FUNCS        0x02
 
-#define DEBUG_CELL_MODEL_$$BEAST_UPNAME$$       ( \
-                            DBGMSK_CELL_MODEL_$$BEAST_UPNAME$$_ENABLE | \
-                            DBGMSK_CELL_MODEL_$$BEAST_UPNAME$$_CLASS  | \
-                            DBGMSK_CELL_MODEL_$$BEAST_UPNAME$$_FUNCS )
+#define DEBUG_$$BEAST_UPNAME$$       ( \
+                            DBGMSK_$$BEAST_UPNAME$$_ENABLE | \
+                            DBGMSK_$$BEAST_UPNAME$$_CLASS  | \
+                            DBGMSK_$$BEAST_UPNAME$$_FUNCS )
 
-#define CELL_MODEL_$$BEAST_UPNAME$$_CHKDBG( dbg )      ( \ 
-                            defined(DEBUG_CELL_MODEL_$$BEAST_UPNAME$$) && \
-                            ( DEBUG_CELL_MODEL_$$BEAST_UPNAME$$ & DBGMSK_CELL_MODEL_$$BEAST_UPNAME$$_ENABLE ) &&  \
-                            ( DEBUG_CELL_MODEL_$$BEAST_UPNAME$$ & (dbg) ) )
+#define DBGCHK_$$BEAST_UPNAME$$( dbg )      ( \ 
+                            defined(DEBUG_$$BEAST_UPNAME$$) && \
+                            ( DEBUG_$$BEAST_UPNAME$$ & DBGMSK_$$BEAST_UPNAME$$_ENABLE ) &&  \
+                            ( DEBUG_$$BEAST_UPNAME$$ & (dbg) ) )
 
-#if CELL_MODEL_$$BEAST_UPNAME$$_CHKDBG( DBGMSK_CELL_MODEL_$$BEAST_UPNAME$$_ENABLE )
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
        #include <stdio.h>
        #include <stdlib.h>
        #define $$BEAST_CLASS_NAME$$_dprint( fmt ) do{ fprintf(fdbg, "$$BEAST_CLASS_NAME$$ :" fmt "\n"); fflush( fdbg ); } while(0)
