@@ -12,7 +12,7 @@ command-line utilities.
 - `src/` — reusable BEAST implementation.
 - `apps/` — independent command-line utilities, each with its own `main.cpp`.
 - `tests/` — library and integration tests.
-- `docs/` — Doxygen configuration and documentation sources.
+- `docs/` — user documentation and Doxygen configuration.
 
 ## Main components
 
@@ -22,7 +22,10 @@ command-line utilities.
 - Runtime factories and estimator execution support.
 - Standalone utilities linked against the BEAST library.
 
-## Documentation
+## Usage documentation
+
+For detailed instructions covering configuration, builds, tests, utilities,
+installation, and documentation generation, see [BEAST C++ Usage Guide](USAGE.md).
 
 Generate the HTML documentation from the project root with:
 
@@ -30,16 +33,10 @@ Generate the HTML documentation from the project root with:
 make docs
 ```
 
-The generated entry page is:
+The generated entry page is normally:
 
 ```text
 build/docs/html/index.html
-```
-
-A different build directory can be selected with `BUILD_DIR`, for example:
-
-```bash
-make docs BUILD_DIR=build-docs
 ```
 
 ## License

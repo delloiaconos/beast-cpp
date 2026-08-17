@@ -13,7 +13,8 @@ OUTPUT_LANGUAGE        = English
 INPUT                  = "@CMAKE_CURRENT_SOURCE_DIR@/include" \
                          "@CMAKE_CURRENT_SOURCE_DIR@/src" \
                          "@CMAKE_CURRENT_SOURCE_DIR@/apps" \
-                         "@CMAKE_CURRENT_SOURCE_DIR@/docs/mainpage.md"
+                         "@CMAKE_CURRENT_SOURCE_DIR@/docs/mainpage.md" \
+                         "@CMAKE_CURRENT_SOURCE_DIR@/docs/USAGE.md"
 RECURSIVE              = YES
 FILE_PATTERNS          = *.h \
                          *.hpp \
