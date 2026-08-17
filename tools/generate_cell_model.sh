@@ -147,9 +147,6 @@ fi
 # Template -> output mappings
 #
 # Add additional generated files here.
-#
-# Associative arrays make the relationship between each input template and
-# generated output file explicit.
 # -----------------------------------------------------------------------------
 
 declare -A HEADER_FILES=(
