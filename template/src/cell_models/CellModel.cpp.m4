@@ -157,7 +157,8 @@ t_size $$BEAST_CLASS_NAME$$::CellModel_Info( char * strCellModel )
 	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::CellModel_Info( char * strCellModel )" );
 #endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
 	char strThisModel[] = "$$UPNAME$$";
-
-	return (t_size) strcpy( strCellModel, strThisModel );;
+    
+    strcpy( strCellModel, strThisModel );
+	return (t_size) strlen( strThisModel );
 }
 #endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO
