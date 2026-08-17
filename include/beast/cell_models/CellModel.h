@@ -83,10 +83,10 @@ public:
 	static const t_float Zero;
 
 
-#ifdef DBGMSK_CELL_MODEL_INFO
+#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 public:
 	virtual t_size CellModel_Info( char * strCellModel );
-#endif
+#endif //// ARCH_PC || DBGMSK_CELL_MODEL_INFO
 };
 
 #endif //__CELL_MODEL_H__
