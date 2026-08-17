@@ -65,7 +65,9 @@ Estimator_EnhancedMixAlgorithm::~Estimator_EnhancedMixAlgorithm()
 
 t_float Estimator_EnhancedMixAlgorithm::initialize( Vector &x0, Vector &p0, Vector &unew, Vector &yXPnew, t_float tnew )
 {
-
+	(void) unew;
+	(void) yXPnew;
+	
 	pPold   = p0;
 	xPold   = x0;
 

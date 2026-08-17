@@ -76,7 +76,9 @@ t_size Estimator_MixAlgorithm::getP( Vector * const P)
 
 t_float Estimator_MixAlgorithm::initialize( Vector &x0, Vector &p0, Vector &unew, Vector &yXPnew, t_float tnew )
 {
-
+	(void) unew;
+	(void) yXPnew;
+	
 	pPold   = p0;
 	xPold   = x0;
 
