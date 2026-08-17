@@ -118,8 +118,8 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (1/XX) PARAMETER - estimate time update
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 1/XX ==\n");
-	printf( "pPold\n" );
+	Estimator_EKFdual_dprint( "== 1/XX ==\n");
+	Estimator_EKFdual_dprint( "pPold\n" );
 	pPold.Print();
 #endif
 
@@ -127,25 +127,25 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (2/XX) PARAMETER - error covariance time update
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 2/XX ==\n");
-	printf( "spPold\n" );
+	Estimator_EKFdual_dprint( "== 2/XX ==\n");
+	Estimator_EKFdual_dprint( "spPold\n" );
 	spPold.Print();
 #endif
 
 	Matrix spMnew  = spPold + Cell->spR;
 
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "\n" );
+	Estimator_EKFdual_dprint( "\n" );
 	spMnew.Print();
 #endif
 
 
 	// (3/XX) STATE - estimate time update
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 3/XX ==\n");
-	printf( "pMnew\n" );
+	Estimator_EKFdual_dprint( "== 3/XX ==\n");
+	Estimator_EKFdual_dprint( "pMnew\n" );
 	pMnew.Print();
-	printf( "xPold\n");
+	Estimator_EKFdual_dprint( "xPold\n");
 	xPold.Print();
 #endif
 
@@ -155,13 +155,13 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	Cell->CoerceState(&xMnew);
 
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "xMnew \n" );
+	Estimator_EKFdual_dprint( "xMnew \n" );
 	xMnew.Print();
 #endif
 
 	// (4/XX) STATE - error covariance time update
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 4/XX ==\n");
+	Estimator_EKFdual_dprint( "== 4/XX ==\n");
 #endif
 
 
@@ -179,15 +179,15 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	} catch( Exception& Ex ) { throw Ex; }
 
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "f1xold\n" );
+	Estimator_EKFdual_dprint( "f1xold\n" );
 	f1xold.Print();
-	printf( "sxMnew\n" );
+	Estimator_EKFdual_dprint( "sxMnew\n" );
 	sxMnew.Print();
 #endif
 
 	// (5/XX) STATE - Kalman gain computation
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 5/XX ==\n");
+	Estimator_EKFdual_dprint( "== 5/XX ==\n");
 #endif
 
 	Matrix g1xnew = Matrix( Ny, Nx );
@@ -227,17 +227,17 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 #endif // EKFDUAL_SOLMETH
 
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "g1xnew\n");
+	Estimator_EKFdual_dprint( "g1xnew\n");
 	g1xnew.Print();
 
-	printf( "Lxnew\n" );
+	Estimator_EKFdual_dprint( "Lxnew\n" );
 	Lxnew.Print();
 #endif
 
 
 	 // (6/XX) STATE - estimate measurement update
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 6/XX ==\n");
+	Estimator_EKFdual_dprint( "== 6/XX ==\n");
 #endif
 
 	Vector g0new = Matrix( Ny, 1 );
@@ -246,7 +246,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	Cell->g0( xMnew, pMnew, unew, deltat, &g0new );
 
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "g0new\n" );
+	Estimator_EKFdual_dprint( "g0new\n" );
 	g0new.Print();
 #endif
 
@@ -256,7 +256,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	    xPnew = xMnew + xcorr;
 
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	    printf( "xPnew" );
+	    Estimator_EKFdual_dprint( "xPnew" );
 	    xPnew.Print();
 #endif
 
@@ -264,7 +264,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	} catch( Exception& Ex ) { throw Ex; }
 
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "xPnew\n" );
+	Estimator_EKFdual_dprint( "xPnew\n" );
 	xPnew.Print();
 #endif
 
@@ -272,7 +272,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (7/XX) STATE - error covariance measurement update
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 7/XX ==\n");
+	Estimator_EKFdual_dprint( "== 7/XX ==\n");
 #endif
 
 	Matrix sxPnew = Matrix( Nx, Nx );
@@ -284,7 +284,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
     // (8/XX) PARAMETER - Kalman gain computation
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 8/XX ==\n");
+	Estimator_EKFdual_dprint( "== 8/XX ==\n");
 #endif
 
 	Matrix g1pnew 	= Matrix( Ny, Np );
@@ -336,7 +336,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
     // (9/XX) PARAMETER - estimate measurement update
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 9/XX ==\n");
+	Estimator_EKFdual_dprint( "== 9/XX ==\n");
 #endif
 
     Vector pPnew = Matrix( Np, 1 );
@@ -351,7 +351,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
     // (10/10) PARAMETERS - error covariance measurement update
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-	printf( "== 10/XX ==\n");
+	Estimator_EKFdual_dprint( "== 10/XX ==\n");
 #endif
 
     Matrix spPnew = Matrix( Np, Np );
@@ -375,7 +375,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
     dgdpold  = dgdpnew;
 
 #if EKFDUAL_DBG( DBG_EKFDUAL_STEPBYSTEP )
-    printf( "sxPold\n");
+    Estimator_EKFdual_dprint( "sxPold\n");
     sxPold.Print();
 #endif
 

@@ -96,8 +96,7 @@ t_float Estimator_OpenLoop::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	 xPold = xMnew;
 
 #if OPENLOOP_DBG( DBG_OPENLOOP_STEPBYSTEP )
-    //printf( "sxPold\n");
-    //sxPold.Print();
+
 #endif
 
     return (t_float) 0;
