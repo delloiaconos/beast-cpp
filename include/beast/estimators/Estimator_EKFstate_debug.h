@@ -34,9 +34,9 @@
 
 /* Tipi di debug disponibili */
 #define DBGMSK_EKFSTATE_ENABLE          	0x80
-#define DBG_EKFSTATE_CLASS        	0x01
-#define DBG_EKFSTATE_COERCE			0x02
-#define DBG_EKFSTATE_STEPBYSTEP		0x04
+#define DBGMSK_EKFSTATE_CLASS        	0x01
+#define DBGMSK_EKFSTATE_COERCE			0x02
+#define DBGMSK_EKFSTATE_STEPBYSTEP		0x04
 
 
 /* Imposta debug
@@ -44,7 +44,7 @@
  * abilitare i vari tipi di debug testuale.
  * Per disabilitare togliere DBGMSK_EKFSTATE_ENABLE oppure commentare la definizione.
  */
-//#define DEBUG_EKFSTATE       ( DBGMSK_EKFSTATE_ENABLE | DBG_EKFSTATE_OCV )
+//#define DEBUG_EKFSTATE       ( DBGMSK_EKFSTATE_ENABLE | DBGMSK_EKFSTATE_OCV )
 
 #define EKFSTATE_DBG( dbg )      (defined(DEBUG_EKFSTATE) && ( DEBUG_EKFSTATE & DBGMSK_EKFSTATE_ENABLE ) &&  ( DEBUG_EKFSTATE & (dbg) )  )
 

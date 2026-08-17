@@ -34,9 +34,9 @@
 
 /* Tipi di debug disponibili */
 #define DBGMSK_MIXALGORITHM_ENABLE          	0x80
-#define DBG_MIXALGORITHM_CLASS        	0x01
-#define DBG_MIXALGORITHM_COERCE			0x02
-#define DBG_MIXALGORITHM_STEPBYSTEP		0x04
+#define DBGMSK_MIXALGORITHM_CLASS        	0x01
+#define DBGMSK_MIXALGORITHM_COERCE			0x02
+#define DBGMSK_MIXALGORITHM_STEPBYSTEP		0x04
 
 
 /* Imposta debug
@@ -44,7 +44,7 @@
  * abilitare i vari tipi di debug testuale.
  * Per disabilitare togliere DBGMSK_MIXALGORITHM_ENABLE oppure commentare la definizione.
  */
-//#define DEBUG_MIXALGORITHM       ( DBGMSK_MIXALGORITHM_ENABLE | DBG_MIXALGORITHM_OCV )
+//#define DEBUG_MIXALGORITHM       ( DBGMSK_MIXALGORITHM_ENABLE | DBGMSK_MIXALGORITHM_OCV )
 
 #define MIXALGORITHM_DBG( dbg )      (defined(DEBUG_MIXALGORITHM) && ( DEBUG_MIXALGORITHM & DBGMSK_MIXALGORITHM_ENABLE ) &&  ( DEBUG_MIXALGORITHM & (dbg) )  )
 

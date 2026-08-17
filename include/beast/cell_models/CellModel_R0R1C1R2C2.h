@@ -74,7 +74,7 @@ private:
     FILE * fdbg;
 #endif
 
-#if _ARCHITECTURE_ == ARCH_PC || defined DBG_CELL_MODEL_INFO
+#if _ARCHITECTURE_ == ARCH_PC || defined DBGMSK_CELL_MODEL_INFO
 public:
 	t_size CellModel_Info( char * strCellModel );
 #endif 

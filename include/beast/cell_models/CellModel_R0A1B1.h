@@ -85,7 +85,7 @@ private:
     t_float lutocv0[R0A1B1_LUT_MAXLEN];
     t_float lutocv1[R0A1B1_LUT_MAXLEN];
 
-#ifdef DBG_CELL_MODEL_INFO
+#ifdef DBGMSK_CELL_MODEL_INFO
 public:
 	t_size CellModel_Info( char * strCellModel );
 #endif

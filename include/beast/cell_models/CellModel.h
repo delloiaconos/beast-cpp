@@ -83,7 +83,7 @@ public:
 	static const t_float Zero;
 
 
-#ifdef DBG_CELL_MODEL_INFO
+#ifdef DBGMSK_CELL_MODEL_INFO
 public:
 	virtual t_size CellModel_Info( char * strCellModel );
 #endif

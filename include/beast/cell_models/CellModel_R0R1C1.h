@@ -74,12 +74,12 @@ private:
     FILE * fdbg;
 #endif
 
-#if R0R1C1_DBG( DBG_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if R0R1C1_DBG( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
 private:
     FILE *fFun;
 #endif
 
-#if _ARCHITECTURE_ == ARCH_PC || defined DBG_CELL_MODEL_INFO
+#if _ARCHITECTURE_ == ARCH_PC || defined DBGMSK_CELL_MODEL_INFO
 public:
 	t_size CellModel_Info( char * strCellModel );
 #endif 

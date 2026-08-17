@@ -34,7 +34,7 @@
 
 /* Tipi di debug disponibili */
 #define DBGMSK_R0R1C1R2C2_ENABLE          0x80
-#define DBG_R0R1C1R2C2_CLASS        0x01
+#define DBGMSK_R0R1C1R2C2_CLASS        0x01
 
 
 /* Imposta debug
@@ -42,7 +42,7 @@
  * abilitare i vari tipi di debug testuale.
  * Per disabilitare togliere DBGMSK_R0R1C1R2C2_ENABLE oppure commentare la definizione.
  */
-//#define DEBUG_R0R1C1R2C2       ( DBGMSK_R0R1C1R2C2_ENABLE | DBG_R0R1C1R2C2_OCV )
+//#define DEBUG_R0R1C1R2C2       ( DBGMSK_R0R1C1R2C2_ENABLE | DBGMSK_R0R1C1R2C2_OCV )
 
 #define R0R1C1R2C2_DBG( dbg )      (defined(DEBUG_R0R1C1R2C2) && ( DEBUG_R0R1C1R2C2 & DBGMSK_R0R1C1R2C2_ENABLE ) &&  ( DEBUG_R0R1C1R2C2 & (dbg) )  )
 

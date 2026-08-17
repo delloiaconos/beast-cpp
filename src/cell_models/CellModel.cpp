@@ -140,7 +140,7 @@ t_size CellModel::CheckInputDim( const Vector &uu )
 }
 
 
-#ifdef DBG_CELL_MODEL_INFO
+#ifdef DBGMSK_CELL_MODEL_INFO
 t_size CellModel::CellModel_Info( char * strCellModel );
 {
 	*strCellModel = '\0';

@@ -47,7 +47,7 @@ CellModel_R0R1C1::CellModel_R0R1C1()
    CellModel_DebugInit();
 #endif
    
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
    CellModel_R0R1C1_dprint( "CALL: CellModel_R0R1C1()" );
 #endif   
 
@@ -103,7 +103,7 @@ CellModel_R0R1C1::CellModel_R0R1C1( char * basepath )
    CellModel_DebugInit();
 #endif
    
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
    CellModel_R0R1C1_dprint( "CALL: CellModel_R0R1C1( char * basepath )" );
 #endif   
 
@@ -132,7 +132,7 @@ CellModel_R0R1C1::CellModel_R0R1C1( char * basepath )
 
   	   }
   	   fclose( fr );
-#if R0R1C1_DBG( DBG_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if R0R1C1_DBG( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
   	   fprintf( fFun, "sxW:\n" );
   	   sxW.Print( fFun );
 #endif
@@ -149,7 +149,7 @@ CellModel_R0R1C1::CellModel_R0R1C1( char * basepath )
   	   	   sxV(i+1,i+1) = tmp;
   	   }
   	   fclose( fr );
-#if R0R1C1_DBG( DBG_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if R0R1C1_DBG( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
   	   fprintf( fFun, "sxV:\n" );
   	   sxV.Print( fFun );
 #endif
@@ -166,7 +166,7 @@ CellModel_R0R1C1::CellModel_R0R1C1( char * basepath )
   	   	   spR(i+1,i+1) = tmp;
   	   }
   	   fclose( fr );
-#if R0R1C1_DBG( DBG_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if R0R1C1_DBG( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
   	   fprintf( fFun, "spR:\n" );
   	   spR.Print( fFun );
 #endif
@@ -184,7 +184,7 @@ CellModel_R0R1C1::CellModel_R0R1C1( char * basepath )
   	   	   spE(i+1,i+1) = tmp;
   	   }
   	   fclose( fr );
-#if R0R1C1_DBG( DBG_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if R0R1C1_DBG( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
   	   fprintf( fFun, "spE:\n" );
   	   spE.Print( fFun );
 #endif
@@ -272,11 +272,11 @@ void inline CellModel_R0R1C1::CellModel_DebugInit( void )
 {    
    fdbg = fopen( "CellModel_R0R1C1_dbg.txt", "wt" );
 
-#if R0R1C1_DBG( DBG_H0F0A_CLASS )
+#if R0R1C1_DBG( DBGMSK_H0F0A_CLASS )
    CellModel_R0R1C1_dprint( "CALL: CellModel_DebugInit()" );
 #endif
 
-#if R0R1C1_DBG( DBG_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if R0R1C1_DBG( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
    fFun = fopen( "CellModel_ROR1C1.txt", "wt" );
 #endif
 }
@@ -285,11 +285,11 @@ void inline CellModel_R0R1C1::CellModel_DebugInit( void )
 
 CellModel_R0R1C1::~CellModel_R0R1C1()
 {
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
    CellModel_R0R1C1_dprint( "CALL: ~CellModel_R0R1C1()" );
 #endif
 
-#if R0R1C1_DBG( DBG_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if R0R1C1_DBG( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
    fclose( fFun );
 #endif
 
@@ -302,7 +302,7 @@ CellModel_R0R1C1::~CellModel_R0R1C1()
 t_size CellModel_R0R1C1::g0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const res )
 {   
 	t_float ocv0old;
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
     CellModel_R0R1C1_dprint( "CALL: y0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const ynew )" );
 #endif
     ocv0old  = interpxy( lutsoc, lutocv0, lutlen, xold.get(1,1));
@@ -313,7 +313,7 @@ t_size CellModel_R0R1C1::g0( const Vector &xold, const Vector &pold, const Vecto
 
 t_size CellModel_R0R1C1::g1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
     CellModel_R0R1C1_dprint( "CALL: y1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
@@ -325,7 +325,7 @@ t_size CellModel_R0R1C1::g1x( const Vector &xold, const Vector &pold, const Vect
 
 t_size CellModel_R0R1C1::g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
     CellModel_R0R1C1_dprint( "CALL: y1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
@@ -340,7 +340,7 @@ t_size CellModel_R0R1C1::f0( const Vector &xold, const Vector &pold, const Vecto
 {
 	t_float deltaSOC, tauloc, alphaloc;
 	t_float u;
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
     CellModel_R0R1C1_dprint( "CALL: f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const xnew )" );
 #endif
     u = uold.get(1,1);
@@ -359,7 +359,7 @@ t_size CellModel_R0R1C1::f1x( const Vector &xold, const Vector &pold, const Vect
 {
 	t_float tauloc, alphaloc;
 
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
     CellModel_R0R1C1_dprint( "CALL: f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
@@ -378,7 +378,7 @@ t_size CellModel_R0R1C1::f1x( const Vector &xold, const Vector &pold, const Vect
 t_size CellModel_R0R1C1::f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )
 {
 	t_float alphaloc, tauloc, adtrc;
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
     CellModel_R0R1C1_dprint( "CALL: f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res )" );
 #endif
 
@@ -398,13 +398,13 @@ t_size CellModel_R0R1C1::f1p( const Vector &xold, const Vector &pold, const Vect
 t_size	CellModel_R0R1C1::CoercePars( Vector * const pp )
 {
 	t_size cntCoerce = 0;
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
     CellModel_R0R1C1_dprint( "CALL: CoercePars( Vector * const pp )" );
 #endif
 
 	if( pp->get(1,1) <= (t_float) 0.0 ) {
 	      pp->setv(1,1, CellModel::CellModel::Zero );
-#if R0R1C1_DBG( DBG_R0R1C1_COERCE )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_COERCE )
 	      dbg_print( "WARNING: parameter p(1,1)=R0<=0 CORRECTED TO ZERO" );
 #endif
 	      cntCoerce++;
@@ -412,7 +412,7 @@ t_size	CellModel_R0R1C1::CoercePars( Vector * const pp )
 
 	if( pp->get(2,1) < (t_float) 0.0 ) {
 	      pp->setv(2,1, CellModel::CellModel::Zero );
-#if R0R1C1_DBG( DBG_R0R1C1_COERCE )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_COERCE )
 	      dbg_print( "WARNING: parameter p(2,1)=R1<=0 CORRECTED TO ZERO" );
 #endif
 	      cntCoerce++;
@@ -421,7 +421,7 @@ t_size	CellModel_R0R1C1::CoercePars( Vector * const pp )
 	if( pp->get(3,1) < (t_float) 0.0 )
 	{
 	      pp->setv(3,1, CellModel::Zero );
-#if R0R1C1_DBG( DBG_R0R1C1_COERCE )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_COERCE )
 	      dbg_print( "WARNING: parameter p(3,1)=C1<0 CORRECTED TO ZERO" );
 #endif
 	      cntCoerce++;
@@ -433,19 +433,19 @@ t_size	CellModel_R0R1C1::CoercePars( Vector * const pp )
 t_size	CellModel_R0R1C1::CoerceState( Vector * const xx )
 {
 	t_size cntCoerce = 0;
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
     CellModel_R0R1C1_dprint( "CALL: CoerceState( Vector * const xx )" );
 #endif
 
 	if( xx->get(1,1) > (t_float) 1 ) {
 		xx->setv(1,1, 1);
-#if R0R1C1_DBG( DBG_R0R1C1_COERCE )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_COERCE )
 	    dbg_print( "WARNING: state x(1,1)=SOC>1. CORRECTED TO 1" );
 #endif
 	    cntCoerce++;
 	} else if( xx->get(1,1) < (t_float) 0.0 ) {
 		xx->setv(1,1, 1);
-#if R0R1C1_DBG( DBG_R0R1C1_COERCE )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_COERCE )
 	    dbg_print( "WARNING: state x(1,1)=SOC<0. CORRECTED TO ZERO" );
 #endif
 	    cntCoerce++;
@@ -454,16 +454,16 @@ t_size	CellModel_R0R1C1::CoerceState( Vector * const xx )
     return cntCoerce;
 }
 
-#if _ARCHITECTURE_ == ARCH_PC || defined DBG_CELL_MODEL_INFO
+#if _ARCHITECTURE_ == ARCH_PC || defined DBGMSK_CELL_MODEL_INFO
 t_size CellModel_R0R1C1::CellModel_Info( char * strCellModel )
 {
 	char strThisModel[] = "R0R1C1";
 
-#if R0R1C1_DBG( DBG_R0R1C1_CLASS )
+#if R0R1C1_DBG( DBGMSK_R0R1C1_CLASS )
     CellModel_R0R1C1_dprint( "CALL: CellModel_Info( char * strCellModel )" );
 #endif
 	/* AUTO genereted Class Member */
     strcpy( strCellModel, strThisModel );
 	return (t_size) 6;
 }
-#endif // DBG_CELL_MODEL_INFO | _ARCHITECTURE_ == ARCH_PC
+#endif // DBGMSK_CELL_MODEL_INFO | _ARCHITECTURE_ == ARCH_PC

@@ -29,7 +29,7 @@
 #ifndef __CELL_MODEL_DEBUG_H__
 #define __CELL_MODEL_DEBUG_H__
 
-// #define DBG_CELL_MODEL_INFO 1
+// #define DBGMSK_CELL_MODEL_INFO 1
 
 
 
