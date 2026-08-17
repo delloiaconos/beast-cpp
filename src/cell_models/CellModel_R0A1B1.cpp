@@ -428,14 +428,17 @@ t_size	CellModel_R0A1B1::CoerceState( Vector * const xx )
 }
 
 
-#ifdef DBGMSK_CELL_MODEL_INFO
+#ifdef _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size CellModel_R0A1B1::CellModel_Info( char * strCellModel )
 {
+	/* AUTO genereted Class Member */
+	char strThisModel[] = "R0A1B1";
+
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
 	CellModel_R0A1B1_dprint( "CALL: CellModel_R0A1B1::CellModel_Info( char * strCellModel )" );
 #endif
-	char strThisModel[] = "R0A1B1";
-
-	return (t_size) strcpy( strCellModel, strThisModel );;
+	
+	strcpy( strCellModel, strThisModel );
+	return (t_size) strlen( strThisModel );
 }
-#endif // DBGMSK_CELL_MODEL_INFO
+#endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO 

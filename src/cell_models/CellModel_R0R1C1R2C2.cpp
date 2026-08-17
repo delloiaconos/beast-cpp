@@ -501,16 +501,17 @@ t_size	CellModel_R0R1C1R2C2::CoerceState( Vector * const xx )
 }
 
 
-#if _ARCHITECTURE_ == ARCH_PC || defined DBGMSK_CELL_MODEL_INFO
+#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size CellModel_R0R1C1R2C2::CellModel_Info( char * strCellModel )
 {
+	/* AUTO genereted Class Member */
 	char strThisModel[] = "R0R1C1R2C2";
 
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_CLASS )
     CellModel_R0R1C1R2C2_dprint( "CALL: CellModel_Info( char * strCellModel )" );
 #endif
-	/* AUTO genereted Class Member */
+	
     strcpy( strCellModel, strThisModel );
-	return (t_size) 10;
+	return (t_size) strlen( strThisModel );
 }
-#endif // DBGMSK_CELL_MODEL_INFO | _ARCHITECTURE_ == ARCH_PC
+#endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO 
