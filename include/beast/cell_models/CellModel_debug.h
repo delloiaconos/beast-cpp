@@ -18,7 +18,7 @@
  * BEAST - Battery Estimation Architecture and Simulation Toolkit
  *
  * @par Repository
- * <REPOSITORY_URL>
+ * https://github.com/delloiaconos/beast-cpp
  *
  * @copyright
  * Copyright (c) 2026 Salvatore Dello Iacono.
