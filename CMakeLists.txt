@@ -4,6 +4,7 @@ project(beast-cpp VERSION 0.2.0 LANGUAGES C CXX)
 
 option(BEAST_BUILD_APPS "Build BEAST command-line utilities" ON)
 option(BEAST_BUILD_TESTS "Build BEAST tests" ON)
+option(BEAST_BUILD_DOCS "Enable BEAST Doxygen documentation target" OFF)
 
 add_library(beast
     src/common/Exception.cpp
@@ -65,6 +66,30 @@ if(BEAST_BUILD_TESTS)
         target_link_libraries(beast-matrix-test PRIVATE beast::beast)
         add_test(NAME beast.matrix COMMAND beast-matrix-test)
     endif()
+endif()
+
+if(BEAST_BUILD_DOCS)
+    find_package(Doxygen REQUIRED)
+
+    set(BEAST_DOXYFILE_IN
+        ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
+    )
+    set(BEAST_DOXYFILE_OUT
+        ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+    )
+
+    configure_file(
+        ${BEAST_DOXYFILE_IN}
+        ${BEAST_DOXYFILE_OUT}
+        @ONLY
+    )
+
+    add_custom_target(docs
+        COMMAND ${DOXYGEN_EXECUTABLE} ${BEAST_DOXYFILE_OUT}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating BEAST API documentation with Doxygen"
+        VERBATIM
+    )
 endif()
 
 include(GNUInstallDirs)

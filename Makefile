@@ -5,6 +5,7 @@ BUILD_DIR ?= build
 BUILD_TYPE ?= Debug
 BEAST_BUILD_APPS ?= ON
 BEAST_BUILD_TESTS ?= ON
+BEAST_BUILD_DOCS ?= OFF
 CMAKE ?= cmake
 CTEST ?= ctest
 
@@ -13,9 +14,10 @@ CMAKE_CONFIGURE_ARGS = \
 	-B "$(BUILD_DIR)" \
 	-DCMAKE_BUILD_TYPE="$(BUILD_TYPE)" \
 	-DBEAST_BUILD_APPS="$(BEAST_BUILD_APPS)" \
-	-DBEAST_BUILD_TESTS="$(BEAST_BUILD_TESTS)"
+	-DBEAST_BUILD_TESTS="$(BEAST_BUILD_TESTS)" \
+	-DBEAST_BUILD_DOCS="$(BEAST_BUILD_DOCS)"
 
-.PHONY: all configure build test clean distclean rebuild install \
+.PHONY: all configure build test docs clean distclean rebuild install \
 	beast-estimator beast-model-info debug release help
 
 all: build
@@ -28,6 +30,13 @@ build: configure
 
 test: build
 	$(CTEST) --test-dir "$(BUILD_DIR)" --output-on-failure
+
+docs:
+	$(MAKE) configure BEAST_BUILD_DOCS=ON
+	$(CMAKE) --build "$(BUILD_DIR)" --target docs
+	@printf '%s\n' \
+		'Documentation generated:' \
+		'  $(BUILD_DIR)/docs/html/index.html'
 
 beast-estimator: configure
 	$(CMAKE) --build "$(BUILD_DIR)" --target beast-estimator --parallel
@@ -67,6 +76,7 @@ help:
 		'  make configure          Configure CMake only' \
 		'  make build              Configure and build all enabled targets' \
 		'  make test               Build and run CTest' \
+		'  make docs               Generate Doxygen HTML documentation' \
 		'  make beast-estimator    Build only the estimator utility' \
 		'  make beast-model-info   Build only the model-info utility' \
 		'  make debug              Build with CMAKE_BUILD_TYPE=Debug' \
@@ -82,8 +92,11 @@ help:
 		'  BUILD_TYPE=Debug        CMake build type' \
 		'  BEAST_BUILD_APPS=ON     Enable command-line utilities' \
 		'  BEAST_BUILD_TESTS=ON    Enable tests' \
+		'  BEAST_BUILD_DOCS=OFF    Enable the CMake Doxygen target' \
 		'' \
 		'Examples:' \
 		'  make release' \
 		'  make test BUILD_TYPE=Release' \
+		'  make docs' \
+		'  make docs BUILD_DIR=build-docs' \
 		'  make build BUILD_DIR=build-ci BEAST_BUILD_TESTS=OFF'
