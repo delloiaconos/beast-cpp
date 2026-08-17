@@ -44,7 +44,7 @@
 
 CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2()
 {
-#if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_ENB )
+#if R0R1C1R2C2_DBG( DBGMSK_R0R1C1R2C2_ENABLE )
    CellModel_DebugInit();
 #endif
    
@@ -103,7 +103,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2( char * basepath )
 	FILE * fr;
 	char filename[2*CELL_MODEL_BASEPATH_LEN];
 
-#if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_ENB )
+#if R0R1C1R2C2_DBG( DBGMSK_R0R1C1R2C2_ENABLE )
    CellModel_DebugInit();
 #endif
    
@@ -264,7 +264,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2( char * basepath )
 #endif // _ARCHITECTURE_ == ARCH_PC
 
 
-#if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_ENB )
+#if R0R1C1R2C2_DBG( DBGMSK_R0R1C1R2C2_ENABLE )
 void inline CellModel_R0R1C1R2C2::CellModel_DebugInit( void )
 {    
    fdbg = fopen( "CellModel_R0R1C1R2C2_dbg.txt", "wt" );
@@ -281,7 +281,7 @@ CellModel_R0R1C1R2C2::~CellModel_R0R1C1R2C2()
 #if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_CLASS )
    CellModel_R0R1C1R2C2_dprint( "CALL: ~CellModel_R0R1C1R2C2()" );
 #endif
-#if R0R1C1R2C2_DBG( DBG_R0R1C1R2C2_ENB )
+#if R0R1C1R2C2_DBG( DBGMSK_R0R1C1R2C2_ENABLE )
     fclose( fdbg );
 #endif 
 }

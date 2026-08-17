@@ -33,7 +33,7 @@
 
 
 /* Tipi di debug disponibili */
-#define DBG_EKFSTATE_ENB          	0x80
+#define DBGMSK_EKFSTATE_ENABLE          	0x80
 #define DBG_EKFSTATE_CLASS        	0x01
 #define DBG_EKFSTATE_COERCE			0x02
 #define DBG_EKFSTATE_STEPBYSTEP		0x04
@@ -42,14 +42,14 @@
 /* Imposta debug
  * bisogna mettere in "or" le costanti definite sopra per
  * abilitare i vari tipi di debug testuale.
- * Per disabilitare togliere DBG_EKFSTATE_ENB oppure commentare la definizione.
+ * Per disabilitare togliere DBGMSK_EKFSTATE_ENABLE oppure commentare la definizione.
  */
-//#define DEBUG_EKFSTATE       ( DBG_EKFSTATE_ENB | DBG_EKFSTATE_OCV )
+//#define DEBUG_EKFSTATE       ( DBGMSK_EKFSTATE_ENABLE | DBG_EKFSTATE_OCV )
 
-#define EKFSTATE_DBG( dbg )      (defined(DEBUG_EKFSTATE) && ( DEBUG_EKFSTATE & DBG_EKFSTATE_ENB ) &&  ( DEBUG_EKFSTATE & (dbg) )  )
+#define EKFSTATE_DBG( dbg )      (defined(DEBUG_EKFSTATE) && ( DEBUG_EKFSTATE & DBGMSK_EKFSTATE_ENABLE ) &&  ( DEBUG_EKFSTATE & (dbg) )  )
 
 
-#if EKFSTATE_DBG( DBG_EKFSTATE_ENB )
+#if EKFSTATE_DBG( DBGMSK_EKFSTATE_ENABLE )
 	#include <stdio.h>
 	#include <stdlib.h>
 	#define Estimator_EKFstate_dprint( fmt ) do{ fprintf(fdbg, "Estimator_EKFstate :" fmt "\n"); fflush( fdbg ); } while(0)

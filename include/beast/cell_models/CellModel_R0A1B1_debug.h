@@ -32,7 +32,7 @@
 
 
 /* Tipi di debug disponibili */
-#define DBG_R0A1B1_ENB          0x80
+#define DBGMSK_R0A1B1_ENABLE          0x80
 #define DBG_R0A1B1_CLASS        0x01
 #define DBG_R0A1B1_COERCE		0x02
 
@@ -40,14 +40,14 @@
 /* Imposta debug
  * bisogna mettere in "or" le costanti definite sopra per
  * abilitare i vari tipi di debug testuale.
- * Per disabilitare togliere DBG_R0A1B1_ENB oppure commentare la definizione.
+ * Per disabilitare togliere DBGMSK_R0A1B1_ENABLE oppure commentare la definizione.
  */
-//#define DEBUG_R0A1B1       ( DBG_R0A1B1_ENB | DBG_R0A1B1_OCV )
+//#define DEBUG_R0A1B1       ( DBGMSK_R0A1B1_ENABLE | DBG_R0A1B1_OCV )
 
-#define R0A1B1_DBG( dbg )      (defined(DEBUG_R0A1B1) && ( DEBUG_R0A1B1 & DBG_R0A1B1_ENB ) &&  ( DEBUG_R0A1B1 & (dbg) )  )
+#define R0A1B1_DBG( dbg )      (defined(DEBUG_R0A1B1) && ( DEBUG_R0A1B1 & DBGMSK_R0A1B1_ENABLE ) &&  ( DEBUG_R0A1B1 & (dbg) )  )
 
 
-#if R0A1B1_DBG( DBG_R0A1B1_ENB )
+#if R0A1B1_DBG( DBGMSK_R0A1B1_ENABLE )
        #include stdio.h
        #include stdlib.h
        #define CellModel_R0A1B1_dprint( fmt ) do{ fprintf(fdbg, "CellModel_R0A1B1 :" fmt "\n"); fflush( fdbg ); } while(0)

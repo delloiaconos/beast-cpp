@@ -33,7 +33,7 @@
 
 
 /* Tipi di debug disponibili */
-#define DBG_MIXALGORITHM_ENB          	0x80
+#define DBGMSK_MIXALGORITHM_ENABLE          	0x80
 #define DBG_MIXALGORITHM_CLASS        	0x01
 #define DBG_MIXALGORITHM_COERCE			0x02
 #define DBG_MIXALGORITHM_STEPBYSTEP		0x04
@@ -42,14 +42,14 @@
 /* Imposta debug
  * bisogna mettere in "or" le costanti definite sopra per
  * abilitare i vari tipi di debug testuale.
- * Per disabilitare togliere DBG_MIXALGORITHM_ENB oppure commentare la definizione.
+ * Per disabilitare togliere DBGMSK_MIXALGORITHM_ENABLE oppure commentare la definizione.
  */
-//#define DEBUG_MIXALGORITHM       ( DBG_MIXALGORITHM_ENB | DBG_MIXALGORITHM_OCV )
+//#define DEBUG_MIXALGORITHM       ( DBGMSK_MIXALGORITHM_ENABLE | DBG_MIXALGORITHM_OCV )
 
-#define MIXALGORITHM_DBG( dbg )      (defined(DEBUG_MIXALGORITHM) && ( DEBUG_MIXALGORITHM & DBG_MIXALGORITHM_ENB ) &&  ( DEBUG_MIXALGORITHM & (dbg) )  )
+#define MIXALGORITHM_DBG( dbg )      (defined(DEBUG_MIXALGORITHM) && ( DEBUG_MIXALGORITHM & DBGMSK_MIXALGORITHM_ENABLE ) &&  ( DEBUG_MIXALGORITHM & (dbg) )  )
 
 
-#if MIXALGORITHM_DBG( DBG_MIXALGORITHM_ENB )
+#if MIXALGORITHM_DBG( DBGMSK_MIXALGORITHM_ENABLE )
 	#include <stdio.h>
 	#include <stdlib.h>
 	#define Estimator_MixAlgorithm_dprint( fmt ) do{ fprintf(fdbg, "Estimator_MixAlgorithm :" fmt "\n"); fflush( fdbg ); } while(0)

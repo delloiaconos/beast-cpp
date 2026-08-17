@@ -69,7 +69,7 @@ public:
     t_size	CoercePars( Vector * const pp );
     t_size	CoerceState( Vector * const xx );
 
-#if R0A1B1_DBG( DBG_R0A1B1_ENB )
+#if R0A1B1_DBG( DBGMSK_R0A1B1_ENABLE )
 private:  
     void inline CellModel_R0A1B1_DebugInit( void );
     FILE * fdbg;
