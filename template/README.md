@@ -24,10 +24,12 @@ Use the top-level Makefile:
 
 ```bash
 make generate-cell-model NAME=R0R2C2
+make generate-estimator NAME=UKF
 ```
 
 or call the generators directly:
 
 ```bash
 tools/generate_cell_model.sh R0R2C2
+tools/generate_estimator.sh UKF
 ```

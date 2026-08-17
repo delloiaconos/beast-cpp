@@ -27,7 +27,7 @@ CMAKE_CONFIGURE_ARGS = \
 
 .PHONY: all configure build test docs clean distclean rebuild install \
 	beast-estimator beast-model-info debug release \
-	generate-cell-model help
+	generate-cell-model generate-estimator help
 
 all: build
 
@@ -58,6 +58,18 @@ generate-cell-model:
 		BEAST_REPOSITORY="$(BEAST_REPOSITORY)" \
 		FORCE="$(FORCE)" \
 		./tools/generate_cell_model.sh "$(NAME)"
+
+generate-estimator:
+	@test -n "$(NAME)" || { \
+		echo 'Usage: make generate-estimator NAME=<estimator-name>'; \
+		exit 2; \
+	}
+	@M4="$(M4)" \
+		BEAST_AUTHOR="$(BEAST_AUTHOR)" \
+		BEAST_YEAR="$(BEAST_YEAR)" \
+		BEAST_REPOSITORY="$(BEAST_REPOSITORY)" \
+		FORCE="$(FORCE)" \
+		./tools/generate_estimator.sh "$(NAME)"
 
 beast-estimator: configure
 	$(CMAKE) --build "$(BUILD_DIR)" --target beast-estimator --parallel
@@ -131,4 +143,5 @@ help:
 		'  make test BUILD_TYPE=Release' \
 		'  make docs' \
 		'  make generate-cell-model NAME=R0R2C2' \
+		'  make generate-estimator NAME=UKF BEAST_AUTHOR="Jane Doe"' \
 		'  make build BUILD_DIR=build-ci BEAST_BUILD_TESTS=OFF'
