@@ -52,6 +52,7 @@
 #if OPENLOOP_DBG( DBG_OPENLOOP_ENB )
 	#include <stdio.h>
 	#include <stdlib.h>
+	#define Estimator_OpenLoop_dprint( fmt ) do{ fprintf(fdbg, "Estimator_OpenLoop :" fmt "\n"); fflush( fdbg ); } while(0)
 #endif
 
 

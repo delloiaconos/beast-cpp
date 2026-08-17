@@ -51,6 +51,7 @@
 #if EKFDUAL_DBG( DBG_EKFDUAL_ENB )
 	#include <stdio.h>
 	#include <stdlib.h>
+	#define Estimator_EKFdual_dprint( fmt ) do{ fprintf(fdbg, "Estimator_EKFdual :" fmt "\n"); fflush( fdbg ); } while(0)
 #endif
 
 

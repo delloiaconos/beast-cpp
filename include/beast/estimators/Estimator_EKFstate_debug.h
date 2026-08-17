@@ -50,7 +50,9 @@
 
 
 #if EKFSTATE_DBG( DBG_EKFSTATE_ENB )
-
+	#include <stdio.h>
+	#include <stdlib.h>
+	#define Estimator_EKFstate_dprint( fmt ) do{ fprintf(fdbg, "Estimator_EKFstate :" fmt "\n"); fflush( fdbg ); } while(0)
 #endif
 
 

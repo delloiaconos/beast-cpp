@@ -49,7 +49,9 @@
 
 
 #if ENHANCEDMIXALGORITHM_DBG( DBG_ENHANCEDMIXALGORITHM_ENB )
-
+	#include <stdio.h>
+	#include <stdlib.h>
+	#define Estimator_EnhancedMixAlgorithm_dprint( fmt ) do{ fprintf(fdbg, "Estimator_EnhancedMixAlgorithm :" fmt "\n"); fflush( fdbg ); } while(0)
 #endif
 
 

@@ -50,7 +50,9 @@
 
 
 #if MIXALGORITHM_DBG( DBG_MIXALGORITHM_ENB )
-
+	#include <stdio.h>
+	#include <stdlib.h>
+	#define Estimator_MixAlgorithm_dprint( fmt ) do{ fprintf(fdbg, "Estimator_MixAlgorithm :" fmt "\n"); fflush( fdbg ); } while(0)
 #endif
 
 
