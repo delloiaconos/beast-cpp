@@ -1,10 +1,31 @@
-/*
- * Estimator_EnhancedMixAlgorithm.cpp
- *
- *  Created on: 04/mag/2014
- *      Author: salvatoredelloiacono
- */
+// SPDX-License-Identifier: GPL-3.0-only
 
+/**
+ * @file
+ * @brief Estimator Implementation Enhanced Mixed Algorithm.
+ *
+ * @details
+ * Part of the BEAST project:
+ * Battery Estimation Architecture and Simulation Toolkit.
+ *
+ * BEAST is a framework for battery modeling, simulation, and state/parameter
+ * estimation.
+ *
+ * @author Salvatore Dello Iacono
+ * @date 2014
+ *
+ * @par Project
+ * BEAST - Battery Estimation Architecture and Simulation Toolkit
+ *
+ * @par Repository
+ * <REPOSITORY_URL>
+ *
+ * @copyright
+ * Copyright (c) 2026 Salvatore Dello Iacono.
+ *
+ * @license
+ * GNU General Public License v3.0.
+ */
 
 #include <beast/estimators/Estimator_EnhancedMixAlgorithm.h>
 #include <beast/estimators/Estimator_EnhancedMixAlgorithm_debug.h>
