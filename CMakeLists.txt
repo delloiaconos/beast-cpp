@@ -23,6 +23,8 @@ add_library(beast
     src/numerics/gaussj.cpp
     src/numerics/interpolation.c
 
+    src/io/ModelDataLoader.cpp
+
     src/cell_models/CellModel.cpp
     ${CELL_MODEL_SOURCES}
 
@@ -76,6 +78,10 @@ if(BEAST_BUILD_TESTS)
         add_executable(beast-debug-test tests/test_debug.cpp)
         target_link_libraries(beast-debug-test PRIVATE beast::beast)
         add_test(NAME beast.debug COMMAND beast-debug-test)
+
+        add_executable(beast-modeldataloader-test tests/test_modeldataloader.cpp)
+        target_link_libraries(beast-modeldataloader-test PRIVATE beast::beast)
+        add_test(NAME beast.modeldataloader COMMAND beast-modeldataloader-test)
     endif()
 endif()
 
