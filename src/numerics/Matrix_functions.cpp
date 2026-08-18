@@ -36,14 +36,22 @@ void Swap(t_float* a, t_float* b);
 
 void Swap(t_float& a, t_float& b)
 {
+#if !ARCH_CHKTYPE( ARCH_PC )
 	register t_float temp = a;
+#else
+	t_float temp = a;
+#endif	
 	a = b;
 	b = temp;
 }
 
 void Swap(t_float* a, t_float* b)
 {
+#if !ARCH_CHKTYPE( ARCH_PC )
 	register t_float temp = *a;
+#else
+	t_float temp = *a;
+#endif	
 	*a = *b;
 	*b = temp;
 }
