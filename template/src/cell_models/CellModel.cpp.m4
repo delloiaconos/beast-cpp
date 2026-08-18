@@ -209,10 +209,11 @@ t_size $$BEAST_CLASS_NAME$$::CoerceState(Vector* const xx)
 #if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size $$BEAST_CLASS_NAME$$::Info( char * strCellModel )
 {
+    /* Auto generated class method. */
 #if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
 	dbg.print( "CALL: Info( char * strCellModel )" );
 #endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
-	char strThisModel[] = "$$UPNAME$$";
+	char strThisModel[] = "$$BEAST_UPNAME$$";
     
     strcpy( strCellModel, strThisModel );
 	return (t_size) strlen( strThisModel );
