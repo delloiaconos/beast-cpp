@@ -1,8 +1,9 @@
+
 // SPDX-License-Identifier: GPL-3.0-only
 
 /**
  * @file
- * @brief Cell Model R0-R1C1 header file. 
+ * @brief Cell Model "R0-R1C1" header file.
  *
  * @details
  * Part of the BEAST project:
@@ -18,7 +19,7 @@
  * BEAST - Battery Estimation Architecture and Simulation Toolkit
  *
  * @par Repository
- * https://github.com/delloiaconos/beast-cpp
+ * https://github.com/delloiaconos/beast-cpp.git
  *
  * @copyright
  * Copyright (c) 2026 Salvatore Dello Iacono.
@@ -27,61 +28,49 @@
  * GNU General Public License v3.0.
  */
 
-#ifndef __CELLMODEL_R0R1C1_H__
-#define __CELLMODEL_R0R1C1_H__
-
-
-#include <beast/cell_models/CellModel.h>
-#include <beast/cell_models/CellModel_debug.h>
-
-#include <beast/cell_models/CellModel_R0R1C1_debug.h>
+#ifndef __CELL_MODEL_R0R1C1_H__
+#define __CELL_MODEL_R0R1C1_H__
 
 #include <beast/common/architecture.h>
-
-#include <beast/numerics/Vector.h>
+#include <beast/common/Debug.h>
 #include <beast/numerics/Matrix.h>
+#include <beast/numerics/Vector.h>
 
-#include "math.h"
+#include <beast/cell_models/CellModel.h>
+#include <beast/cell_models/CellModel_R0R1C1_debug.h>
 
 #define R0R1C1_LUT_MAXLEN 110
 
 class CellModel_R0R1C1 : public CellModel
 {
-      
-public: 
-	CellModel_R0R1C1();
-	
+public:
+    CellModel_R0R1C1();
+
 #if _ARCHITECTURE_ == ARCH_PC
-	CellModel_R0R1C1( char * basepath );
+    explicit CellModel_R0R1C1(char* basepath);
 #endif
 
-	~CellModel_R0R1C1();
-    
-    t_size   f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const xnew );
-    t_size   f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res );
-    t_size   f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res ) ;
+    ~CellModel_R0R1C1() override;
 
-    t_size   g0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const ynew ) ;
-    t_size   g1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res ) ;
-    t_size   g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res ) ;
+    t_size f0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const xnew);
+    t_size f1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
+    t_size f1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
 
-    t_size	CoercePars( Vector * const pp );
-    t_size	CoerceState( Vector * const xx );
+    t_size g0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const ynew);
+    t_size g1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
+    t_size g1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
+
+    t_size CoercePars(Vector* const pp);
+    t_size CoerceState(Vector* const xx);
 
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_ENABLE )
 private:  
-    void inline DebugInit( void );
-    FILE * fdbg;
+    Debug dbg{"[CellModel_R0R1C1] ", "CellModel_R0R1C1.log"};
 #endif
 
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
-private:
-    FILE *fFun;
-#endif
-
-#if _ARCHITECTURE_ == ARCH_PC || defined DBGMSK_CELL_MODEL_INFO
+#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 public:
-	t_size Info( char * strCellModel );
+    t_size Info( char * strCellModel );
 #endif 
 
 private:
