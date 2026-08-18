@@ -72,6 +72,10 @@ if(BEAST_BUILD_TESTS)
         add_executable(beast-matrix-test tests/test_matrix.cpp)
         target_link_libraries(beast-matrix-test PRIVATE beast::beast)
         add_test(NAME beast.matrix COMMAND beast-matrix-test)
+
+        add_executable(beast-debug-test tests/test_debug.cpp)
+        target_link_libraries(beast-debug-test PRIVATE beast::beast)
+        add_test(NAME beast.debug COMMAND beast-debug-test)
     endif()
 endif()
 
