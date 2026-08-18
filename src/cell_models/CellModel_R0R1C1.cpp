@@ -30,7 +30,10 @@
 #include <beast/cell_models/CellModel.h>
 #include <beast/cell_models/CellModel_R0R1C1.h>
 #include <beast/cell_models/CellModel_R0R1C1_debug.h>
+
 #include <beast/numerics/interpolation.h>
+#include <beast/io/ModelDataLoader.h>
+
 CellModel_R0R1C1::CellModel_R0R1C1()
 {
 
@@ -84,8 +87,6 @@ CellModel_R0R1C1::CellModel_R0R1C1()
 CellModel_R0R1C1::CellModel_R0R1C1(const char* basepath)
     : CellModel(basepath)
 {
-	FILE * fr;
-	char filename[CELL_MODEL_BASEPATH_LEN];
 
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_CLASS )
 	dbg.print( "CALL: CellModel_R0R1C1(const char* basepath)" );
@@ -101,153 +102,38 @@ CellModel_R0R1C1::CellModel_R0R1C1(const char* basepath)
    spR = Matrix( Matrix::Identity, Np, Np);
    spE = Matrix( Matrix::Identity, Ny, Ny);
 
+	/* Read data from file */
 
+    beast::io::ModelDataLoader loader( basepath );
 
-   /* Read from file */
-     try {
-  	   t_float tmp;
-  	   t_size i;
-  	   strcpy( filename, basepath );
-  	   strcat( filename, "/MD_COV_sxWvec.in" );
-  	   fr = fopen( filename, "r" );
-  	   for( i = 0; i < sxW.GetRows() && !feof(fr); i++ ) {
-  	   	   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-  	   	   sxW(i+1,i+1) = tmp;
+    loader.readDiagonal( "MD_COV_sxWvec.in", sxW );
+    loader.readDiagonal( "MD_COV_sxVvec.in", sxV );
+    loader.readDiagonal( "MD_COV_spRvec.in", spR );
+    loader.readDiagonal( "MD_COV_spEvec.in", spE );
 
-  	   }
-  	   fclose( fr );
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
-  	   dbg.print( "sxW:\n" );
-  	   sxW.Print( dbg.getFile() );
-#endif // DBGMSK_R0R1C1_FUNDBG && ARCH_PC
-     } catch (const Exception& Ex) {}
-     dbg.print( "OK  002\n" );
-     try {
-  	   t_float tmp;
-  	   t_size i;
-  	   strcpy( filename, basepath );
-  	   strcat( filename, "/MD_COV_sxVvec.in" );
-  	   fr = fopen( filename, "r" );
-  	   for( i = 0; i < sxV.GetRows() && !feof(fr); i++ ) {
-  	   	   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-  	   	   sxV(i+1,i+1) = tmp;
-  	   }
-  	   fclose( fr );
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
-  	   dbg.print( "sxV:\n" );
-  	   sxV.Print( dbg.getFile() );
-#endif
-     } catch (const Exception& Ex) {}
-     dbg.print( "OK  003\n" );
-     try {
-  	   t_float tmp;
-  	   t_size i;
-  	   strcpy( filename, basepath );
-  	   strcat( filename, "/MD_COV_spRvec.in" );
-  	   fr = fopen( filename, "r" );
-  	   for( i = 0; i < spR.GetRows() && !feof(fr); i++ ) {
-  	   	   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-  	   	   spR(i+1,i+1) = tmp;
-  	   }
-  	   fclose( fr );
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
-  	   dbg.print( "spR:\n" );
-  	   spR.Print( dbg.getFile() );
-#endif
-     } catch (const Exception& Ex) {}
+    Qnom = loader.readScalar("MD_pfix_Qn_Ah.in") * 3600.0;
+    eta = loader.readScalar("MD_pfix_eta.in");
 
-     dbg.print( "OK  004\n" );
-     try {
-  	   t_float tmp;
-  	   t_size i;
-  	   strcpy( filename, basepath );
-  	   strcat( filename, "/MD_COV_spEvec.in" );
-  	   fr = fopen( filename, "r" );
-  	   for( i = 0; i < spE.GetRows() && !feof(fr); i++ ) {
-  	   	   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-  	   	   spE(i+1,i+1) = tmp;
-  	   }
-  	   fclose( fr );
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
-  	   dbg.print( "spE:\n" );
-  	   spE.Print( dbg.getFile() );
-#endif
-     } catch (const Exception& Ex) {}
+    const auto soc = loader.readVector("MD_pfix_soc.in");
 
-     dbg.print( "OK  005\n" );
-     try {
-  	   // Qn_Ah
-    	   t_float tmpQn;
-    	   strcpy( filename, basepath );
-    	   strcat( filename, "/MD_pfix_Qn_Ah.in" );
-    	   fr = fopen( filename, "r" );
-    	   fread( &tmpQn, sizeof(t_float), (t_size) 1, fr );
-    	   Qnom = tmpQn*3600;
-    	   fclose( fr );
-     } catch (const Exception& Ex) {}
+    if (soc.empty()) {
+        throw std::runtime_error("SOC lookup table is empty");
+    }
 
-     dbg.print( "OK  006\n" );
-     try {
-  	   // eta
-    	   t_float tmpEta;
-    	   strcpy( filename, basepath );
-    	   strcat( filename, "/MD_pfix_eta.in" );
-    	   fr = fopen( filename, "r" );
-    	   fread( &tmpEta, sizeof(t_float), (t_size) 1, fr );
-    	   eta = tmpEta;
-    	   fclose( fr );
-     } catch (const Exception& Ex) {}
+    if (soc.size() > R0R1C1_LUT_MAXLEN) {
+        throw std::runtime_error("SOC lookup table exceeds maximum size");
+    }
 
-     dbg.print( "OK  007\n" );
-     try {
-     // lutsoc; lutlen
-  	   t_float tmp;
-  	   strcpy( filename, basepath );
-  	   strcat( filename, "/MD_pfix_soc.in" );
-  	   fr = fopen( filename, "r" );
-  	   lutlen = 0;
-  	   while( !feof(fr) && lutlen < R0R1C1_LUT_MAXLEN )
-  	   {
-  		   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-  		   lutsoc[lutlen] = tmp;
-  		   lutlen++;
-  	   }
-  	   fclose( fr );
-     } catch (const Exception& Ex) {}
+	lutlen = static_cast<t_size>(soc.size());
 
-     dbg.print( "OK  008\n" );
-     try {
-  	   t_float tmp;
-  	   t_size i;
-  	   strcpy( filename, basepath );
-  	   strcat( filename, "/MD_pfix_ocv0.in" );
-  	   fr = fopen( filename, "r" );
+    const auto ocv0 = loader.readVector( "MD_pfix_ocv0.in", lutlen );
+    const auto ocv1 = loader.readVector( "MD_pfix_ocv1.in", lutlen );
 
-  	   for( i = 0; (i < lutlen) && !feof(fr); i++ )
-  	   {
-  		   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-  		   lutocv0[i] = tmp;
-  	   }
-
-  	   fclose( fr );
-     } catch (const Exception& Ex) {}
-
-     dbg.print( "OK  009\n" );
-     try {
-     	   t_float tmp;
-     	   t_size i;
-     	   strcpy( filename, basepath );
-     	   strcat( filename, "/MD_pfix_ocv1.in" );
-     	   fr = fopen( filename, "r" );
-
-     	   for( i = 0; (i < lutlen) && !feof(fr); i++ )
-     	   {
-     		   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-     		   lutocv1[i] = tmp;
-     	   }
-     	   fclose( fr );
-     } catch (const Exception& Ex) {}
-
+    for (t_size i = 0; i < lutlen; ++i) {
+        lutsoc[i]  = soc[i];
+        lutocv0[i] = ocv0[i];
+        lutocv1[i] = ocv1[i];
+    }
 }
 #endif // ARCH_PC
 
