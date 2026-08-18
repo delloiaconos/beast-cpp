@@ -34,6 +34,7 @@ changecom()dnl
 #define __CELL_MODEL_$$BEAST_UPNAME$$_H__
 
 #include <beast/common/architecture.h>
+#include <beast/common/Debug.h>
 #include <beast/numerics/Matrix.h>
 #include <beast/numerics/Vector.h>
 
@@ -70,8 +71,7 @@ public:
 
 #if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
 private:  
-    void inline DebugInit( void );
-    FILE * fdbg;
+    Debug dbg{"[$$BEAST_CLASS_NAME$$] ", "$$BEAST_CLASS_NAME$$.log"};
 #endif
 
 #if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )

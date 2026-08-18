@@ -51,10 +51,5 @@ changecom()dnl
                             ( DEBUG_$$BEAST_UPNAME$$ & (dbg) ) )
 #endif // DEBUG_$$BEAST_UPNAME$$
 
-#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
-       #include <stdio.h>
-       #include <stdlib.h>
-       #define $$BEAST_CLASS_NAME$$_dprint( fmt ) do{ fprintf(fdbg, "$$BEAST_CLASS_NAME$$ :" fmt "\n"); fflush( fdbg ); } while(0)
-#endif
 
 #endif // __CELL_MODEL_$$BEAST_UPNAME$$_DEBUG_H__
