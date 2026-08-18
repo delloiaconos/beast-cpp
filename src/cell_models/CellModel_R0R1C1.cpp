@@ -121,7 +121,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   sxW.Print( dbg.getFile() );
 #endif // DBGMSK_R0R1C1_FUNDBG && ARCH_PC
      } catch (const Exception& Ex) {}
-     fprintf( stderr, "OK  002\n" );
+     dbg.print( "OK  002\n" );
      try {
   	   t_float tmp;
   	   t_size i;
@@ -138,7 +138,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   sxV.Print( dbg.getFile() );
 #endif
      } catch (const Exception& Ex) {}
-     fprintf( stderr, "OK  003\n" );
+     dbg.print( "OK  003\n" );
      try {
   	   t_float tmp;
   	   t_size i;
@@ -156,7 +156,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
 #endif
      } catch (const Exception& Ex) {}
 
-     fprintf( stderr, "OK  004\n" );
+     dbg.print( "OK  004\n" );
      try {
   	   t_float tmp;
   	   t_size i;
@@ -174,7 +174,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
 #endif
      } catch (const Exception& Ex) {}
 
-     fprintf( stderr, "OK  005\n" );
+     dbg.print( "OK  005\n" );
      try {
   	   // Qn_Ah
     	   t_float tmpQn;
@@ -186,7 +186,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
     	   fclose( fr );
      } catch (const Exception& Ex) {}
 
-     fprintf( stderr, "OK  006\n" );
+     dbg.print( "OK  006\n" );
      try {
   	   // eta
     	   t_float tmpEta;
@@ -198,7 +198,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
     	   fclose( fr );
      } catch (const Exception& Ex) {}
 
-     fprintf( stderr, "OK  007\n" );
+     dbg.print( "OK  007\n" );
      try {
      // lutsoc; lutlen
   	   t_float tmp;
@@ -215,7 +215,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   fclose( fr );
      } catch (const Exception& Ex) {}
 
-     fprintf( stderr, "OK  008\n" );
+     dbg.print( "OK  008\n" );
      try {
   	   t_float tmp;
   	   t_size i;
@@ -232,7 +232,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   fclose( fr );
      } catch (const Exception& Ex) {}
 
-     fprintf( stderr, "OK  009\n" );
+     dbg.print( "OK  009\n" );
      try {
      	   t_float tmp;
      	   t_size i;
