@@ -14,6 +14,8 @@ public:
 
     void print(const char* format, ...);
 
+    FILE* getFile();
+
     Debug(const Debug&) = delete;
     Debug& operator=(const Debug&) = delete;
 

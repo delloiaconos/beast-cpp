@@ -36,9 +36,10 @@ Debug::Debug(const char* prefix_, const char* basepath, const char* filename )
     char* filepath =
         static_cast<char*>(std::malloc(path_length));
 
-    if (filepath == nullptr)
+    if (filepath == nullptr) {
         return;
-
+    }
+    
     /*
      * Add the directory separator only if necessary.
      */
@@ -46,12 +47,9 @@ Debug::Debug(const char* prefix_, const char* basepath, const char* filename )
 
     if (base_length > 0 &&
         basepath[base_length - 1] != '/' &&
-        basepath[base_length - 1] != '\\')
-    {
+        basepath[base_length - 1] != '\\') {
         std::snprintf( filepath, path_length, "%s/%s", basepath, filename );
-    }
-    else
-    {
+    } else {
         std::snprintf( filepath, path_length, "%s%s", basepath, filename );
     }
 
@@ -68,20 +66,17 @@ Debug::Debug(const char* prefix_, const char* filename )
     /*
      * Store prefix.
      */
-    if (prefix_ != nullptr)
-    {
+    if (prefix_ != nullptr) {
         prefix = static_cast<char*>(
             std::malloc(std::strlen(prefix_) + 1)
         );
 
-        if (prefix != nullptr)
-        {
+        if (prefix != nullptr) {
             std::strcpy(prefix, prefix_);
         }
     }
 
-    if (filename != nullptr)
-    {
+    if (filename != nullptr) {
         fdbg = std::fopen(filename, "w");
     }
 }
@@ -89,14 +84,12 @@ Debug::Debug(const char* prefix_, const char* filename )
 
 Debug::~Debug()
 {
-    if (fdbg != nullptr)
-    {
+    if (fdbg != nullptr) {
         std::fclose(fdbg);
         fdbg = nullptr;
     }
 
-    if (prefix != nullptr)
-    {
+    if (prefix != nullptr) {
         std::free(prefix);
         prefix = nullptr;
     }
@@ -105,14 +98,14 @@ Debug::~Debug()
 
 void Debug::print(const char* format, ...)
 {
-    if (fdbg == nullptr || format == nullptr)
+    if (fdbg == nullptr || format == nullptr) {
         return;
-
+    }
+    
     /*
      * Print prefix first.
      */
-    if (prefix != nullptr)
-    {
+    if (prefix != nullptr) {
         std::fprintf(fdbg, "%s", prefix);
     }
 
@@ -126,4 +119,9 @@ void Debug::print(const char* format, ...)
     va_end(args);
 
     std::fflush(fdbg);
+}
+
+FILE* Debug::getFile( void ) 
+{
+    return fdbg;
 }
