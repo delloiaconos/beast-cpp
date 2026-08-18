@@ -70,11 +70,9 @@ private:
     Debug dbg{"[Estimator_OpenLoop] ", "Estimator_OpenLoop.log"};
 #endif // DBGMSK_OPENLOOP_ENABLE
 
-
 private:
-
-	Vector pPold;
 	Vector xPold;
+	Vector pPold;
 	Vector uold;
 };
 
