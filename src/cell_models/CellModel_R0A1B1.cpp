@@ -249,7 +249,7 @@ CellModel_R0A1B1::CellModel_R0A1B1( char * basepath )
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
 void inline CellModel_R0A1B1::CellModel_DebugInit( void )
 {    
-   fdbg = fopen( "CellModel_R0A1B1_dbg.txt", "wt" );
+	fdbg = fopen( "CellModel_R0A1B1_dbg.txt", "wt" );
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
    CellModel_R0A1B1_dprint( "CALL: CellModel_R0A1B1::CellModel_DebugInit()" );
@@ -361,7 +361,6 @@ t_size CellModel_R0A1B1::g1x( const Vector &xold, const Vector &pold, const Vect
 }
 
 
-
 t_size CellModel_R0A1B1::g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const res )
 {
 	(void) xold;
@@ -378,6 +377,7 @@ t_size CellModel_R0A1B1::g1p( const Vector &xold, const Vector &pold, const Vect
 
     return Nu*Np;
 }
+
 
 t_size	CellModel_R0A1B1::CoercePars( Vector * const pp )
 {
@@ -419,6 +419,7 @@ t_size	CellModel_R0A1B1::CoercePars( Vector * const pp )
 
 	return cnt;
 }
+
 
 t_size	CellModel_R0A1B1::CoerceState( Vector * const xx )
 {

@@ -30,17 +30,12 @@
 #ifndef __CELLMODEL_R0A1B1_H__
 #define __CELLMODEL_R0A1B1_H__
 
+#include <beast/common/architecture.h>
 #include <beast/numerics/Matrix.h>
 #include <beast/numerics/Vector.h>
 
-#include <beast/common/architecture.h>
-
 #include <beast/cell_models/CellModel.h>
-#include <beast/cell_models/CellModel_debug.h>
-
 #include <beast/cell_models/CellModel_R0A1B1_debug.h>
-
-#include <math.h>
 
 #define R0A1B1_LUT_MAXLEN 110
 
@@ -48,15 +43,12 @@ class CellModel_R0A1B1 : public CellModel
 {
       
 public:
-
 	CellModel_R0A1B1();
 #if _ARCHITECTURE_ == ARCH_PC
     CellModel_R0A1B1( char * basepath );
 #endif
 
     ~CellModel_R0A1B1();
-
-
     
     t_size   f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const xnew );
     t_size   f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res );
@@ -69,12 +61,6 @@ public:
     t_size	CoercePars( Vector * const pp );
     t_size	CoerceState( Vector * const xx );
 
-#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
-private:  
-    void inline CellModel_R0A1B1_DebugInit( void );
-    FILE * fdbg;
-#endif
-
 private:
     t_float Qnom;
     t_float eta;
@@ -84,6 +70,12 @@ private:
     t_float lutsoc[R0A1B1_LUT_MAXLEN];
     t_float lutocv0[R0A1B1_LUT_MAXLEN];
     t_float lutocv1[R0A1B1_LUT_MAXLEN];
+
+#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
+private:  
+    void inline CellModel_R0A1B1_DebugInit( void );
+    FILE * fdbg;
+#endif
 
 #ifdef DBGMSK_CELL_MODEL_INFO
 public:
