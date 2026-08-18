@@ -103,7 +103,6 @@ CellModel_R0R1C1::CellModel_R0R1C1(const char* basepath)
    spE = Matrix( Matrix::Identity, Ny, Ny);
 
 	/* Read data from file */
-
     beast::io::ModelDataLoader loader( basepath );
 
     loader.readDiagonal( "MD_COV_sxWvec.in", sxW );
