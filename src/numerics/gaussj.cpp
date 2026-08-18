@@ -19,7 +19,7 @@ t_size gaussj_AxB( Matrix& aa, Matrix& bb )
 	nn = (t_size) aa.Size(1);
 	mm = (t_size) bb.Size(2);
 
-#if GAUSSJ_MATRIX_CHECK == TRUE
+#if GAUSSJ_MATRIXCHECK == TRUE
 	if( nn != (t_size) aa.Size(1) )
 	{
 		// ERROR: aa matrix not squared
@@ -31,7 +31,7 @@ t_size gaussj_AxB( Matrix& aa, Matrix& bb )
 		//ERROR: bb matrix not matching aa size
 		return 255;
 	}
-#endif //GAUSSJ_MATRIX_CHECK == TRUE
+#endif //GAUSSJ_MATRIXCHECK == TRUE
 
 	// The integer arrays ipiv, indxr, and indxc are used  for bookkeeping on the pivoting
 	indxc 	= new t_uint[nn + 1]; // from 1 to nn
@@ -138,7 +138,7 @@ t_size gaussj_xAB( Matrix& aa, Matrix& bb )
 	nn = (t_size) bb.Size(1);
 	mm = (t_size) aa.Size(2);
 
-#if GAUSSJ_MATRIX_CHECK == TRUE
+#if GAUSSJ_MATRIXCHECK == TRUE
 	if( mm != (t_size) aa.Size(1) )
 	{
 		// ERROR: aa matrix not squared
@@ -150,7 +150,7 @@ t_size gaussj_xAB( Matrix& aa, Matrix& bb )
 		//ERROR: bb matrix not matching aa size
 		return 255;
 	}
-#endif //GAUSSJ_MATRIX_CHECK == TRUE
+#endif //GAUSSJ_MATRIXCHECK == TRUE
 
 	// The integer arrays ipiv, indxr, and indxc are used  for bookkeeping on the pivoting
 	indxc 	= new t_uint[nn + 1]; // from 1 to nn
