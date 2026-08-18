@@ -266,25 +266,6 @@ t_size CellModel_R0A1B1::f0(const Vector& xold, const Vector& pold,
 }
 
 
-t_size CellModel_R0A1B1::g0(const Vector& xold, const Vector& pold,
-                            const Vector& uold, t_float deltat,
-                            Vector* const ynew)
-{
-	(void) deltat;
-    
-	t_float ocv0old;
-
-#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
-	dbg.print( "CALL: g0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const ynew)" );
-#endif // DBGMSK_R0A1B1_CLASS
-
-    ocv0old = interpxy( lutsoc, lutocv0, lutlen, xold.get( 1, 1 ) );
-
-    ynew->setv(1,1, ocv0old - pold.get(1,1)*uold.get(1,1)+xold.get(2,1));
-    return Nu;
-}
-
-
 t_size CellModel_R0A1B1::f1x(const Vector& xold, const Vector& pold,
                              const Vector& uold, t_float deltat,
                              Matrix* const res)
@@ -325,6 +306,26 @@ t_size CellModel_R0A1B1::f1p(const Vector& xold, const Vector& pold,
 
 	return Nx*Np;
 }
+
+
+t_size CellModel_R0A1B1::g0(const Vector& xold, const Vector& pold,
+                            const Vector& uold, t_float deltat,
+                            Vector* const ynew)
+{
+	(void) deltat;
+    
+	t_float ocv0old;
+
+#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
+	dbg.print( "CALL: g0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const ynew)" );
+#endif // DBGMSK_R0A1B1_CLASS
+
+    ocv0old = interpxy( lutsoc, lutocv0, lutlen, xold.get( 1, 1 ) );
+
+    ynew->setv(1,1, ocv0old - pold.get(1,1)*uold.get(1,1)+xold.get(2,1));
+    return Nu;
+}
+
 
 t_size CellModel_R0A1B1::g1x(const Vector& xold, const Vector& pold,
                              const Vector& uold, t_float deltat,
