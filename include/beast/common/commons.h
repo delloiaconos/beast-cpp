@@ -31,7 +31,7 @@
 #define __COMMONS_H__
 
 #ifndef FALSE
-	#define FALSE 0
+	#define FALSE 0U
 #endif //FALSE
 
 
