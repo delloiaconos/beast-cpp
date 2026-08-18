@@ -57,7 +57,7 @@
 #endif //_ARCHITECTURE_
 
 
-#if _ARCHITECTURE_ == ARCH_NIOS
+#if ARCH_CHKTYPE( ARCH_NIOS )
 
 	#define __FLOAT_T__
 	typedef float t_float;

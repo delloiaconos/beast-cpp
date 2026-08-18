@@ -84,7 +84,7 @@ t_float Estimator_OpenLoop::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	(void) yXPnew;
 
 	t_float deltat;
-#if _ARCHITECTURE_ == ARCH_NIOS
+#if ARCH_CHKTYPE( ARCH_NIOS )
 	 deltat = tnew;
 #else
 	 deltat = tnew - told;

@@ -92,11 +92,11 @@ t_float Estimator_EKFstate::initialize( Vector &x0, Vector &p0, Vector &unew, Ve
 t_float Estimator_EKFstate::step( Vector &unew, Vector &yXPnew, t_float tnew )
 {
 	t_float deltat;
-#if _ARCHITECTURE_ == ARCH_NIOS
+#if ARCH_CHKTYPE( ARCH_NIOS )
 	 deltat = tnew;
 #else
 	 deltat = tnew - told;
-#endif
+#endif // ARCH_NIOS
 
 	// (1/6) state estimate time update
 #if DBGCHK_EKFSTATE( DBGMSK_EKFSTATE_STEPBYSTEP )

@@ -111,11 +111,11 @@ t_float Estimator_EKFdual::initialize( Vector &x0, Vector &p0, Vector &unew, Vec
 t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 {
 	t_float deltat;
-#if _ARCHITECTURE_ == ARCH_NIOS
+#if ARCH_CHKTYPE( ARCH_NIOS )
 	 deltat = tnew;
-#else
+#else 
 	 deltat = tnew - told;
-#endif
+#endif 
 
 	// (1/XX) PARAMETER - estimate time update
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )

@@ -94,7 +94,7 @@ t_float Estimator_EnhancedMixAlgorithm::initialize( Vector &x0, Vector &p0, Vect
 t_float Estimator_EnhancedMixAlgorithm::step( Vector &unew, Vector &yXPnew, t_float tnew )
 {
 	t_float deltat;
-#if _ARCHITECTURE_ == ARCH_NIOS
+#if ARCH_CHKTYPE( ARCH_NIOS )
 	 deltat = tnew;
 #else
 	 deltat = tnew - told;

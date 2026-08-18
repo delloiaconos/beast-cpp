@@ -101,7 +101,7 @@ t_float Estimator_MixAlgorithm::initialize( Vector &x0, Vector &p0, Vector &unew
 t_float Estimator_MixAlgorithm::step( Vector &unew, Vector &yXPnew, t_float tnew )
 {
 	t_float deltat;
-#if _ARCHITECTURE_ == ARCH_NIOS
+#if ARCH_CHKTYPE( ARCH_NIOS )
 	 deltat = tnew;
 #else
 	 deltat = tnew - told;
