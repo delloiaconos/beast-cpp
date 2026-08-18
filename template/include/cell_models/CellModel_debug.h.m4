@@ -37,6 +37,7 @@ changecom()dnl
 #define DBGMSK_$$BEAST_UPNAME$$_ENABLE           0x80
 #define DBGMSK_$$BEAST_UPNAME$$_CLASS            0x01
 #define DBGMSK_$$BEAST_UPNAME$$_FUNCS            0x02
+#define DBGMSK_$$BEAST_UPNAME$$_COERCE           0x04
 
 #define DEBUG_$$BEAST_UPNAME$$       ( \
                             DBGMSK_$$BEAST_UPNAME$$_ENABLE | \
