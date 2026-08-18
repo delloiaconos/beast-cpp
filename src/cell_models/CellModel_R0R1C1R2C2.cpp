@@ -45,7 +45,7 @@
 CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2()
 {
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_ENABLE )
-   CellModel_DebugInit();
+   DebugInit();
 #endif
    
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_CLASS )
@@ -104,7 +104,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2( char * basepath )
 	char filename[2*CELL_MODEL_BASEPATH_LEN];
 
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_ENABLE )
-   CellModel_DebugInit();
+   DebugInit();
 #endif
    
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_CLASS )
@@ -265,12 +265,12 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2( char * basepath )
 
 
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_ENABLE )
-void inline CellModel_R0R1C1R2C2::CellModel_DebugInit( void )
+void inline CellModel_R0R1C1R2C2::DebugInit( void )
 {    
    fdbg = fopen( "CellModel_R0R1C1R2C2_dbg.txt", "wt" );
 
 #if DBGCHK_R0R1C1R2C2( DBGMSK_H0F0A_CLASS )
-   CellModel_R0R1C1R2C2_dprint( "CALL: CellModel_DebugInit()" );
+   CellModel_R0R1C1R2C2_dprint( "CALL: DebugInit()" );
 #endif
 }
 #endif

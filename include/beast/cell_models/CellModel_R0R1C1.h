@@ -70,7 +70,7 @@ public:
 
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_ENABLE )
 private:  
-    void inline CellModel_DebugInit( void );
+    void inline DebugInit( void );
     FILE * fdbg;
 #endif
 

@@ -41,7 +41,7 @@
 CellModel_R0A1B1::CellModel_R0A1B1()
 {
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
-   CellModel_DebugInit();
+   DebugInit();
 #endif
    
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
@@ -97,7 +97,7 @@ CellModel_R0A1B1::CellModel_R0A1B1( char * basepath )
 	char filename[2*CELL_MODEL_BASEPATH_LEN];
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
-   CellModel_DebugInit();
+   DebugInit();
 #endif
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
@@ -247,12 +247,12 @@ CellModel_R0A1B1::CellModel_R0A1B1( char * basepath )
 
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
-void inline CellModel_R0A1B1::CellModel_DebugInit( void )
+void inline CellModel_R0A1B1::DebugInit( void )
 {    
 	fdbg = fopen( "CellModel_R0A1B1_dbg.txt", "wt" );
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
-   CellModel_R0A1B1_dprint( "CALL: CellModel_R0A1B1::CellModel_DebugInit()" );
+   CellModel_R0A1B1_dprint( "CALL: CellModel_R0A1B1::DebugInit()" );
 #endif
 }
 #endif

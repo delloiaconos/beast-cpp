@@ -69,14 +69,14 @@ $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$(char* basepath)
 
 
 #if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
-void inline $$BEAST_CLASS_NAME$$::CellModel_DebugInit( void )
+void inline $$BEAST_CLASS_NAME$$::DebugInit( void )
 {    
 #if ARCH_PC == _ARCHITECTURE_
 	fdbg = fopen( "$$BEST_CLASS_NAME$$_dbg.txt", "wt" );
 #endif
 
 #if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
-   $$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::CellModel_DebugInit()" );
+   $$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::DebugInit()" );
 #endif
 }
 #endif

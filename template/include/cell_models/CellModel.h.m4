@@ -70,7 +70,7 @@ public:
 
 #if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
 private:  
-    void inline CellModel_DebugInit( void );
+    void inline DebugInit( void );
     FILE * fdbg;
 #endif
 

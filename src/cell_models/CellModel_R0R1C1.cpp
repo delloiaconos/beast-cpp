@@ -44,7 +44,7 @@
 CellModel_R0R1C1::CellModel_R0R1C1()
 {
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_ENABLE )
-   CellModel_DebugInit();
+   DebugInit();
 #endif
    
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_CLASS )
@@ -100,7 +100,7 @@ CellModel_R0R1C1::CellModel_R0R1C1( char * basepath )
 	char filename[CELL_MODEL_BASEPATH_LEN];
 
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_ENABLE )
-   CellModel_DebugInit();
+   DebugInit();
 #endif
    
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_CLASS )
@@ -268,12 +268,12 @@ CellModel_R0R1C1::CellModel_R0R1C1( char * basepath )
 #endif // _ARCHITECTURE_ == ARCH_PC
 
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_ENABLE )
-void inline CellModel_R0R1C1::CellModel_DebugInit( void )
+void inline CellModel_R0R1C1::DebugInit( void )
 {    
    fdbg = fopen( "CellModel_R0R1C1_dbg.txt", "wt" );
 
 #if DBGCHK_R0R1C1( DBGMSK_H0F0A_CLASS )
-   CellModel_R0R1C1_dprint( "CALL: CellModel_DebugInit()" );
+   CellModel_R0R1C1_dprint( "CALL: DebugInit()" );
 #endif
 
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
