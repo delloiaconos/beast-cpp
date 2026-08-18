@@ -39,7 +39,7 @@ Debug::Debug(const char* prefix_, const char* basepath, const char* filename )
     if (filepath == nullptr) {
         return;
     }
-    
+
     /*
      * Add the directory separator only if necessary.
      */
@@ -102,16 +102,10 @@ void Debug::print(const char* format, ...)
         return;
     }
     
-    /*
-     * Print prefix first.
-     */
     if (prefix != nullptr) {
         std::fprintf(fdbg, "%s", prefix);
     }
 
-    /*
-     * Print the formatted message.
-     */
     va_list args;
 
     va_start(args, format);
