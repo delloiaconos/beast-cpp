@@ -45,6 +45,7 @@
  * Per disabilitare togliere DBGMSK_EKFDUAL_ENABLE oppure commentare la definizione.
  */
 //#define DEBUG_EKFDUAL       ( DBGMSK_EKFDUAL_ENABLE | DBGMSK_EKFDUAL_OUT_LX | DBGMSK_EKFDUAL_OUT_LP )
+#define DEBUG_EKFDUAL 0xFF
 
 #ifndef DEBUG_EKFDUAL
 #define DBGCHK_EKFDUAL( dbg )    (FALSE)

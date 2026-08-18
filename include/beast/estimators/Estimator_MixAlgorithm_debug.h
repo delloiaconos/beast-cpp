@@ -44,7 +44,8 @@
  * abilitare i vari tipi di debug testuale.
  * Per disabilitare togliere DBGMSK_MIXALGORITHM_ENABLE oppure commentare la definizione.
  */
-//#define DEBUG_MIXALGORITHM       ( DBGMSK_MIXALGORITHM_ENABLE | DBGMSK_MIXALGORITHM_OCV )
+//#define DEBUG_MIXALGORITHM       ( DBGMSK_MIXALGORITHM_ENABLE | DBGMSK_MIXALGORITHM_OCV  )
+#define DEBUG_MIXALGORITHM 0xFF
 
 #ifndef DEBUG_MIXALGORITHM
 #define DBGCHK_MIXALGORITHM( dbg )    (FALSE)

@@ -45,6 +45,7 @@
  * Per disabilitare togliere DBGMSK_EKFSTATE_ENABLE oppure commentare la definizione.
  */
 //#define DEBUG_EKFSTATE       ( DBGMSK_EKFSTATE_ENABLE | DBGMSK_EKFSTATE_OCV )
+#define DEBUG_EKFSTATE  0xFF
 
 #ifndef DEBUG_EKFSTATE
 #define DBGCHK_EKFSTATE( dbg )    (FALSE)

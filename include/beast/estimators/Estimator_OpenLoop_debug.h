@@ -46,7 +46,7 @@
  * Per disabilitare togliere DBGMSK_OPENLOOP_ENABLE oppure commentare la definizione.
  */
 //#define DEBUG_OPENLOOP       ( DBGMSK_OPENLOOP_ENABLE | DBGMSK_OPENLOOP_OUT_LX | DBGMSK_OPENLOOP_OUT_LP )
-#define DEBUG_OPENLOOP		0x00
+#define DEBUG_OPENLOOP		0xFF
 
 #ifndef DEBUG_OPENLOOP
 #define DBGCHK_OPENLOOP( dbg )    (FALSE)

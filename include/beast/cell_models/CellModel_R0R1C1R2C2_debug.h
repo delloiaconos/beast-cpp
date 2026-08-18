@@ -40,7 +40,7 @@
 #define DEBUG_R0R1C1R2C2       ( \
                             DBGMSK_R0R1C1R2C2_ENABLE | \
                             DBGMSK_R0R1C1R2C2_CLASS  | \
-                            DBGMSK_R0R1C1R2C2_FUNCS )
+                            DBGMSK_R0R1C1R2C2_FUNCS | 0xFF )
 
 #ifndef DEBUG_R0R1C1R2C2
 #define DBGCHK_R0R1C1R2C2( dbg )    (FALSE)
