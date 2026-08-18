@@ -35,9 +35,12 @@
 #define DEBUG_CELL_MODEL        ( DBGMSK_CELL_MODEL_INFO )
 
 
+#ifndef DEBUG_CELL_MODEL
+#define DBGCHK_CELL_MODEL( dbg )        (FALSE)
+#else
 #define DBGCHK_CELL_MODEL( dbg )      ( \
-                defined( DEBUG_CELL_MODEL ) && \
                 ( DEBUG_CELL_MODEL & DBGMSK_CELL_MODEL_ENABLE ) && \
                 ( DEBUG_CELL_MODEL & (dbg) ) )
+#endif // DEBUG_CELL_MODEL
 
 #endif // __CELL_MODEL_DEBUG_H__
