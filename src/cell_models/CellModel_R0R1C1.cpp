@@ -117,9 +117,9 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   }
   	   fclose( fr );
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
-  	   fprintf( fFun, "sxW:\n" );
-  	   sxW.Print( fFun );
-#endif
+  	   dbg.print( "sxW:\n" );
+  	   sxW.Print( dbg.getFile() );
+#endif // DBGMSK_R0R1C1_FUNDBG && ARCH_PC
      } catch (const Exception& Ex) {}
      fprintf( stderr, "OK  002\n" );
      try {
@@ -134,8 +134,8 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   }
   	   fclose( fr );
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
-  	   fprintf( fFun, "sxV:\n" );
-  	   sxV.Print( fFun );
+  	   dbg.print( "sxV:\n" );
+  	   sxV.Print( dbg.getFile() );
 #endif
      } catch (const Exception& Ex) {}
      fprintf( stderr, "OK  003\n" );
@@ -151,8 +151,8 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   }
   	   fclose( fr );
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
-  	   fprintf( fFun, "spR:\n" );
-  	   spR.Print( fFun );
+  	   dbg.print( "spR:\n" );
+  	   spR.Print( dbg.getFile() );
 #endif
      } catch (const Exception& Ex) {}
 
@@ -169,8 +169,8 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   }
   	   fclose( fr );
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
-  	   fprintf( fFun, "spE:\n" );
-  	   spE.Print( fFun );
+  	   dbg.print( "spE:\n" );
+  	   spE.Print( dbg.getFile() );
 #endif
      } catch (const Exception& Ex) {}
 
