@@ -50,6 +50,12 @@
 /* Define architecture HERE */
 #define _ARCHITECTURE_ ARCH_PC
 
+#ifndef _ARCHITECTURE_
+#define ARCH_CHKTYPE( arch ) 		(FALSE)
+#else
+#define ARCH_CHKTYPE( arch )		( (arch) == _ARCHITECTURE_ )
+#endif //_ARCHITECTURE_
+
 
 #if _ARCHITECTURE_ == ARCH_NIOS
 
@@ -65,7 +71,7 @@
 
 	#define _ARCHITECTURE_ATTR_ 	(ARCH_ATTR_SOFTFLOAT)
 
-#elif _ARCHITECTURE_ == ARCH_PC
+#elif ARCH_CHKTYPE( ARCH_PC )
 
 	#define __FLOAT_T__
 	typedef double t_float;
@@ -84,11 +90,6 @@
 	
 #endif //_ARCHITECTURE_
 
-#ifndef _ARCHITECTURE_
-#define ARCH_CHKTYPE( arch ) 		(FALSE)
-#else
-#define ARCH_CHKTYPE( arch )		( (arch) == _ARCHITECTURE_ )
-#endif //_ARCHITECTURE_
 
 #ifndef _ARCHITECTURE_
 #define ARCH_CHKATTR( attr ) 		(FALSE)
