@@ -31,6 +31,8 @@
 #include <beast/estimators/Estimator_EKFdual.h>
 #include <beast/estimators/Estimator_EKFdual_debug.h>
 
+#include <beast/numerics/gaussj.h>
+
 Estimator_EKFdual::Estimator_EKFdual()
 {
 	Nx = (t_size) 0;
