@@ -18,7 +18,7 @@
  * BEAST - Battery Estimation Architecture and Simulation Toolkit
  *
  * @par Repository
- * https://github.com/delloiaconos/beast-cpp
+ * https://github.com/delloiaconos/beast-cpp.git
  *
  * @copyright
  * Copyright (c) 2026 Salvatore Dello Iacono.
@@ -26,36 +26,29 @@
  * @license
  * GNU General Public License v3.0.
  */
-#ifndef __CELL_MODEL_R0R1C1_DEBUG_H__
-#define __CELL_MODEL_R0R1C1_DEBUG_H__
 
+#ifndef __CELL_MODEL_R0A1B1_DEBUG_H__
+#define __CELL_MODEL_R0A1B1_DEBUG_H__
 
-/* Tipi di debug disponibili */
-#define DBGMSK_R0A1B1_ENABLE       0x80
-#define DBGMSK_R0A1B1_CLASS        0x01
-#define DBGMSK_R0A1B1_COERCE       0x02
+/* Debug Masks for Cell Model "R0A1B1" */
 
+#define DBGMSK_R0A1B1_ENABLE           0x80
+#define DBGMSK_R0A1B1_CLASS            0x01
+#define DBGMSK_R0A1B1_FUNCS            0x02
+#define DBGMSK_R0A1B1_COERCE           0x04
 
-/* Imposta debug
- * bisogna mettere in "or" le costanti definite sopra per
- * abilitare i vari tipi di debug testuale.
- * Per disabilitare togliere DBGMSK_R0A1B1_ENABLE oppure commentare la definizione.
- */
-//#define DEBUG_R0A1B1       ( DBGMSK_R0A1B1_ENABLE | DBGMSK_R0A1B1_OCV )
+#define DEBUG_R0A1B1       ( \
+                            DBGMSK_R0A1B1_ENABLE | \
+                            DBGMSK_R0A1B1_CLASS  | \
+                            DBGMSK_R0A1B1_FUNCS )
 
 #ifndef DEBUG_R0A1B1
-#define DBGCHK_R0A1B1( dbg )      (FALSE)
+#define DBGCHK_R0A1B1( dbg )    (FALSE)
 #else
-#define DBGCHK_R0A1B1( dbg )       ( \
-                                   ( DEBUG_R0A1B1 & DBGMSK_R0A1B1_ENABLE ) && \
-                                   ( DEBUG_R0A1B1 & (dbg) ) )
-#endif
-
-#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
-       #include stdio.h
-       #include stdlib.h
-       #define CellModel_R0A1B1_dprint( fmt ) do{ fprintf(fdbg, "CellModel_R0A1B1 :" fmt "\n"); fflush( fdbg ); } while(0)
-#endif
+#define DBGCHK_R0A1B1( dbg )    ( \
+                            ( DEBUG_R0A1B1 & DBGMSK_R0A1B1_ENABLE ) &&  \
+                            ( DEBUG_R0A1B1 & (dbg) ) )
+#endif // DEBUG_R0A1B1
 
 
-#endif // __CELLMODEL_R0R1C1_DEBUG_H__
+#endif // __CELL_MODEL_R0A1B1_DEBUG_H__

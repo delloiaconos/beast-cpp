@@ -2,7 +2,7 @@
 
 /**
  * @file
- * @brief Cell Model R0-A1B1 header file. 
+ * @brief Cell Model "R0-A1B1" header file.
  *
  * @details
  * Part of the BEAST project:
@@ -18,7 +18,7 @@
  * BEAST - Battery Estimation Architecture and Simulation Toolkit
  *
  * @par Repository
- * https://github.com/delloiaconos/beast-cpp
+ * https://github.com/delloiaconos/beast-cpp.git
  *
  * @copyright
  * Copyright (c) 2026 Salvatore Dello Iacono.
@@ -31,6 +31,7 @@
 #define __CELLMODEL_R0A1B1_H__
 
 #include <beast/common/architecture.h>
+#include <beast/common/Debug.h>
 #include <beast/numerics/Matrix.h>
 #include <beast/numerics/Vector.h>
 
@@ -41,22 +42,22 @@
 
 class CellModel_R0A1B1 : public CellModel
 {
-      
 public:
-	CellModel_R0A1B1();
+    CellModel_R0A1B1();
+
 #if _ARCHITECTURE_ == ARCH_PC
-    CellModel_R0A1B1( char * basepath );
+    explicit CellModel_R0A1B1(char* basepath);
 #endif
 
-    ~CellModel_R0A1B1();
-    
-    t_size   f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const xnew );
-    t_size   f1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res );
-    t_size   f1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res ) ;
+    ~CellModel_R0A1B1() override;
 
-    t_size   g0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const ynew ) ;
-    t_size   g1x( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res ) ;
-    t_size   g1p( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Matrix * const res ) ;
+    t_size f0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const xnew);
+    t_size f1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
+    t_size f1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
+
+    t_size g0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const ynew);
+    t_size g1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
+    t_size g1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
 
     t_size	CoercePars( Vector * const pp );
     t_size	CoerceState( Vector * const xx );
@@ -73,16 +74,14 @@ private:
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
 private:  
-    void inline DebugInit( void );
-    FILE * fdbg;
+    Debug dbg{"[CellModel_R0A1B1] ", "CellModel_R0A1B1.log"};
 #endif
 
-#ifdef DBGMSK_CELL_MODEL_INFO
+#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 public:
-	t_size Info( char * strCellModel );
-#endif
+    t_size Info( char * strCellModel );
+#endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO
+
 };
 
-
-
-#endif //__CELLMODEL_R0A1B1_H__
+#endif // __CELL_MODEL_R0A1B1_H__
