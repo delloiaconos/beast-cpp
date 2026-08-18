@@ -35,7 +35,8 @@ const t_float CellModel::Zero = 1e-9;
 
 
 CellModel::CellModel()
-{/*
+{
+/*
 	Nx = 0;
 	Np = 0;
 	Nu = 0;
@@ -43,7 +44,8 @@ CellModel::CellModel()
 	sxW = Matrix(Nx, Nx);
 	sxV = Matrix(Ny, Ny);
 	spR = Matrix(Np, Np);
-	spE = Matrix(Ny, Ny);*/
+	spE = Matrix(Ny, Ny);
+*/
 }
 
 CellModel::~CellModel()
@@ -53,7 +55,7 @@ CellModel::~CellModel()
 CellModel::CellModel( char * basepath )
 {
 	(void) basepath;
-/*	strcpy( _basepath, basepath );
+/*
 	Nx = 0;
 	Np = 0;
 	Nu = 0;
@@ -61,7 +63,8 @@ CellModel::CellModel( char * basepath )
 	sxW = Matrix(Nx, Nx);
 	sxV = Matrix(Ny, Ny);
 	spR = Matrix(Np, Np);
-	spE = Matrix(Ny, Ny);*/
+	spE = Matrix(Ny, Ny);
+*/
 }
 #endif //_ARCHITECTURE_ == ARCH_PC
 
@@ -72,6 +75,7 @@ t_size CellModel::f0( const Vector &xold, const Vector &pold, const Vector &uold
 	(void) uold;
 	(void) deltat;
 	(void) xnew;
+
 	return (t_size) 0;
 }
 
@@ -82,6 +86,7 @@ t_size CellModel::f1x( const Vector &xold, const Vector &pold, const Vector &uol
 	(void) uold;
 	(void) deltat;
 	(void) dnew; 
+
 	return (t_size) 0;
 }
 
@@ -92,6 +97,7 @@ t_size CellModel::f1p( const Vector &xold, const Vector &pold, const Vector &uol
 	(void) uold;
 	(void) deltat;
 	(void) dnew;
+
 	return (t_size) 0;
 }
 
@@ -102,6 +108,7 @@ t_size CellModel::g0( const Vector &xold, const Vector &pold, const Vector &uold
 	(void) uold;
 	(void) deltat;
 	(void) ynew;
+
 	return (t_size) 0;
 }
 
@@ -112,6 +119,7 @@ t_size CellModel::g1x( const Vector &xold, const Vector &pold, const Vector &uol
 	(void) uold;
 	(void) deltat;
 	(void) dnew;
+
 	return (t_size) 0;
 }
 
@@ -122,21 +130,25 @@ t_size CellModel::g1p( const Vector &xold, const Vector &pold, const Vector &uol
 	(void) uold;
 	(void) deltat;
 	(void) dnew;
+
 	return (t_size) 0;
 }
+
 
 t_size CellModel::CoercePars( Vector * const pp )
 {
 	(void) pp;
+
 	return (t_size) 0;
 }
+
 
 t_size CellModel::CoerceState( Vector * const xx )
 {
 	(void) xx;
+
 	return (t_size) 0;
 }
-
 
 
 t_size CellModel::CheckParsDim( const Vector &pp )
@@ -150,6 +162,7 @@ t_size CellModel::CheckParsDim( const Vector &pp )
 	return (t_size) 0;
 }
 
+
 t_size CellModel::CheckStateDim( const Vector &xx )
 {
 	if( xx.GetRows() != Nx )
@@ -160,6 +173,7 @@ t_size CellModel::CheckStateDim( const Vector &xx )
 
 	return (t_size) 0;
 }
+
 
 t_size CellModel::CheckInputDim( const Vector &uu )
 {
