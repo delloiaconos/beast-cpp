@@ -427,7 +427,7 @@ t_size CellModel_R0R1C1::CoercePars(Vector* const pp)
 	if( pp->get(1,1) <= (t_float) 0.0 ) {
 	      pp->setv(1,1, CellModel::CellModel::Zero );
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_COERCE )
-	      dbg_print( "WARNING: parameter p(1,1)=R0<=0 CORRECTED TO ZERO" );
+	      dbg.print( "WARNING: parameter p(1,1)=R0<=0 CORRECTED TO ZERO" );
 #endif
 	      cntCoerce++;
 	}
@@ -435,7 +435,7 @@ t_size CellModel_R0R1C1::CoercePars(Vector* const pp)
 	if( pp->get(2,1) < (t_float) 0.0 ) {
 	      pp->setv(2,1, CellModel::CellModel::Zero );
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_COERCE )
-	      dbg_print( "WARNING: parameter p(2,1)=R1<=0 CORRECTED TO ZERO" );
+	      dbg.print( "WARNING: parameter p(2,1)=R1<=0 CORRECTED TO ZERO" );
 #endif
 	      cntCoerce++;
 	}
@@ -444,7 +444,7 @@ t_size CellModel_R0R1C1::CoercePars(Vector* const pp)
 	{
 	      pp->setv(3,1, CellModel::Zero );
 #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_COERCE )
-	      dbg_print( "WARNING: parameter p(3,1)=C1<0 CORRECTED TO ZERO" );
+	      dbg.print( "WARNING: parameter p(3,1)=C1<0 CORRECTED TO ZERO" );
 #endif
 	      cntCoerce++;
 	}
