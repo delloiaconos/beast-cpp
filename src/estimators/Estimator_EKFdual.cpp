@@ -208,7 +208,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 		Lxnew = sxMnew*g1xnewT*tmp2I; //Kalman gain matrix
 	} catch( Exception& Ex ) { throw Ex; }
-#elif EKFDUAL_SOLMETH == EKFDUAL_SOL_GAUSSJ
+#elif EKFDUAL_SOLMETH == EKFDUAL_SOLMETH_GAUSSJ
 	try {
 		Matrix tmp1 = Matrix( Ny, Ny );
 		Matrix g1xnewT = Matrix( Ny, Nx );
@@ -316,7 +316,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
     	Lpnew = spMnew*dgdpnewT*tmp2I;
     } catch( Exception& Ex ) { throw Ex; }
-#elif EKFDUAL_SOLMETH == EKFDUAL_SOL_GAUSSJ
+#elif EKFDUAL_SOLMETH == EKFDUAL_SOLMETH_GAUSSJ
     try {
     	Matrix tmp1 = Matrix( Np, Np );
     	Matrix dgdpnewT = Matrix( Ny, Np );

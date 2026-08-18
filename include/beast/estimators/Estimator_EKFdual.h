@@ -42,7 +42,7 @@
 #define EKFDUAL_SOLMETH_INVERT 1 // Invert the matrix
 #define EKFDUAL_SOLMETH_GAUSSJ 2 // Solve with Gauss-Jordan elimination
 
-#define EKFDUAL_SOLMETH EKFDUAL_SOL_GAUSSJ
+#define EKFDUAL_SOLMETH EKFDUAL_SOLMETH_GAUSSJ
 
 
 class Estimator_EKFdual : public Estimator
