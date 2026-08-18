@@ -32,6 +32,7 @@
 #include <beast/cell_models/CellModel_R0A1B1_debug.h>
 
 #include <beast/numerics/interpolation.h>
+#include <beast/io/ModelDataLoader.h>
 
 CellModel_R0A1B1::CellModel_R0A1B1()
 {
@@ -87,8 +88,6 @@ CellModel_R0A1B1::CellModel_R0A1B1()
 CellModel_R0A1B1::CellModel_R0A1B1(const char* basepath)
     : CellModel(basepath)
 {
-	FILE * fr;
-	char filename[2*CELL_MODEL_BASEPATH_LEN];
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
 	dbg.print( "CALL: CellModel_R0A1B1(const char* basepath)" );
@@ -107,131 +106,38 @@ CellModel_R0A1B1::CellModel_R0A1B1(const char* basepath)
    spR = Matrix( Matrix::Identity, Np, Np);
    spE = Matrix( Matrix::Identity, Ny, Ny);
 
-   /* Read from file */
-   do {
-	   t_float tmp;
-	   t_size i;
-	   strcpy( filename, basepath );
-	   strcat( filename, "/MD_COV_sxWvec.in" );
-	   fr = fopen( filename, "r" );
-	   for( i = 0; i < sxW.GetRows() && !feof(fr); i++ ) {
-	   	   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-	   	   sxW(i+1,i+1) = tmp;
-	   }
-	   fclose( fr );
-   } while(0);
+   /* Read data from file */
+    beast::io::ModelDataLoader loader( basepath );
 
-   do {
-	   t_float tmp;
-	   t_size i;
-	   strcpy( filename, basepath );
-	   strcat( filename, "/MD_COV_sxVvec.in" );
-	   fr = fopen( filename, "r" );
-	   for( i = 0; i < sxV.GetRows() && !feof(fr); i++ ) {
-	   	   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-	   	   sxV(i+1,i+1) = tmp;
-	   }
-	   fclose( fr );
-   } while(0);
+    loader.readDiagonal( "MD_COV_sxWvec.in", sxW );
+    loader.readDiagonal( "MD_COV_sxVvec.in", sxV );
+    loader.readDiagonal( "MD_COV_spRvec.in", spR );
+    loader.readDiagonal( "MD_COV_spEvec.in", spE );
 
-   do {
-	   t_float tmp;
-	   t_size i;
-	   strcpy( filename, basepath );
-	   strcat( filename, "/MD_COV_spRvec.in" );
-	   fr = fopen( filename, "r" );
-	   for( i = 0; i < spR.GetRows() && !feof(fr); i++ ) {
-	   	   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-	   	   spR(i+1,i+1) = tmp;
-	   }
-	   fclose( fr );
+    Qnom = loader.readScalar("MD_pfix_Qn_Ah.in") * 3600.0;
+    eta = loader.readScalar("MD_pfix_eta.in");
 
-   } while(0);
+    const auto soc = loader.readVector("MD_pfix_soc.in");
 
-   do {
-	   t_float tmp;
-	   t_size i;
-	   strcpy( filename, basepath );
-	   strcat( filename, "/MD_COV_spEvec.in" );
-	   fr = fopen( filename, "r" );
-	   for( i = 0; i < spE.GetRows() && !feof(fr); i++ ) {
-	   	   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-	   	   spE(i+1,i+1) = tmp;
-	   }
-	   fclose( fr );
+    if (soc.empty()) {
+        throw std::runtime_error("SOC lookup table is empty");
+    }
 
-     } while(0);
+    if (soc.size() > R0A1B1_LUT_MAXLEN) {
+        throw std::runtime_error("SOC lookup table exceeds maximum size");
+    }
 
+	lutlen = static_cast<t_size>(soc.size());
 
-   do {
-	   // Qn_Ah
-  	   t_float tmpQn;
-  	   strcpy( filename, basepath );
-  	   strcat( filename, "/MD_pfix_Qn_Ah.in" );
-  	   fr = fopen( filename, "r" );
-  	   fread( &tmpQn, sizeof(t_float), (t_size) 1, fr );
-  	   Qnom = tmpQn*3600;
-  	   fclose( fr );
-     } while(0);
+    const auto ocv0 = loader.readVector( "MD_pfix_ocv0.in", lutlen );
+    const auto ocv1 = loader.readVector( "MD_pfix_ocv1.in", lutlen );
 
-   do {
-	   // eta
-  	   t_float tmpEta;
-  	   strcpy( filename, basepath );
-  	   strcat( filename, "/MD_pfix_eta.in" );
-  	   fr = fopen( filename, "r" );
-  	   fread( &tmpEta, sizeof(t_float), (t_size) 1, fr );
-  	   eta = tmpEta;
-  	   fclose( fr );
-     } while(0);
+    for (t_size i = 0; i < lutlen; ++i) {
+        lutsoc[i]  = soc[i];
+        lutocv0[i] = ocv0[i];
+        lutocv1[i] = ocv1[i];
+    }
 
-   do {
-   // lut_soc; lutlen
-	   t_float tmp;
-	   strcpy( filename, basepath );
-	   strcat( filename, "/MD_pfix_soc.in" );
-	   fr = fopen( filename, "r" );
-	   lutlen = 0;
-	   while( !feof(fr) && lutlen < R0A1B1_LUT_MAXLEN )
-	   {
-		   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-		   lutsoc[lutlen] = tmp;
-		   lutlen++;
-	   }
-	   fclose( fr );
-   	  } while(0);
-
-   do {
-	   t_float tmp;
-	   t_size i;
-	   strcpy( filename, basepath );
-	   strcat( filename, "/MD_pfix_ocv0.in" );
-	   fr = fopen( filename, "r" );
-
-	   for( i = 0; ( i < lutlen ) && !feof(fr); i++ )
-	   {
-		   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-		   lutocv0[i] = tmp;
-	   }
-
-	   fclose( fr );
-   } while(0);
-
-   do {
-   	   t_float tmp;
-   	   t_size i;
-   	   strcpy( filename, basepath );
-   	   strcat( filename, "/MD_pfix_ocv1.in" );
-   	   fr = fopen( filename, "r" );
-
-   	   for( i = 0; (i < lutlen) && !feof(fr); i++ )
-   	   {
-   		   fread( &tmp, sizeof(t_float), (t_size) 1, fr );
-   		   lutocv1[i] = tmp;
-   	   }
-
-   	   fclose( fr );
-      } while(0);
 }
 #endif
 
