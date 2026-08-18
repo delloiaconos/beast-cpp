@@ -40,9 +40,8 @@ $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$()
 
 $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$(CellModel* cell)
     : Estimator(cell),
-      x_(Nx, 1),
-      p_(Np, 1),
-      u_(Nu, 1)
+      xPold(Nx, 1),
+      pPold(Np, 1)
 {
 }
 
@@ -51,12 +50,12 @@ $$BEAST_CLASS_NAME$$::~$$BEAST_CLASS_NAME$$() = default;
 t_float $$BEAST_CLASS_NAME$$::initialize(Vector& x0, Vector& p0, Vector& unew,
                                       Vector& yXPnew, t_float tnew)
 {
-    (void)yXPnew;
+    (void) unew;
+    (void) yXPnew;
+    (void) tnew;
 
-    x_ = x0;
-    p_ = p0;
-    u_ = unew;
-    told = tnew;
+    xPold = x0;
+    pPold = p0;
 
     // TODO: Initialize estimator-specific state and covariance information.
     return static_cast<t_float>(0.0);
@@ -64,27 +63,30 @@ t_float $$BEAST_CLASS_NAME$$::initialize(Vector& x0, Vector& p0, Vector& unew,
 
 t_float $$BEAST_CLASS_NAME$$::step(Vector& unew, Vector& yXPnew, t_float tnew)
 {
-    (void)yXPnew;
-
-    u_ = unew;
-    told = tnew;
-
+    (void) unew;
+    (void) yXPnew;
+    (void) tnew;
+    
     // TODO: Implement one estimator update step.
     return static_cast<t_float>(0.0);
 }
 
 t_size $$BEAST_CLASS_NAME$$::getX(Vector* const x)
 {
+    /* Auto generated State getter. */
+
     if (x != nullptr) {
-        *x = x_;
+        *x = xPold;
     }
     return Nx;
 }
 
 t_size $$BEAST_CLASS_NAME$$::getP(Vector* const p)
-{
+{   
+    /* Auto generated Parameters getter. */
+
     if (p != nullptr) {
-        *p = p_;
+        *p = pPold;
     }
     return Np;
 }
@@ -92,14 +94,16 @@ t_size $$BEAST_CLASS_NAME$$::getP(Vector* const p)
 #ifdef ESTIMATOR_GET_GAINS
 t_size $$BEAST_CLASS_NAME$$::getLx(Vector* const lx)
 {
-    (void)lx;
+    (void) lx;
+
     // TODO: Return the state gain when supported by the estimator.
     return static_cast<t_size>(0);
 }
 
 t_size $$BEAST_CLASS_NAME$$::getLp(Vector* const lp)
 {
-    (void)lp;
+    (void) lp;
+
     // TODO: Return the parameter gain when supported by the estimator.
     return static_cast<t_size>(0);
 }
@@ -108,14 +112,16 @@ t_size $$BEAST_CLASS_NAME$$::getLp(Vector* const lp)
 #ifdef ESTIMATOR_GET_COV
 t_size $$BEAST_CLASS_NAME$$::getSx(Vector* const sx)
 {
-    (void)sx;
+    (void) sx;
+
     // TODO: Return the state covariance when supported by the estimator.
     return static_cast<t_size>(0);
 }
 
 t_size $$BEAST_CLASS_NAME$$::getSp(Vector* const sp)
 {
-    (void)sp;
+    (void) sp;
+
     // TODO: Return the parameter covariance when supported by the estimator.
     return static_cast<t_size>(0);
 }

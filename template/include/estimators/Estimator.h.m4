@@ -34,8 +34,11 @@ changecom()dnl
 #define __ESTIMATOR_$$BEAST_UPNAME$$_H__
 
 #include <$$BEAST_INCLUDE_BASEPATH$$/Estimator.h>
+#include <$$BEAST_INCLUDE_BASEPATH$$/$$BEAST_CLASS_NAME$$_debug.h>
 
 #include <beast/common/architecture.h>
+#include <beast/common/Debug.h>
+
 #include <beast/numerics/Matrix.h>
 #include <beast/numerics/Vector.h>
 
@@ -74,9 +77,8 @@ private:
 #endif // DBGMSK_$$BEAST_UPNAME$$_ENABLE
 
 private:
-    Vector x_;
-    Vector p_;
-    Vector u_;
+	Vector xPold;
+    Vector pPold;
 };
 
 #endif // __ESTIMATOR_$$BEAST_UPNAME$$_H__
