@@ -16,6 +16,7 @@ file(GLOB ESTIMATOR_SOURCES CONFIGURE_DEPENDS
 
 add_library(beast
     src/common/Exception.cpp
+    src/common/Debug.cpp
 
     src/numerics/Matrix.cpp
     src/numerics/Matrix_functions.cpp
