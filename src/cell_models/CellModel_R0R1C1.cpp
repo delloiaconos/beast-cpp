@@ -283,54 +283,6 @@ t_size CellModel_R0R1C1::f0(const Vector& xold, const Vector& pold,
     return Nx;
 }
 
-t_size CellModel_R0R1C1::f1x(const Vector& xold, const Vector& pold,
-                             const Vector& uold, t_float deltat,
-                             Matrix* const res)
-{
-	(void) xold;
-	(void) uold;
-	 
-	t_float tauloc, alphaloc;
-
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_CLASS )
-	dbg.print( "CALL: f1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res)" );
-#endif // DBGMSK_R0R1C1_CLASS
-
-    tauloc   = pold.get(2,1)*pold.get(3,1);
-    alphaloc = exp( - deltat/tauloc );
-
-    res->setv(1,1, (t_float) 1.0 );
-    res->setv(1,2, (t_float) 0.0 );
-
-    res->setv(2,1, (t_float) 0.0 );
-    res->setv(2,2, alphaloc );
-
-    return Nx*Nx;
-}
-
-t_size CellModel_R0R1C1::f1p(const Vector& xold, const Vector& pold,
-                             const Vector& uold, t_float deltat,
-                             Matrix* const res)
-{
-	t_float alphaloc, tauloc, adtrc;
-
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_CLASS )
-	dbg.print( "CALL: f1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res)" );
-#endif // DBGMSK_R0R1C1_CLASS
-
-    tauloc   = pold.get(2,1)*pold.get(3,1);
-    alphaloc = exp(- deltat/tauloc );
-    adtrc    = alphaloc*deltat/tauloc;
-    res->setv(1,1, (t_float) 0.0 );
-    res->setv(1,2, (t_float) 0.0 );
-    res->setv(1,3, (t_float) 0.0 );
-    res->setv(2,1, (t_float) 0.0 );
-    res->setv(2,2, adtrc/pold.get(2,1)*xold.get(2,1)+(alphaloc-1.+adtrc)*uold.get(1,1) );
-    res->setv(2,3, adtrc/pold.get(3,1)*(xold.get(2,1)+pold.get(2,1)*uold.get(1,1)) ) ;
-
-	return Nx*Np;
-}
-
 
 t_size CellModel_R0R1C1::g0(const Vector& xold, const Vector& pold,
                             const Vector& uold, t_float deltat,
@@ -367,6 +319,57 @@ t_size CellModel_R0R1C1::g1x(const Vector& xold, const Vector& pold,
     return Nu*Nx;
 }
 
+
+t_size CellModel_R0R1C1::f1x(const Vector& xold, const Vector& pold,
+                             const Vector& uold, t_float deltat,
+                             Matrix* const res)
+{
+	(void) xold;
+	(void) uold;
+	 
+	t_float tauloc, alphaloc;
+
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_CLASS )
+	dbg.print( "CALL: f1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res)" );
+#endif // DBGMSK_R0R1C1_CLASS
+
+    tauloc   = pold.get(2,1)*pold.get(3,1);
+    alphaloc = exp( - deltat/tauloc );
+
+    res->setv(1,1, (t_float) 1.0 );
+    res->setv(1,2, (t_float) 0.0 );
+
+    res->setv(2,1, (t_float) 0.0 );
+    res->setv(2,2, alphaloc );
+
+    return Nx*Nx;
+}
+
+
+t_size CellModel_R0R1C1::f1p(const Vector& xold, const Vector& pold,
+                             const Vector& uold, t_float deltat,
+                             Matrix* const res)
+{
+	t_float alphaloc, tauloc, adtrc;
+
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_CLASS )
+	dbg.print( "CALL: f1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res)" );
+#endif // DBGMSK_R0R1C1_CLASS
+
+    tauloc   = pold.get(2,1)*pold.get(3,1);
+    alphaloc = exp(- deltat/tauloc );
+    adtrc    = alphaloc*deltat/tauloc;
+    res->setv(1,1, (t_float) 0.0 );
+    res->setv(1,2, (t_float) 0.0 );
+    res->setv(1,3, (t_float) 0.0 );
+    res->setv(2,1, (t_float) 0.0 );
+    res->setv(2,2, adtrc/pold.get(2,1)*xold.get(2,1)+(alphaloc-1.+adtrc)*uold.get(1,1) );
+    res->setv(2,3, adtrc/pold.get(3,1)*(xold.get(2,1)+pold.get(2,1)*uold.get(1,1)) ) ;
+
+	return Nx*Np;
+}
+
+
 t_size CellModel_R0R1C1::g1p(const Vector& xold, const Vector& pold,
                              const Vector& uold, t_float deltat,
                              Matrix* const res)
@@ -384,6 +387,32 @@ t_size CellModel_R0R1C1::g1p(const Vector& xold, const Vector& pold,
     res->setv(1,3, (t_float) 0.0 );
 
     return Nu*Np;
+}
+
+
+t_size CellModel_R0R1C1::CoerceState(Vector* const xx)
+{
+	t_size cntCoerce = 0;
+
+    #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_CLASS )
+	dbg.print( "CALL: CoerceState(Vector* const xx)" );
+#endif // DBGMSK_R0R1C1_CLASS
+
+	if( xx->get(1,1) > (t_float) 1 ) {
+		xx->setv(1,1, 1);
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_COERCE )
+	    dbg.print( "WARNING: state x(1,1)=SOC>1. CORRECTED TO 1" );
+#endif
+	    cntCoerce++;
+	} else if( xx->get(1,1) < (t_float) 0.0 ) {
+		xx->setv(1,1, 1);
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_COERCE )
+	    dbg.print( "WARNING: state x(1,1)=SOC<0. CORRECTED TO ZERO" );
+#endif
+	    cntCoerce++;
+	}
+
+    return cntCoerce;
 }
 
 
@@ -423,30 +452,6 @@ t_size CellModel_R0R1C1::CoercePars(Vector* const pp)
 	return cntCoerce;
 }
 
-t_size CellModel_R0R1C1::CoerceState(Vector* const xx)
-{
-	t_size cntCoerce = 0;
-
-    #if DBGCHK_R0R1C1( DBGMSK_R0R1C1_CLASS )
-	dbg.print( "CALL: CoerceState(Vector* const xx)" );
-#endif // DBGMSK_R0R1C1_CLASS
-
-	if( xx->get(1,1) > (t_float) 1 ) {
-		xx->setv(1,1, 1);
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_COERCE )
-	    dbg.print( "WARNING: state x(1,1)=SOC>1. CORRECTED TO 1" );
-#endif
-	    cntCoerce++;
-	} else if( xx->get(1,1) < (t_float) 0.0 ) {
-		xx->setv(1,1, 1);
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_COERCE )
-	    dbg.print( "WARNING: state x(1,1)=SOC<0. CORRECTED TO ZERO" );
-#endif
-	    cntCoerce++;
-	}
-
-    return cntCoerce;
-}
 
 #if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size CellModel_R0R1C1::Info( char * strCellModel )

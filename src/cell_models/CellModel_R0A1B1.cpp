@@ -327,6 +327,32 @@ t_size CellModel_R0A1B1::g0(const Vector& xold, const Vector& pold,
 }
 
 
+t_size	CellModel_R0A1B1::CoerceState(Vector* const xx)
+{
+	t_size cnt = 0;
+#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
+	dbg.print( "CALL: CoerceState(Vector* const xx)" );
+#endif // DBGMSK_R0A1B1_CLASS
+
+	if( xx->get(1,1) > (t_float) 1 ) {
+		xx->setv(1,1, 1);
+#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_COERCE )
+	    dbg.print( "WARNING: state x(1,1)=SOC>1. CORRECTED TO 1" );
+#endif
+	    cnt++;
+	} else if( xx->get(1,1) < (t_float) 0.0 ) {
+		xx->setv(1,1, 1);
+#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_COERCE )
+	    dbg.print( "WARNING: state x(1,1)=SOC<0. CORRECTED TO ZERO" );
+#endif
+	    cnt++;
+	}
+
+	return cnt;
+}
+
+
+
 t_size CellModel_R0A1B1::g1x(const Vector& xold, const Vector& pold,
                              const Vector& uold, t_float deltat,
                              Matrix* const res)
@@ -412,30 +438,6 @@ t_size	CellModel_R0A1B1::CoercePars(Vector* const pp)
 	return cnt;
 }
 
-
-t_size	CellModel_R0A1B1::CoerceState(Vector* const xx)
-{
-	t_size cnt = 0;
-#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
-	dbg.print( "CALL: CoerceState(Vector* const xx)" );
-#endif // DBGMSK_R0A1B1_CLASS
-
-	if( xx->get(1,1) > (t_float) 1 ) {
-		xx->setv(1,1, 1);
-#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_COERCE )
-	    dbg.print( "WARNING: state x(1,1)=SOC>1. CORRECTED TO 1" );
-#endif
-	    cnt++;
-	} else if( xx->get(1,1) < (t_float) 0.0 ) {
-		xx->setv(1,1, 1);
-#if DBGCHK_R0A1B1( DBGMSK_R0A1B1_COERCE )
-	    dbg.print( "WARNING: state x(1,1)=SOC<0. CORRECTED TO ZERO" );
-#endif
-	    cnt++;
-	}
-
-	return cnt;
-}
 
 #if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size CellModel_R0A1B1::Info( char * strCellModel )
