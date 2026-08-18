@@ -2,7 +2,7 @@
 
 /**
  * @file
- * @brief Cell Model R0-R1C1-R2C2 debug configuration file. 
+ * @brief Cell Model "R0-R1C1-R2C2" debug header file.
  *
  * @details
  * Part of the BEAST project:
@@ -18,7 +18,7 @@
  * BEAST - Battery Estimation Architecture and Simulation Toolkit
  *
  * @par Repository
- * https://github.com/delloiaconos/beast-cpp
+ * https://github.com/delloiaconos/beast-cpp.git
  *
  * @copyright
  * Copyright (c) 2026 Salvatore Dello Iacono.
@@ -27,35 +27,28 @@
  * GNU General Public License v3.0.
  */
 
-#ifndef __CELLMODEL_R0R1C1R2C2_DEBUG_H__
-#define __CELLMODEL_R0R1C1R2C2_DEBUG_H__
+#ifndef __CELL_MODEL_R0R1C1R2C2_DEBUG_H__
+#define __CELL_MODEL_R0R1C1R2C2_DEBUG_H__
 
-/* Tipi di debug disponibili */
-#define DBGMSK_R0R1C1R2C2_ENABLE   0x80
-#define DBGMSK_R0R1C1R2C2_CLASS    0x01
+/* Debug Masks for Cell Model "R0R1C1R2C2" */
 
+#define DBGMSK_R0R1C1R2C2_ENABLE           0x80
+#define DBGMSK_R0R1C1R2C2_CLASS            0x01
+#define DBGMSK_R0R1C1R2C2_FUNCS            0x02
+#define DBGMSK_R0R1C1R2C2_COERCE           0x04
 
-/* Imposta debug
- * bisogna mettere in "or" le costanti definite sopra per
- * abilitare i vari tipi di debug testuale.
- * Per disabilitare togliere DBGMSK_R0R1C1R2C2_ENABLE oppure commentare la definizione.
- */
-//#define DEBUG_R0R1C1R2C2       ( DBGMSK_R0R1C1R2C2_ENABLE | DBGMSK_R0R1C1R2C2_OCV )
+#define DEBUG_R0R1C1R2C2       ( \
+                            DBGMSK_R0R1C1R2C2_ENABLE | \
+                            DBGMSK_R0R1C1R2C2_CLASS  | \
+                            DBGMSK_R0R1C1R2C2_FUNCS )
 
 #ifndef DEBUG_R0R1C1R2C2
-#define DBGCHK_R0R1C1R2C2( dbg )      (FALSE)
+#define DBGCHK_R0R1C1R2C2( dbg )    (FALSE)
 #else
-#define DBGCHK_R0R1C1R2C2( dbg )       ( \
-                                   ( DEBUG_R0R1C1R2C2 & DBGMSK_R0R1C1R2C2_ENABLE ) && \
-                                   ( DEBUG_R0R1C1R2C2 & (dbg) ) )
+#define DBGCHK_R0R1C1R2C2( dbg )    ( \
+                            ( DEBUG_R0R1C1R2C2 & DBGMSK_R0R1C1R2C2_ENABLE ) &&  \
+                            ( DEBUG_R0R1C1R2C2 & (dbg) ) )
 #endif // DEBUG_R0R1C1R2C2
 
 
-#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_ENABLE )
-       #include stdio.h
-       #include stdlib.h
-       #define CellModel_R0R1C1R2C2_dprint( fmt ) do{ fprintf(fdbg, "CellModel_R0R1C1R2C2 :" fmt "\n"); fflush( fdbg ); } while(0)
-#endif
-
-
-#endif //__CELLMODEL_R0R1C1R2C2_DEBUG_H__
+#endif // __CELL_MODEL_R0R1C1R2C2_DEBUG_H__
