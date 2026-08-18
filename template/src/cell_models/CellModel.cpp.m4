@@ -35,6 +35,11 @@ changecom()dnl
 
 $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$()
 {
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$()" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Set the actual model dimensions.
     Nx = 0;
     Np = 0;
@@ -48,6 +53,12 @@ $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$()
 $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$(char* basepath)
     : CellModel(basepath)
 {
+    (void) basepath;
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$(char* basepath)" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Set the actual model dimensions and load model data from basepath.
     Nx = 0;
     Np = 0;
@@ -56,7 +67,32 @@ $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$(char* basepath)
 }
 #endif
 
-$$BEAST_CLASS_NAME$$::~$$BEAST_CLASS_NAME$$() = default;
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
+void inline $$BEAST_CLASS_NAME$$::CellModel_DebugInit( void )
+{    
+#if ARCH_PC == _ARCHITECTURE_
+	fdbg = fopen( "$$BEST_CLASS_NAME$$_dbg.txt", "wt" );
+#endif
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+   $$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::CellModel_DebugInit()" );
+#endif
+}
+#endif
+
+
+$$BEAST_CLASS_NAME$$::~$$BEAST_CLASS_NAME$$()
+{
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+   $$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::~$$BEAST_CLASS_NAME$$()" );
+#endif
+
+#if ARCH_PC == _ARCHITECTURE_
+	fclose( fdbg );
+#endif
+
+}
 
 t_size $$BEAST_CLASS_NAME$$::f0(const Vector& xold, const Vector& pold,
                             const Vector& uold, t_float deltat,
@@ -67,32 +103,47 @@ t_size $$BEAST_CLASS_NAME$$::f0(const Vector& xold, const Vector& pold,
     (void)uold;
     (void)deltat;
     (void)xnew;
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::f0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const xnew)" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Implement the state-transition function.
     return static_cast<t_size>(0);
 }
 
 t_size $$BEAST_CLASS_NAME$$::f1x(const Vector& xold, const Vector& pold,
                              const Vector& uold, t_float deltat,
-                             Matrix* const dnew)
+                             Matrix* const res)
 {
     (void)xold;
     (void)pold;
     (void)uold;
     (void)deltat;
-    (void)dnew;
+    (void)res;
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::f1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res)" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Implement the state Jacobian df/dx.
     return static_cast<t_size>(0);
 }
 
 t_size $$BEAST_CLASS_NAME$$::f1p(const Vector& xold, const Vector& pold,
                              const Vector& uold, t_float deltat,
-                             Matrix* const dnew)
+                             Matrix* const res)
 {
     (void)xold;
     (void)pold;
     (void)uold;
     (void)deltat;
-    (void)dnew;
+    (void)res;
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::f1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res)" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Implement the parameter Jacobian df/dp.
     return static_cast<t_size>(0);
 }
@@ -106,32 +157,47 @@ t_size $$BEAST_CLASS_NAME$$::g0(const Vector& xold, const Vector& pold,
     (void)uold;
     (void)deltat;
     (void)ynew;
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::g0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const ynew)" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Implement the output function.
     return static_cast<t_size>(0);
 }
 
 t_size $$BEAST_CLASS_NAME$$::g1x(const Vector& xold, const Vector& pold,
                              const Vector& uold, t_float deltat,
-                             Matrix* const dnew)
+                             Matrix* const res)
 {
     (void)xold;
     (void)pold;
     (void)uold;
     (void)deltat;
-    (void)dnew;
+    (void)res;
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::g1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res)" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Implement the output Jacobian dg/dx.
     return static_cast<t_size>(0);
 }
 
 t_size $$BEAST_CLASS_NAME$$::g1p(const Vector& xold, const Vector& pold,
                              const Vector& uold, t_float deltat,
-                             Matrix* const dnew)
+                             Matrix* const res)
 {
     (void)xold;
     (void)pold;
     (void)uold;
     (void)deltat;
-    (void)dnew;
+    (void)res;
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::g1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res)" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Implement the output Jacobian dg/dp.
     return static_cast<t_size>(0);
 }
@@ -139,6 +205,10 @@ t_size $$BEAST_CLASS_NAME$$::g1p(const Vector& xold, const Vector& pold,
 t_size $$BEAST_CLASS_NAME$$::CoercePars(Vector* const pp)
 {
     (void)pp;
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::CoerceState(Vector* const xx)" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Constrain model parameters to their valid domain.
     return static_cast<t_size>(0);
 }
@@ -146,6 +216,11 @@ t_size $$BEAST_CLASS_NAME$$::CoercePars(Vector* const pp)
 t_size $$BEAST_CLASS_NAME$$::CoerceState(Vector* const xx)
 {
     (void)xx;
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
+	$$BEAST_CLASS_NAME$$_dprint( "CALL: $$BEAST_CLASS_NAME$$::CoerceState(Vector* const xx)" );
+#endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
+
     // TODO: Constrain model states to their valid domain.
     return static_cast<t_size>(0);
 }

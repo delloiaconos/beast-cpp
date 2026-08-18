@@ -38,6 +38,7 @@ changecom()dnl
 #include <beast/numerics/Vector.h>
 
 #include <$$BEAST_INCLUDE_BASEPATH$$/CellModel.h>
+#include <$$BEAST_INCLUDE_BASEPATH$$/$$BEAST_CLASS_NAME$$_debug.h>
 
 /**
  * @brief Skeleton implementation of the BEAST_NAME cell model.
@@ -57,16 +58,22 @@ public:
     ~$$BEAST_CLASS_NAME$$() override;
 
     t_size f0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const xnew);
-    t_size f1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const dnew);
-    t_size f1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const dnew);
+    t_size f1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
+    t_size f1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
 
     t_size g0(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Vector* const ynew);
-    t_size g1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const dnew);
-    t_size g1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const dnew);
+    t_size g1x(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
+    t_size g1p(const Vector& xold, const Vector& pold, const Vector& uold, t_float deltat, Matrix* const res);
 
     t_size CoercePars(Vector* const pp);
     t_size CoerceState(Vector* const xx);
-    
+
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
+private:  
+    void inline CellModel_DebugInit( void );
+    FILE * fdbg;
+#endif
+
 #if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 public:
     t_size Info( char * strCellModel );
