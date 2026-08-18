@@ -51,7 +51,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2()
 
 
    /* Initialize! */
-#if _ARCHITECTURE_ != ARCH_PC
+#if !ARCH_CHKTYPE( ARCH_PC )
    sxW.setv( 1, 1, 1.0e-4 );
    sxW.setv( 2, 2, 1.0e-6 );
    sxW.setv( 3, 3, 1.0e-6 );
@@ -80,12 +80,12 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2()
 	   lutocv1[ii]	= LUT_ocv1[ii];
    }
 
-#endif
+#endif // !ARCH_PC
 
 }
 
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
 CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2(char* basepath)
     : CellModel(basepath)
 {
@@ -119,7 +119,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2(char* basepath)
 
   	   }
   	   fclose( fr );
-#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
   	   fprintf( fFun, "sxW:\n" );
   	   sxW.Print( fFun );
 #endif
@@ -136,7 +136,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2(char* basepath)
   	   	   sxV(i+1,i+1) = tmp;
   	   }
   	   fclose( fr );
-#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
   	   fprintf( fFun, "sxV:\n" );
   	   sxV.Print( fFun );
 #endif
@@ -153,7 +153,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2(char* basepath)
   	   	   spR(i+1,i+1) = tmp;
   	   }
   	   fclose( fr );
-#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
   	   fprintf( fFun, "spR:\n" );
   	   spR.Print( fFun );
 #endif
@@ -170,7 +170,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2(char* basepath)
   	   	   spE(i+1,i+1) = tmp;
   	   }
   	   fclose( fr );
-#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
   	   fprintf( fFun, "spE:\n" );
   	   spE.Print( fFun );
 #endif
@@ -246,7 +246,7 @@ CellModel_R0R1C1R2C2::CellModel_R0R1C1R2C2(char* basepath)
      } catch (const Exception& Ex) {}
 
 }
-#endif // _ARCHITECTURE_ == ARCH_PC
+#endif // ARCH_PC
 
 
 CellModel_R0R1C1R2C2::~CellModel_R0R1C1R2C2()
@@ -503,7 +503,7 @@ t_size CellModel_R0R1C1R2C2::CoerceState(Vector* const xx)
     return cntCoerce;
 }
 
-#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if ARCH_CHKTYPE( ARCH_PC ) || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size CellModel_R0R1C1R2C2::Info( char * strCellModel )
 {
     /* Auto generated class method. */

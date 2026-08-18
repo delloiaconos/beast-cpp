@@ -51,7 +51,7 @@ CellModel_R0A1B1::CellModel_R0A1B1()
    spE = Matrix( Matrix::Identity, Ny, Ny);
 
 /* Initialize */
-#if _ARCHITECTURE_ != ARCH_PC
+#if !ARCH_CHKTYPE( ARCH_PC )
    /* TODO: Initialize corrects values! */
    sxW.setv( 1, 1, 1.0e-4 );
    sxW.setv( 2, 2, 1.0e-6 );
@@ -79,11 +79,11 @@ CellModel_R0A1B1::CellModel_R0A1B1()
 	   lutocv1[ii]	= LUT_ocv1[ii];
    }
 
-#endif // _ARCHITECTURE_ != ARCH_PC
+#endif // !ARCH_PC
 
 }
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
 CellModel_R0A1B1::CellModel_R0A1B1(char* basepath)
     : CellModel(basepath)
 {
@@ -439,7 +439,7 @@ t_size	CellModel_R0A1B1::CoercePars(Vector* const pp)
 }
 
 
-#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if ARCH_CHKTYPE( ARCH_PC ) || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size CellModel_R0A1B1::Info( char * strCellModel )
 {
 	/* AUTO genereted Class Member */

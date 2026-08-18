@@ -49,7 +49,7 @@ $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$()
     // TODO: Initialize sxW, sxV, spR and spE for the model.
 }
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
 $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$(char* basepath)
     : CellModel(basepath)
 {
@@ -65,7 +65,7 @@ $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$(char* basepath)
     Nu = 0;
     Ny = 0;
 }
-#endif
+#endif // ARCH_PC
 
 
 $$BEAST_CLASS_NAME$$::~$$BEAST_CLASS_NAME$$()
@@ -206,7 +206,7 @@ t_size $$BEAST_CLASS_NAME$$::CoerceState(Vector* const xx)
     return static_cast<t_size>(0);
 }
 
-#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if ARCH_CHKTYPE( ARCH_PC ) || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size $$BEAST_CLASS_NAME$$::Info( char * strCellModel )
 {
     /* Auto generated class method. */

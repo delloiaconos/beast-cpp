@@ -51,7 +51,7 @@ CellModel::CellModel()
 CellModel::~CellModel()
 {}
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
 CellModel::CellModel( char * basepath )
 {
 	(void) basepath;
@@ -66,7 +66,7 @@ CellModel::CellModel( char * basepath )
 	spE = Matrix(Ny, Ny);
 */
 }
-#endif //_ARCHITECTURE_ == ARCH_PC
+#endif // ARCH_PC
 
 t_size CellModel::f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const xnew )
 {
@@ -187,7 +187,7 @@ t_size CellModel::CheckInputDim( const Vector &uu )
 }
 
 
-#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if ARCH_CHKTYPE( ARCH_PC ) || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size CellModel::Info( char * strCellModel )
 {
 	*strCellModel = '\0';

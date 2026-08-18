@@ -45,9 +45,9 @@ class CellModel_R0R1C1R2C2 : public CellModel
 public:
     CellModel_R0R1C1R2C2();
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
     explicit CellModel_R0R1C1R2C2(char* basepath);
-#endif
+#endif // ARCH_PC
 
     ~CellModel_R0R1C1R2C2() override;
 
@@ -67,10 +67,10 @@ private:
     Debug dbg{"[CellModel_R0R1C1R2C2] ", "CellModel_R0R1C1R2C2.log"};
 #endif
 
-#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if ARCH_CHKTYPE( ARCH_PC ) || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 public:
     t_size Info( char * strCellModel );
-#endif 
+#endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO
 
 private:
     t_float Qnom;

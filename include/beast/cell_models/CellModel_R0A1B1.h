@@ -45,9 +45,9 @@ class CellModel_R0A1B1 : public CellModel
 public:
     CellModel_R0A1B1();
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
     explicit CellModel_R0A1B1(char* basepath);
-#endif
+#endif // ARCH_PC
 
     ~CellModel_R0A1B1() override;
 
@@ -77,7 +77,7 @@ private:
     Debug dbg{"[CellModel_R0A1B1] ", "CellModel_R0A1B1.log"};
 #endif
 
-#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if ARCH_CHKTYPE( ARCH_PC ) || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 public:
     t_size Info( char * strCellModel );
 #endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO

@@ -33,13 +33,13 @@
 #include <beast/common/architecture.h>
 #include <beast/common/Exception.h>
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
 	#define MATRIX_ENB_PRINT
-#else
+#else // ! ARCH_PC
 	#ifdef MATRIX_ENB_PRINT
 		#undef MATRIX_ENB_PRINT
 	#endif
-#endif//_ARCHITECTURE_ == ARCH_PC
+#endif // ARCH_PC
 
 #ifdef MATRIX_ENB_PRINT
 	#include <stdio.h>

@@ -49,7 +49,7 @@ CellModel_R0R1C1::CellModel_R0R1C1()
    spE = Matrix( Matrix::Identity, Ny, Ny);
 
    /* Initialize! */
-#if _ARCHITECTURE_ != ARCH_PC
+#if !ARCH_CHKTYPE( ARCH_PC )
    sxW.setv( 1, 1, 1.0e-4 );
    sxW.setv( 2, 2, 1.0e-6 );
 
@@ -75,12 +75,12 @@ CellModel_R0R1C1::CellModel_R0R1C1()
 	   lutocv0[ii]	= LUT_ocv0[ii];
 	   lutocv1[ii]	= LUT_ocv1[ii];
    }
+#endif // ! ARCH_PC
 
-#endif
 }
 
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
 CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
     : CellModel(basepath)
 {
@@ -116,7 +116,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
 
   	   }
   	   fclose( fr );
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
   	   fprintf( fFun, "sxW:\n" );
   	   sxW.Print( fFun );
 #endif
@@ -133,7 +133,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   	   sxV(i+1,i+1) = tmp;
   	   }
   	   fclose( fr );
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
   	   fprintf( fFun, "sxV:\n" );
   	   sxV.Print( fFun );
 #endif
@@ -150,7 +150,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   	   spR(i+1,i+1) = tmp;
   	   }
   	   fclose( fr );
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
   	   fprintf( fFun, "spR:\n" );
   	   spR.Print( fFun );
 #endif
@@ -168,7 +168,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
   	   	   spE(i+1,i+1) = tmp;
   	   }
   	   fclose( fr );
-#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && _ARCHITECTURE_ == ARCH_PC
+#if DBGCHK_R0R1C1( DBGMSK_R0R1C1_FUNDBG ) && ARCH_CHKTYPE( ARCH_PC )
   	   fprintf( fFun, "spE:\n" );
   	   spE.Print( fFun );
 #endif
@@ -249,7 +249,7 @@ CellModel_R0R1C1::CellModel_R0R1C1(char* basepath)
      } catch (const Exception& Ex) {}
 
 }
-#endif // _ARCHITECTURE_ == ARCH_PC
+#endif // ARCH_PC
 
 
 CellModel_R0R1C1::~CellModel_R0R1C1()
@@ -453,7 +453,7 @@ t_size CellModel_R0R1C1::CoercePars(Vector* const pp)
 }
 
 
-#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if ARCH_CHKTYPE( ARCH_PC ) || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size CellModel_R0R1C1::Info( char * strCellModel )
 {
     /* Auto generated class method. */

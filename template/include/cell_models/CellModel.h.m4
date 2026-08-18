@@ -1,6 +1,5 @@
 changequote(`$', `$')dnl
 changecom()dnl
-
 // SPDX-License-Identifier: GPL-3.0-only
 
 /**
@@ -52,9 +51,9 @@ class $$BEAST_CLASS_NAME$$ : public CellModel
 public:
     $$BEAST_CLASS_NAME$$();
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
     explicit $$BEAST_CLASS_NAME$$(char* basepath);
-#endif
+#endif // ARCH_PC
 
     ~$$BEAST_CLASS_NAME$$() override;
 
@@ -74,7 +73,7 @@ private:
     Debug dbg{"[$$BEAST_CLASS_NAME$$] ", "$$BEAST_CLASS_NAME$$.log"};
 #endif
 
-#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if ARCH_CHKTYPE( ARCH_PC ) || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 public:
     t_size Info( char * strCellModel );
 #endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO

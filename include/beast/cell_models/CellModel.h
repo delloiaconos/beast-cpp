@@ -37,10 +37,10 @@
 #include <beast/numerics/Matrix.h>
 #include <beast/numerics/Vector.h>
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
 	#include <string.h>
 	#define CELL_MODEL_BASEPATH_LEN 250
-#endif
+#endif // ARCH_PC
 
 
 class CellModel
@@ -48,10 +48,10 @@ class CellModel
 public:
     CellModel();
 
-#if _ARCHITECTURE_ == ARCH_PC
+#if ARCH_CHKTYPE( ARCH_PC )
     CellModel( char * basepath );
     char _basepath[CELL_MODEL_BASEPATH_LEN];
-#endif
+#endif // ARCH_PC
     virtual ~CellModel();
 
     virtual t_size   f0( const Vector &xold, const Vector &pold, const Vector &uold, t_float deltat, Vector * const xnew );
@@ -83,10 +83,10 @@ public:
 	static const t_float Zero;
 
 
-#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if ARCH_CHKTYPE( ARCH_PC ) || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 public:
 	virtual t_size Info( char * strCellModel );
-#endif //// ARCH_PC || DBGMSK_CELL_MODEL_INFO
+#endif // ARCH_PC || DBGMSK_CELL_MODEL_INFO
 };
 
 #endif //__CELL_MODEL_H__
