@@ -56,11 +56,5 @@
      (DEBUG_OPENLOOP & (dbg)) )
 #endif // DEBUG_OPENLOOP
 
-#if DBGCHK_OPENLOOP( DBGMSK_OPENLOOP_ENABLE )
-	#include <stdio.h>
-	#include <stdlib.h>
-	#define Estimator_OpenLoop_dprint( fmt ) do{ fprintf(fdbg, "Estimator_OpenLoop :" fmt "\n"); fflush( fdbg ); } while(0)
-#endif
-
 
 #endif // __ESTIMATOR_OPENLOOP_DEBUG_H__

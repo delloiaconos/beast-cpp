@@ -100,7 +100,7 @@ t_float Estimator_EKFstate::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (1/6) state estimate time update
 #if DBGCHK_EKFSTATE( DBGMSK_EKFSTATE_STEPBYSTEP )
-	Estimator_EKFstate_dprint( "== 1/6 ==\n");
+	dbg.print( "== 1/6 ==\n");
 #endif
 	Vector xMnew = Matrix( Nx, 1 );
 	Cell->f0( xPold, pPold, uold, deltat, &xMnew );
@@ -109,7 +109,7 @@ t_float Estimator_EKFstate::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (2/6) error covariance time update
 #if DBGCHK_EKFSTATE( DBGMSK_EKFSTATE_STEPBYSTEP )
-	Estimator_EKFstate_dprint( "== 2/6 ==\n");
+	dbg.print( "== 2/6 ==\n");
 #endif
 	Matrix f1xold = Matrix( Nx, Nx );
 	Matrix sxMnew = Matrix( Nx, Nx );
@@ -123,7 +123,7 @@ t_float Estimator_EKFstate::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (3/6) Kalman gain computation
 #if DBGCHK_EKFSTATE( DBGMSK_EKFSTATE_STEPBYSTEP )
-	Estimator_EKFstate_dprint( "== 3/6 ==\n");
+	dbg.print( "== 3/6 ==\n");
 #endif
 	Matrix g1xnew = Matrix( Ny, Nx );
 	Matrix Lxnew = Matrix( Nx, Ny );
@@ -148,7 +148,7 @@ t_float Estimator_EKFstate::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (4/6) state estimate measurement update
 #if DBGCHK_EKFSTATE( DBGMSK_EKFSTATE_STEPBYSTEP )
-	Estimator_EKFstate_dprint( "== 4/6 ==\n");
+	dbg.print( "== 4/6 ==\n");
 #endif
 
 	Vector g0new = Matrix( Ny, 1 );
@@ -165,7 +165,7 @@ t_float Estimator_EKFstate::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (5/6) error covariance measurement update
 #if DBGCHK_EKFSTATE( DBGMSK_EKFSTATE_STEPBYSTEP )
-	Estimator_EKFstate_dprint( "== 5/6 ==\n");
+	dbg.print( "== 5/6 ==\n");
 #endif
 	Matrix sxPnew = Matrix( Nx, Nx );
 
@@ -176,7 +176,7 @@ t_float Estimator_EKFstate::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (6/6) preparing next step
 #if DBGCHK_EKFSTATE( DBGMSK_EKFSTATE_STEPBYSTEP )
-	Estimator_EKFstate_dprint( "== 6/6 ==\n");
+	dbg.print( "== 6/6 ==\n");
 #endif
 
 	told    = tnew;

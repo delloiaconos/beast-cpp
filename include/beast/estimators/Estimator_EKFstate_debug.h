@@ -55,11 +55,4 @@
 #endif // DEBUG_EKFSTATE
 
 
-#if DBGCHK_EKFSTATE( DBGMSK_EKFSTATE_ENABLE )
-	#include <stdio.h>
-	#include <stdlib.h>
-	#define Estimator_EKFstate_dprint( fmt ) do{ fprintf(fdbg, "Estimator_EKFstate :" fmt "\n"); fflush( fdbg ); } while(0)
-#endif
-
-
 #endif // __ESTIMATOR_EKFSTATE_DEBUG_H__

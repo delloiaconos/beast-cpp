@@ -68,6 +68,11 @@ public:
     t_size getSp(Vector* const sp) override;
 #endif
 
+#if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
+private:  
+    Debug dbg{"[$$BEAST_CLASS_NAME$$] ", "$$BEAST_CLASS_NAME$$.log"};
+#endif // DBGMSK_$$BEAST_UPNAME$$_ENABLE
+
 private:
     Vector x_;
     Vector p_;

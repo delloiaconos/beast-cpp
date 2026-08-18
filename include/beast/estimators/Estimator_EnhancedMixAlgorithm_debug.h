@@ -55,11 +55,4 @@
 #endif // DEBUG_ENHANCEDMIXALGORITHM
 
 
-#if DBGCHK_ENHANCEDMIXALGORITHM( DBGMSK_ENHANCEDMIXALGORITHM_ENABLE )
-	#include <stdio.h>
-	#include <stdlib.h>
-	#define Estimator_EnhancedMixAlgorithm_dprint( fmt ) do{ fprintf(fdbg, "Estimator_EnhancedMixAlgorithm :" fmt "\n"); fflush( fdbg ); } while(0)
-#endif
-
-
 #endif // __ESTIMATOR_ENHANCEDMIXALGORITHM_DEBUG_H__

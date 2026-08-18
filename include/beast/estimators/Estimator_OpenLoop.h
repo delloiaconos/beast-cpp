@@ -63,6 +63,12 @@ public:
 	t_size getSp( Vector * const Sp ); // returns Parameters Gain
 #endif
 
+#if DBGCHK_OPENLOOP( DBGMSK_OPENLOOP_ENABLE )
+private:  
+    Debug dbg{"[Estimator_OpenLoop] ", "Estimator_OpenLoop.log"};
+#endif // DBGMSK_OPENLOOP_ENABLE
+
+
 private:
 
 	Vector pPold;

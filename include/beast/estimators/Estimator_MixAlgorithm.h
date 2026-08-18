@@ -63,6 +63,11 @@ public:
 	t_size getSp( Vector * const Sp ); // returns Parameters Gain
 #endif
 
+#if DBGCHK_MIXALGORITHM( DBGMSK_MIXALGORITHM_ENABLE )
+private:  
+    Debug dbg{"[Estimator_MixAlgorithm] ", "Estimator_MixAlgorithm.log"};
+#endif // DBGMSK_MIXALGORITHM_ENABLE
+
 private:
 	Vector pPold;
 	Vector xPold;

@@ -119,8 +119,8 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (1/XX) PARAMETER - estimate time update
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 1/XX ==\n");
-	Estimator_EKFdual_dprint( "pPold\n" );
+	dbg.print( "== 1/XX ==\n");
+	dbg.print( "pPold\n" );
 	pPold.Print();
 #endif
 
@@ -128,25 +128,25 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (2/XX) PARAMETER - error covariance time update
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 2/XX ==\n");
-	Estimator_EKFdual_dprint( "spPold\n" );
+	dbg.print( "== 2/XX ==\n");
+	dbg.print( "spPold\n" );
 	spPold.Print();
 #endif
 
 	Matrix spMnew  = spPold + Cell->spR;
 
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "\n" );
+	dbg.print( "\n" );
 	spMnew.Print();
 #endif
 
 
 	// (3/XX) STATE - estimate time update
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 3/XX ==\n");
-	Estimator_EKFdual_dprint( "pMnew\n" );
+	dbg.print( "== 3/XX ==\n");
+	dbg.print( "pMnew\n" );
 	pMnew.Print();
-	Estimator_EKFdual_dprint( "xPold\n");
+	dbg.print( "xPold\n");
 	xPold.Print();
 #endif
 
@@ -156,13 +156,13 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	Cell->CoerceState(&xMnew);
 
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "xMnew \n" );
+	dbg.print( "xMnew \n" );
 	xMnew.Print();
 #endif
 
 	// (4/XX) STATE - error covariance time update
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 4/XX ==\n");
+	dbg.print( "== 4/XX ==\n");
 #endif
 
 
@@ -180,15 +180,15 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	} catch( Exception& Ex ) { throw Ex; }
 
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "f1xold\n" );
+	dbg.print( "f1xold\n" );
 	f1xold.Print();
-	Estimator_EKFdual_dprint( "sxMnew\n" );
+	dbg.print( "sxMnew\n" );
 	sxMnew.Print();
 #endif
 
 	// (5/XX) STATE - Kalman gain computation
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 5/XX ==\n");
+	dbg.print( "== 5/XX ==\n");
 #endif
 
 	Matrix g1xnew = Matrix( Ny, Nx );
@@ -228,17 +228,17 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 #endif // EKFDUAL_SOLMETH
 
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "g1xnew\n");
+	dbg.print( "g1xnew\n");
 	g1xnew.Print();
 
-	Estimator_EKFdual_dprint( "Lxnew\n" );
+	dbg.print( "Lxnew\n" );
 	Lxnew.Print();
 #endif
 
 
 	 // (6/XX) STATE - estimate measurement update
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 6/XX ==\n");
+	dbg.print( "== 6/XX ==\n");
 #endif
 
 	Vector g0new = Matrix( Ny, 1 );
@@ -247,7 +247,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	Cell->g0( xMnew, pMnew, unew, deltat, &g0new );
 
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "g0new\n" );
+	dbg.print( "g0new\n" );
 	g0new.Print();
 #endif
 
@@ -257,7 +257,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	    xPnew = xMnew + xcorr;
 
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	    Estimator_EKFdual_dprint( "xPnew" );
+	    dbg.print( "xPnew" );
 	    xPnew.Print();
 #endif
 
@@ -265,7 +265,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 	} catch( Exception& Ex ) { throw Ex; }
 
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "xPnew\n" );
+	dbg.print( "xPnew\n" );
 	xPnew.Print();
 #endif
 
@@ -273,7 +273,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
 	// (7/XX) STATE - error covariance measurement update
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 7/XX ==\n");
+	dbg.print( "== 7/XX ==\n");
 #endif
 
 	Matrix sxPnew = Matrix( Nx, Nx );
@@ -285,7 +285,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
     // (8/XX) PARAMETER - Kalman gain computation
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 8/XX ==\n");
+	dbg.print( "== 8/XX ==\n");
 #endif
 
 	Matrix g1pnew 	= Matrix( Ny, Np );
@@ -337,7 +337,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
     // (9/XX) PARAMETER - estimate measurement update
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 9/XX ==\n");
+	dbg.print( "== 9/XX ==\n");
 #endif
 
     Vector pPnew = Matrix( Np, 1 );
@@ -352,7 +352,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
 
     // (10/10) PARAMETERS - error covariance measurement update
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-	Estimator_EKFdual_dprint( "== 10/XX ==\n");
+	dbg.print( "== 10/XX ==\n");
 #endif
 
     Matrix spPnew = Matrix( Np, Np );
@@ -376,7 +376,7 @@ t_float Estimator_EKFdual::step( Vector &unew, Vector &yXPnew, t_float tnew )
     dgdpold  = dgdpnew;
 
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_STEPBYSTEP )
-    Estimator_EKFdual_dprint( "sxPold\n");
+    dbg.print( "sxPold\n");
     sxPold.Print();
 #endif
 

@@ -54,12 +54,4 @@
      (DEBUG_MIXALGORITHM & (dbg)) )
 #endif // DEBUG_MIXALGORITHM
 
-
-#if DBGCHK_MIXALGORITHM( DBGMSK_MIXALGORITHM_ENABLE )
-	#include <stdio.h>
-	#include <stdlib.h>
-	#define Estimator_MixAlgorithm_dprint( fmt ) do{ fprintf(fdbg, "Estimator_MixAlgorithm :" fmt "\n"); fflush( fdbg ); } while(0)
-#endif
-
-
 #endif // __ESTIMATOR_MIXALGORITHM_DEBUG_H__

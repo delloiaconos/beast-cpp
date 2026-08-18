@@ -69,8 +69,12 @@ public:
 	t_size getSp( Vector * const Sp ); // returns Parameters Gain
 #endif
 
-private:
+#if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_ENABLE )
+private:  
+    Debug dbg{"[Estimator_EKFdual] ", "Estimator_EKFdual.log"};
+#endif // DBGMSK_EKFDUAL_ENABLE
 
+private:
 	Vector pPold;
 	Vector xPold;
 	Vector uold;

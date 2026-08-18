@@ -54,11 +54,4 @@
      (DEBUG_EKFDUAL & (dbg)) )
 #endif // DEBUG_EKFDUAL
 
-#if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_ENABLE )
-	#include <stdio.h>
-	#include <stdlib.h>
-	#define Estimator_EKFdual_dprint( fmt ) do{ fprintf(fdbg, "Estimator_EKFdual :" fmt "\n"); fflush( fdbg ); } while(0)
-#endif
-
-
 #endif // __ESTIMATOR_EKFDUAL_DEBUG_H__
