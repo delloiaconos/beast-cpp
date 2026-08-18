@@ -52,7 +52,7 @@ CellModel::~CellModel()
 {}
 
 #if ARCH_CHKTYPE( ARCH_PC )
-CellModel::CellModel( char * basepath )
+CellModel::CellModel( const char* basepath )
 {
 	(void) basepath;
 /*

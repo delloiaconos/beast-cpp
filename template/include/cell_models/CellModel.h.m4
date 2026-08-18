@@ -52,7 +52,7 @@ public:
     $$BEAST_CLASS_NAME$$();
 
 #if ARCH_CHKTYPE( ARCH_PC )
-    explicit $$BEAST_CLASS_NAME$$(char* basepath);
+    explicit $$BEAST_CLASS_NAME$$(const char* basepath);
 #endif // ARCH_PC
 
     ~$$BEAST_CLASS_NAME$$() override;

@@ -84,14 +84,14 @@ CellModel_R0A1B1::CellModel_R0A1B1()
 }
 
 #if ARCH_CHKTYPE( ARCH_PC )
-CellModel_R0A1B1::CellModel_R0A1B1(char* basepath)
+CellModel_R0A1B1::CellModel_R0A1B1(const char* basepath)
     : CellModel(basepath)
 {
 	FILE * fr;
 	char filename[2*CELL_MODEL_BASEPATH_LEN];
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_CLASS )
-	dbg.print( "CALL: CellModel_R0A1B1(char* basepath)" );
+	dbg.print( "CALL: CellModel_R0A1B1(const char* basepath)" );
 #endif // DBGMSK_R0A1B1_CLASS
 
    if( basepath != (char*) NULL )

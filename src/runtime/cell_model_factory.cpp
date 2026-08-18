@@ -24,7 +24,7 @@ std::unique_ptr<CellModel> make_cell_model(const std::string& name,
 {
     // Legacy constructors accept char*. std::string::data() is writable in C++17.
     std::string path = model_data_directory;
-    char* basepath = path.empty() ? nullptr : path.data();
+    const char* basepath = path.empty() ? nullptr : path.data();
 
     if (name == "R0A1B1") {
         return std::make_unique<CellModel_R0A1B1>(basepath);

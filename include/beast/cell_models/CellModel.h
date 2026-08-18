@@ -49,7 +49,7 @@ public:
     CellModel();
 
 #if ARCH_CHKTYPE( ARCH_PC )
-    CellModel( char * basepath );
+    CellModel( const char* basepath );
     char _basepath[CELL_MODEL_BASEPATH_LEN];
 #endif // ARCH_PC
     virtual ~CellModel();

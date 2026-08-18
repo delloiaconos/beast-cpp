@@ -50,13 +50,13 @@ $$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$()
 }
 
 #if ARCH_CHKTYPE( ARCH_PC )
-$$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$(char* basepath)
+$$BEAST_CLASS_NAME$$::$$BEAST_CLASS_NAME$$(const char* basepath)
     : CellModel(basepath)
 {
     (void) basepath;
 
 #if DBGCHK_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_CLASS )
-	dbg.print( "CALL: $$BEAST_CLASS_NAME$$(char* basepath)" );
+	dbg.print( "CALL: $$BEAST_CLASS_NAME$$(const char* basepath)" );
 #endif // DBGMSK_$$BEAST_UPNAME$$_CLASS
 
     // TODO: Set the actual model dimensions and load model data from basepath.

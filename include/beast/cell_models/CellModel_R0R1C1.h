@@ -47,7 +47,7 @@ public:
     CellModel_R0R1C1();
 
 #if ARCH_CHKTYPE( ARCH_PC )
-    explicit CellModel_R0R1C1(char* basepath);
+    explicit CellModel_R0R1C1(const char* basepath);
 #endif // ARCH_PC
 
     ~CellModel_R0R1C1() override;
