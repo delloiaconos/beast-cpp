@@ -46,7 +46,13 @@
  */
 //#define DEBUG_EKFDUAL       ( DBGMSK_EKFDUAL_ENABLE | DBGMSK_EKFDUAL_OUT_LX | DBGMSK_EKFDUAL_OUT_LP )
 
-#define DBGCHK_EKFDUAL( dbg )      (defined(DEBUG_EKFDUAL) && ( DEBUG_EKFDUAL & DBGMSK_EKFDUAL_ENABLE ) &&  ( DEBUG_EKFDUAL & (dbg) )  )
+#ifndef DEBUG_EKFDUAL
+#define DBGCHK_EKFDUAL( dbg )    (FALSE)
+#else
+#define DBGCHK_EKFDUAL( dbg ) ( \
+     (DEBUG_EKFDUAL & DBGMSK_EKFDUAL_ENABLE) && \
+     (DEBUG_EKFDUAL & (dbg)) )
+#endif // DEBUG_EKFDUAL
 
 #if DBGCHK_EKFDUAL( DBGMSK_EKFDUAL_ENABLE )
 	#include <stdio.h>

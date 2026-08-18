@@ -48,10 +48,13 @@
 //#define DEBUG_OPENLOOP       ( DBGMSK_OPENLOOP_ENABLE | DBGMSK_OPENLOOP_OUT_LX | DBGMSK_OPENLOOP_OUT_LP )
 #define DEBUG_OPENLOOP		0x00
 
-#define DBGCHK_OPENLOOP( dbg )      ( \
-					defined( DEBUG_OPENLOOP ) && \
-					( DEBUG_OPENLOOP & DBGMSK_OPENLOOP_ENABLE ) && \
-					( DEBUG_OPENLOOP & (dbg) ) )
+#ifndef DEBUG_OPENLOOP
+#define DBGCHK_OPENLOOP( dbg )    (FALSE)
+#else
+#define DBGCHK_OPENLOOP( dbg ) ( \
+     (DEBUG_OPENLOOP & DBGMSK_OPENLOOP_ENABLE) && \
+     (DEBUG_OPENLOOP & (dbg)) )
+#endif // DEBUG_OPENLOOP
 
 #if DBGCHK_OPENLOOP( DBGMSK_OPENLOOP_ENABLE )
 	#include <stdio.h>

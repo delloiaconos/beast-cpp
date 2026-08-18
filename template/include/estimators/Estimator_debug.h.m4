@@ -44,10 +44,13 @@ changecom()dnl
                             DBGMSK_$$BEAST_UPNAME$$_ENABLE | \
                             DBGMSK_$$BEAST_UPNAME$$_CLASS )
 
-#define CHKDBG_$$BEAST_UPNAME$$( dbg )      ( \
-                            defined( DEBUG_$$BEAST_UPNAME$$ ) && \
-                            ( DEBUG_$$BEAST_UPNAME$$ & DBGMSK_$$BEAST_UPNAME$$_ENABLE ) && \ 
+#ifndef DEBUG_$$BEAST_UPNAME$$
+#define DBGCHK_$$BEAST_UPNAME$$( dbg )    (FALSE)
+#else
+#define DBGCHK_$$BEAST_UPNAME$$( dbg )    ( \
+                            ( DEBUG_$$BEAST_UPNAME$$ & DBGMSK_$$BEAST_UPNAME$$_ENABLE ) &&  \
                             ( DEBUG_$$BEAST_UPNAME$$ & (dbg) ) )
+#endif // DEBUG_$$BEAST_UPNAME$$
 
 #if CHKDBG_$$BEAST_UPNAME$$( DBGMSK_$$BEAST_UPNAME$$_ENABLE )
        #include <stdio.h>
