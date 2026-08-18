@@ -446,7 +446,7 @@ t_size	CellModel_R0A1B1::CoerceState( Vector * const xx )
 }
 
 
-#ifdef _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
+#if _ARCHITECTURE_ == ARCH_PC || DBGCHK_CELL_MODEL( DBGMSK_CELL_MODEL_INFO )
 t_size CellModel_R0A1B1::Info( char * strCellModel )
 {
 	/* AUTO genereted Class Member */

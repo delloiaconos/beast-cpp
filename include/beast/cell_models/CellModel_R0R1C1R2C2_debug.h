@@ -42,7 +42,13 @@
  */
 //#define DEBUG_R0R1C1R2C2       ( DBGMSK_R0R1C1R2C2_ENABLE | DBGMSK_R0R1C1R2C2_OCV )
 
-#define DBGCHK_R0R1C1R2C2( dbg )      (defined(DEBUG_R0R1C1R2C2) && ( DEBUG_R0R1C1R2C2 & DBGMSK_R0R1C1R2C2_ENABLE ) &&  ( DEBUG_R0R1C1R2C2 & (dbg) )  )
+#ifndef DEBUG_R0R1C1R2C2
+#define DBGCHK_R0R1C1R2C2( dbg )      (FALSE)
+#else
+#define DBGCHK_R0R1C1R2C2( dbg )       ( \
+                                   ( DEBUG_R0R1C1R2C2 & DBGMSK_R0R1C1R2C2_ENABLE ) && \
+                                   ( DEBUG_R0R1C1R2C2 & (dbg) ) )
+#endif // DEBUG_R0R1C1R2C2
 
 
 #if DBGCHK_R0R1C1R2C2( DBGMSK_R0R1C1R2C2_ENABLE )

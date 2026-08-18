@@ -43,8 +43,13 @@
  */
 //#define DEBUG_R0A1B1       ( DBGMSK_R0A1B1_ENABLE | DBGMSK_R0A1B1_OCV )
 
-#define DBGCHK_R0A1B1( dbg )      (defined(DEBUG_R0A1B1) && ( DEBUG_R0A1B1 & DBGMSK_R0A1B1_ENABLE ) &&  ( DEBUG_R0A1B1 & (dbg) )  )
-
+#ifndef DEBUG_R0A1B1
+#define DBGCHK_R0A1B1( dbg )      (FALSE)
+#else
+#define DBGCHK_R0A1B1( dbg )       ( \
+                                   ( DEBUG_R0A1B1 & DBGMSK_R0A1B1_ENABLE ) && \
+                                   ( DEBUG_R0A1B1 & (dbg) ) )
+#endif
 
 #if DBGCHK_R0A1B1( DBGMSK_R0A1B1_ENABLE )
        #include stdio.h
