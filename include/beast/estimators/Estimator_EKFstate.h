@@ -30,6 +30,8 @@
 #ifndef __ESTIMATOR_EKFSTATE_H__
 #define __ESTIMATOR_EKFSTATE_H__
 
+#include <beast/common/Debug.h>
+
 #include <beast/estimators/Estimator.h>
 #include <beast/cell_models/CellModel.h>
 
