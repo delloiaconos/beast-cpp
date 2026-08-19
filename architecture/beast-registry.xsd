@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified">
+
+
+    <!-- ========================================================= -->
+    <!-- Basic types                                               -->
+    <!-- ========================================================= -->
+
+    <xs:simpleType name="registryNameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z][A-Z0-9_]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="classNameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z_][A-Za-z0-9_]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="pathType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="dimensionType">
+        <xs:restriction base="xs:nonNegativeInteger"/>
+    </xs:simpleType>
+
+
+    <!-- ========================================================= -->
+    <!-- Implementation language                                  -->
+    <!-- ========================================================= -->
+
+    <xs:simpleType name="implementationLanguageType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="cpp"/>
+            <xs:enumeration value="c"/>
+            <xs:enumeration value="matlab"/>
+            <xs:enumeration value="python"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!-- ========================================================= -->
+    <!-- Status                                                    -->
+    <!-- ========================================================= -->
+
+    <xs:simpleType name="statusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="experimental"/>
+            <xs:enumeration value="stable"/>
+            <xs:enumeration value="deprecated"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!-- ========================================================= -->
+    <!-- Dimensions                                                -->
+    <!-- ========================================================= -->
+
+    <xs:complexType name="dimensionsType">
+
+        <xs:sequence>
+
+            <xs:element
+                name="states"
+                type="dimensionType"/>
+
+            <xs:element
+                name="parameters"
+                type="dimensionType"/>
+
+            <xs:element
+                name="inputs"
+                type="dimensionType"/>
+
+            <xs:element
+                name="outputs"
+                type="dimensionType"/>
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+
+    <!-- ========================================================= -->
+    <!-- Header files                                              -->
+    <!-- ========================================================= -->
+
+    <xs:complexType name="headersType">
+
+        <xs:sequence>
+
+            <!-- Exactly one main public/primary header -->
+            <xs:element
+                name="main"
+                type="pathType"/>
+
+            <!-- Zero or more additional headers -->
+            <xs:element
+                name="header"
+                type="pathType"
+                minOccurs="0"
+                maxOccurs="unbounded"/>
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+
+    <!-- ========================================================= -->
+    <!-- Source files                                              -->
+    <!-- ========================================================= -->
+
+    <xs:complexType name="sourcesType">
+
+        <xs:sequence>
+
+            <!-- Exactly one primary implementation source -->
+            <xs:element
+                name="main"
+                type="pathType"/>
+
+            <!-- Zero or more additional sources -->
+            <xs:element
+                name="source"
+                type="pathType"
+                minOccurs="0"
+                maxOccurs="unbounded"/>
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+
+    <!-- ========================================================= -->
+    <!-- Implementation                                           -->
+    <!-- ========================================================= -->
+
+    <xs:complexType name="implementationType">
+
+        <xs:sequence>
+
+            <xs:element
+                name="className"
+                type="classNameType"/>
+
+            <!--
+                Every implementation has at least one primary
+                source file.
+            -->
+            <xs:element
+                name="sources"
+                type="sourcesType"/>
+
+            <!--
+                Headers are optional because MATLAB/Python
+                implementations normally do not have headers.
+            -->
+            <xs:element
+                name="headers"
+                type="headersType"
+                minOccurs="0"/>
+
+        </xs:sequence>
+
+
+        <xs:attribute
+            name="language"
+            type="implementationLanguageType"
+            use="required"/>
+
+    </xs:complexType>
+
+
+    <!-- ========================================================= -->
+    <!-- Information                                               -->
+    <!-- ========================================================= -->
+
+    <xs:complexType name="infoType">
+
+        <xs:sequence>
+
+            <xs:element
+                name="brief"
+                type="xs:string"/>
+
+            <xs:element
+                name="description"
+                type="xs:string"/>
+
+            <xs:element
+                name="maintainer"
+                type="xs:string"/>
+
+            <xs:element
+                name="year"
+                type="xs:gYear"/>
+
+            <xs:element
+                name="lastModified"
+                type="xs:date"/>
+
+            <xs:element
+                name="status"
+                type="statusType"/>
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+
+    <!-- ========================================================= -->
+    <!-- Cell model                                                -->
+    <!-- ========================================================= -->
+
+    <xs:complexType name="cellModelType">
+
+        <xs:sequence>
+
+            <xs:element
+                name="dimensions"
+                type="dimensionsType"/>
+
+            <xs:element
+                name="implementation"
+                type="implementationType"
+                minOccurs="1"
+                maxOccurs="unbounded"/>
+
+            <xs:element
+                name="info"
+                type="infoType"/>
+
+            <xs:element
+                name="notes"
+                type="xs:string"
+                minOccurs="0"/>
+
+        </xs:sequence>
+
+
+        <xs:attribute
+            name="name"
+            type="registryNameType"
+            use="required"/>
+
+    </xs:complexType>
+
+
+    <!-- ========================================================= -->
+    <!-- Estimator                                                 -->
+    <!-- ========================================================= -->
+
+    <xs:complexType name="estimatorType">
+
+        <xs:sequence>
+
+            <xs:element
+                name="implementation"
+                type="implementationType"
+                minOccurs="1"
+                maxOccurs="unbounded"/>
+
+            <xs:element
+                name="info"
+                type="infoType"/>
+
+            <xs:element
+                name="notes"
+                type="xs:string"
+                minOccurs="0"/>
+
+        </xs:sequence>
+
+
+        <xs:attribute
+            name="name"
+            type="registryNameType"
+            use="required"/>
+
+    </xs:complexType>
+
+
+    <!-- ========================================================= -->
+    <!-- Root                                                      -->
+    <!-- ========================================================= -->
+
+    <xs:element name="beastRegistry">
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <!-- ================================================= -->
+                <!-- Cell models                                       -->
+                <!-- ================================================= -->
+
+                <xs:element name="cellModels">
+
+                    <xs:complexType>
+
+                        <xs:sequence>
+
+                            <xs:element
+                                name="cellmodel"
+                                type="cellModelType"
+                                minOccurs="1"
+                                maxOccurs="unbounded"/>
+
+                        </xs:sequence>
+
+                    </xs:complexType>
+
+
+                    <!-- Cell-model registry names must be unique -->
+
+                    <xs:unique name="uniqueCellModelName">
+                        <xs:selector xpath="cellmodel"/>
+                        <xs:field xpath="@name"/>
+                    </xs:unique>
+
+
+                    <!--
+                        Only one implementation per language
+                        for each cell model.
+                    -->
+
+                    <xs:unique
+                        name="uniqueCellModelImplementationLanguage">
+
+                        <xs:selector
+                            xpath="cellmodel/implementation"/>
+
+                        <xs:field
+                            xpath="@language"/>
+
+                    </xs:unique>
+
+
+                    <!--
+                        Implementation class names must be unique
+                        when specified.
+                    -->
+
+                    <xs:unique
+                        name="uniqueCellModelClassName">
+
+                        <xs:selector
+                            xpath="cellmodel/implementation"/>
+
+                        <xs:field
+                            xpath="className"/>
+
+                    </xs:unique>
+
+                </xs:element>
+
+
+                <!-- ================================================= -->
+                <!-- Estimators                                        -->
+                <!-- ================================================= -->
+
+                <xs:element name="estimators">
+
+                    <xs:complexType>
+
+                        <xs:sequence>
+
+                            <xs:element
+                                name="estimator"
+                                type="estimatorType"
+                                minOccurs="1"
+                                maxOccurs="unbounded"/>
+
+                        </xs:sequence>
+
+                    </xs:complexType>
+
+
+                    <xs:unique name="uniqueEstimatorName">
+                        <xs:selector xpath="estimator"/>
+                        <xs:field xpath="@name"/>
+                    </xs:unique>
+
+
+                    <xs:unique
+                        name="uniqueEstimatorImplementationLanguage">
+
+                        <xs:selector
+                            xpath="estimator/implementation"/>
+
+                        <xs:field
+                            xpath="@language"/>
+
+                    </xs:unique>
+
+
+                    <xs:unique
+                        name="uniqueEstimatorClassName">
+
+                        <xs:selector
+                            xpath="estimator/implementation"/>
+
+                        <xs:field
+                            xpath="className"/>
+
+                    </xs:unique>
+
+                </xs:element>
+
+            </xs:sequence>
+
+
+            <xs:attribute
+                name="version"
+                type="xs:positiveInteger"
+                use="required"/>
+
+        </xs:complexType>
+
+    </xs:element>
+
+</xs:schema>
