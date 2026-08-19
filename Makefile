@@ -60,7 +60,7 @@ generate-cell-model:
 		BEAST_YEAR="$(BEAST_YEAR)" \
 		BEAST_REPOSITORY="$(BEAST_REPOSITORY)" \
 		FORCE="$(FORCE)" \
-		./codegen/scripts/generate_cell_model.sh "$(NAME)"
+		./codegen/scripts/generate-m4.sh ./codegen/m4/cell_model.conf "$(NAME)"
 
 generate-estimator:
 	@test -n "$(NAME)" || { \
@@ -72,7 +72,7 @@ generate-estimator:
 		BEAST_YEAR="$(BEAST_YEAR)" \
 		BEAST_REPOSITORY="$(BEAST_REPOSITORY)" \
 		FORCE="$(FORCE)" \
-		./codegen/scripts/generate_estimator.sh "$(NAME)"
+		./codegen/scripts/generate-m4.sh ./codegen/m4/estimator.conf "$(NAME)"
 
 beast-estimator: configure
 	$(CMAKE) --build "$(BUILD_DIR)" --target beast-estimator --parallel
