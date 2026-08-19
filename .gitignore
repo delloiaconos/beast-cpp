@@ -7,7 +7,18 @@ cmake-build-*/
 *.dylib
 *.exe
 
+# Tools
+tools/fmpp/fmpp_*
+
+# Temporary files
 *.bck
 *.bak
 *.old
 *.tmp
+*.temp
+
+# Archives
+*.zip
+*.rar
+*.tar.gz
+*.tar
