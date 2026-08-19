@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beastRegistry
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="beast-registry.xsd"
+    version="1">
+
+    <cellModels>
+
+        <cellmodel name="TCELL">
+
+            <dimensions>
+                <states>1</states>
+                <parameters>3</parameters>
+                <inputs>1</inputs>
+                <outputs>1</outputs>
+            </dimensions>
+            
+            <implementation language="cpp">
+                <className>CellModel_TCell</className>
+                <sources>
+                    <main>src/cell_models/CellModel_TCell.cpp</main>
+                </sources>
+                <headers>
+                    <main>beast/cell_models/CellModel_TCell.h</main>
+                </headers>
+            </implementation>
+
+            <info>
+                <brief>Test cell Implementation.</brief>
+                <description>
+                    Test Cell Implementation
+                </description>
+
+                <maintainer>Salvatore Dello Iacono</maintainer>
+                <year>2016</year>
+                <lastModified>2026-08-18</lastModified>
+                <status>development</status>
+            </info>
+            <notes></notes>
+        
+        </cellmodel>
+
+    </cellModels>
+
+    <estimators>
+
+        <estimator name="ETest">
+
+            <implementation language="cpp">
+                <className>Estimator_ETest</className>
+                <sources>
+                    <main>src/estimators/Estimator_ETest.cpp</main>
+                </sources>
+                <headers>
+                    <main>beast/estimators/Estimator_ETest.h</main>
+                </headers>
+            </implementation>
+
+            <info>
+                <brief>Test Estimator.</brief>
+
+                <description>
+                Test Estimator
+                </description>
+
+                <maintainer>Salvatore Dello Iacono</maintainer>
+                <year>2026</year>
+                <lastModified>2026-08-18</lastModified>
+                <status>development</status>
+            </info>
+
+            <notes></notes>
+        </estimator>
+
+    </estimators>
+
+</beastRegistry>
+
