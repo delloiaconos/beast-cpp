@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(beast-cpp VERSION 0.2.0 LANGUAGES C CXX)
 
+option(BEAST_BUILD_TEMPLATES "Build BEAST cpp/h/hpp files from templates" OFF)
 option(BEAST_BUILD_APPS "Build BEAST command-line utilities" ON)
 option(BEAST_BUILD_TESTS "Build BEAST tests" ON)
 option(BEAST_BUILD_DOCS "Enable BEAST Doxygen documentation target" OFF)
@@ -54,6 +55,51 @@ if(MSVC)
     target_compile_options(beast PRIVATE /W3)
 else()
     target_compile_options(beast PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+
+
+if(BEAST_BUILD_TEMPLATES)
+    find_program(XMLLINT_BIN xmllint)
+    if(NOT XMLLINT_BIN)
+        message(FATAL_ERROR "xmllint utility not found! Please install libxml2-utils.")
+    endif()
+
+    find_program(FMPP_BIN ${CMAKE_CURRENT_SOURCE_DIR}/tools/fmpp/fmpp_0.9.16/bin/fmpp)
+    if(NOT FMPP_BIN)
+        message(FATAL_ERROR "FMPP not found! Ensure it is in your PATH.")
+    endif()
+
+    # Percorsi dei file
+    set(XSD_FILE "${CMAKE_CURRENT_SOURCE_DIR}/architecture/beast-registry.xsd")
+    set(XML_MAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/architecture/beast-architecture.xml")
+    set(OUTPUT_MARKER "${CMAKE_CURRENT_BINARY_DIR}/generated/beast_generated.cpp")
+
+    # ==========================================
+    # VALIDAZIONE XML (Target Manuale)
+    # ==========================================
+    add_custom_target(registry-validate
+        COMMAND echo "Validating XML data structure..."
+        COMMAND ${XMLLINT_BIN} --noent --schema ${XSD_FILE} ${XML_MAIN_FILE} --noout
+        COMMENT "Checking XML schema validity"
+    )
+
+    # ==========================================
+    # GENERAZIONE FMPP (Target Manuale)
+    # ==========================================
+    # Usiamo un custom command per tracciare le modifiche ai file
+    add_custom_command(
+        OUTPUT ${OUTPUT_MARKER}
+        COMMAND echo "Generating beast-cpp c/cpp/h/hpp files from templates..."
+        COMMAND ${FMPP_BIN}
+        DEPENDS ${XML_MAIN_FILE} "${CMAKE_CURRENT_SOURCE_DIR}/config.fmpp"
+        COMMENT "Running FMPP template processor"
+    )
+
+    # Target manuale per FMPP
+    add_custom_target(templates-build DEPENDS ${OUTPUT_MARKER})
+
+    # Collegamento logico: la generazione richiede che la validazione passi per prima
+    add_dependencies(templates-build registry-validate)
 endif()
 
 if(BEAST_BUILD_APPS)
