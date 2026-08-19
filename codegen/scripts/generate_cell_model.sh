@@ -67,13 +67,21 @@ info()
 # -----------------------------------------------------------------------------
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-TEMPLATE_INCLUDE_DIR="$ROOT_DIR/template/include/cell_models"
-TEMPLATE_SOURCE_DIR="$ROOT_DIR/template/src/cell_models"
+CODEGEN_DIR="$ROOT_DIR/codegen/m4"
 
-OUTPUT_INCLUDE_DIR="$ROOT_DIR/include/beast/cell_models/"
-OUTPUT_SOURCE_DIR="$ROOT_DIR/src/cell_models/"
+# -----------------------------------------------------------------------------
+# Template -> output mappings
+# -----------------------------------------------------------------------------
+
+
+FILES=(
+    "$CODEGEN_DIR/cell_models/CellModel.cpp.m4|$ROOT_DIR/src/cell_models/CellModel_${NAME}.cpp"
+    "$CODEGEN_DIR/cell_models/CellModel.h.m4|$ROOT_DIR/include/beast/cell_models/CellModel_${NAME}.h"
+    "$CODEGEN_DIR/cell_models/CellModel_debug.h.m4|$ROOT_DIR/include/beast/cell_models/CellModel_${NAME}_debug.h"
+)
+
 
 
 # -----------------------------------------------------------------------------
@@ -142,24 +150,6 @@ if ! command -v "$M4" >/dev/null 2>&1; then
     exit 1
 fi
 
-
-# -----------------------------------------------------------------------------
-# Template -> output mappings
-#
-# Add additional generated files here.
-# -----------------------------------------------------------------------------
-
-declare -A HEADER_FILES=(
-    ["CellModel.h.m4"]="CellModel_${NAME}.h"
-    ["CellModel_debug.h.m4"]="CellModel_${NAME}_debug.h"
-)
-
-
-declare -A SOURCE_FILES=(
-    ["CellModel.cpp.m4"]="CellModel_${NAME}.cpp"
-)
-
-
 # -----------------------------------------------------------------------------
 # Generation helpers
 # -----------------------------------------------------------------------------
@@ -212,18 +202,12 @@ generate_file()
 
 
 # -----------------------------------------------------------------------------
-# Validate all templates before creating anything
-#
-# This avoids partially generating a class because one of the templates was
-# missing.
+# Validate templates
 # -----------------------------------------------------------------------------
 
-for template_name in "${!HEADER_FILES[@]}"; do
-    check_template "$TEMPLATE_INCLUDE_DIR/$template_name"
-done
-
-for template_name in "${!SOURCE_FILES[@]}"; do
-    check_template "$TEMPLATE_SOURCE_DIR/$template_name"
+for entry in "${FILES[@]}"; do
+    IFS='|' read -r template_file output_file <<< "$entry"
+    check_template "$template_file"
 done
 
 
@@ -231,14 +215,9 @@ done
 # Validate all output files before creating anything
 # -----------------------------------------------------------------------------
 
-for template_name in "${!HEADER_FILES[@]}"; do
-    output_name="${HEADER_FILES[$template_name]}"
-    check_output "$OUTPUT_INCLUDE_DIR/$output_name"
-done
-
-for template_name in "${!SOURCE_FILES[@]}"; do
-    output_name="${SOURCE_FILES[$template_name]}"
-    check_output "$OUTPUT_SOURCE_DIR/$output_name"
+for entry in "${FILES[@]}"; do
+    IFS='|' read -r template_file output_file <<< "$entry"
+    check_output "$output_file"
 done
 
 
@@ -246,34 +225,24 @@ done
 # Create output directories
 # -----------------------------------------------------------------------------
 
-mkdir -p "$OUTPUT_INCLUDE_DIR"
-mkdir -p "$OUTPUT_SOURCE_DIR"
-
-
-# -----------------------------------------------------------------------------
-# Generate headers
-# -----------------------------------------------------------------------------
-
-for template_name in "${!HEADER_FILES[@]}"; do
-    output_name="${HEADER_FILES[$template_name]}"
-
-    generate_file \
-        "$TEMPLATE_INCLUDE_DIR/$template_name" \
-        "$OUTPUT_INCLUDE_DIR/$output_name"
+for entry in "${FILES[@]}"; do
+    IFS='|' read -r template_file output_file <<< "$entry"
+    mkdir -p "$(dirname "$output_file")"
 done
 
 
 # -----------------------------------------------------------------------------
-# Generate sources
+# Generate files
 # -----------------------------------------------------------------------------
 
-for template_name in "${!SOURCE_FILES[@]}"; do
-    output_name="${SOURCE_FILES[$template_name]}"
+for entry in "${FILES[@]}"; do
+    IFS='|' read -r template_file output_file <<< "$entry"
 
     generate_file \
-        "$TEMPLATE_SOURCE_DIR/$template_name" \
-        "$OUTPUT_SOURCE_DIR/$output_name"
+        "$template_file" \
+        "$output_file"
 done
+
 
 
 # -----------------------------------------------------------------------------
@@ -284,8 +253,6 @@ echo
 info "CellModel generated successfully"
 info "Name:       $NAME"
 info "Class:      CellModel_${UPPER_NAME}"
-info "Headers:    ${OUTPUT_INCLUDE_DIR#$ROOT_DIR/}"
-info "Sources:    ${OUTPUT_SOURCE_DIR#$ROOT_DIR/}"
 info "Author:     $BEAST_AUTHOR"
 info "Repository: $BEAST_REPOSITORY"
 info "Year:       $BEAST_YEAR"
