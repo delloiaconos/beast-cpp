@@ -7,7 +7,7 @@
 
     <cellModels>
 
-        <cellmodel name="TCELL">
+        <cellmodel name="CTEST">
 
             <dimensions>
                 <states>1</states>
@@ -17,7 +17,7 @@
             </dimensions>
             
             <implementation language="cpp">
-                <className>CellModel_TCell</className>
+                <className>CellModel_CTest</className>
                 <sources>
                     <main>src/cell_models/CellModel_TCell.cpp</main>
                 </sources>
@@ -35,7 +35,7 @@
                 <maintainer>Salvatore Dello Iacono</maintainer>
                 <year>2016</year>
                 <lastModified>2026-08-18</lastModified>
-                <status>development</status>
+                <status>experimental</status>
             </info>
             <notes></notes>
         
@@ -45,7 +45,7 @@
 
     <estimators>
 
-        <estimator name="ETest">
+        <estimator name="ETEST">
 
             <implementation language="cpp">
                 <className>Estimator_ETest</className>
@@ -67,7 +67,7 @@
                 <maintainer>Salvatore Dello Iacono</maintainer>
                 <year>2026</year>
                 <lastModified>2026-08-18</lastModified>
-                <status>development</status>
+                <status>experimental</status>
             </info>
 
             <notes></notes>
