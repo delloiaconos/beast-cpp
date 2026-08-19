@@ -37,6 +37,9 @@ configure:
 build: configure
 	$(CMAKE) --build "$(BUILD_DIR)" --parallel
 
+build-templates: configure
+	$(CMAKE) --build-templates "$(BUILD_DIR)" --parallel
+
 test: build
 	$(CTEST) --test-dir "$(BUILD_DIR)" --output-on-failure
 
@@ -57,7 +60,7 @@ generate-cell-model:
 		BEAST_YEAR="$(BEAST_YEAR)" \
 		BEAST_REPOSITORY="$(BEAST_REPOSITORY)" \
 		FORCE="$(FORCE)" \
-		./tools/generate_cell_model.sh "$(NAME)"
+		./codegen/scripts/generate_cell_model.sh "$(NAME)"
 
 generate-estimator:
 	@test -n "$(NAME)" || { \
@@ -69,7 +72,7 @@ generate-estimator:
 		BEAST_YEAR="$(BEAST_YEAR)" \
 		BEAST_REPOSITORY="$(BEAST_REPOSITORY)" \
 		FORCE="$(FORCE)" \
-		./tools/generate_estimator.sh "$(NAME)"
+		./codegen/scripts/generate_estimator.sh "$(NAME)"
 
 beast-estimator: configure
 	$(CMAKE) --build "$(BUILD_DIR)" --target beast-estimator --parallel
@@ -108,6 +111,7 @@ help:
 		'  make                    Configure and build the project' \
 		'  make configure          Configure CMake only' \
 		'  make build              Configure and build all enabled targets' \
+		'  make build-templates    Configure and build all templates from registry' \'
 		'  make test               Build and run CTest' \
 		'  make docs               Generate Doxygen HTML documentation' \
 		'  make generate-cell-model NAME=R0R2C2' \
@@ -133,15 +137,13 @@ help:
 		'' \
 		'Generator variables:' \
 		'  M4=m4                   M4 executable' \
-		'  BEAST_AUTHOR=<name>     Doxygen author (defaults to git user.name)' \
-		'  BEAST_YEAR=<year>       Header year (defaults to current year)' \
-		'  BEAST_REPOSITORY=<url>  Repository reference (defaults to git origin)' \
+		'  NAME=Test               Estimator or CellModel Name' \
 		'  FORCE=1                 Allow overwriting generated files' \
 		'' \
 		'Examples:' \
 		'  make release' \
 		'  make test BUILD_TYPE=Release' \
 		'  make docs' \
-		'  make generate-cell-model NAME=R0R2C2' \
-		'  make generate-estimator NAME=UKF BEAST_AUTHOR="Jane Doe"' \
+		'  make generate-cell-model NAME=CMTest' \
+		'  make generate-estimator NAME=ETest FORCE=1' \
 		'  make build BUILD_DIR=build-ci BEAST_BUILD_TESTS=OFF'
