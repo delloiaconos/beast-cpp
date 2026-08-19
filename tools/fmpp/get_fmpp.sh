@@ -117,6 +117,11 @@ cp -r \
 echo "Removing extracted temporary files..."
 rm -rf "${FMPP_EXTRACTED_DIR}"
 
+read -rp "Remove temporary directory '${TEMP_DIR}'? [y/N] " REPLY;
+if [[ "${REPLY}" =~ ^[Yy]$ ]]; then
+    rm -rf "${TEMP_DIR}"
+fi
+
 # 6. Configure Linux execute permissions.
 chmod +x "${TARGET_DIR}/bin/fmpp"
 
