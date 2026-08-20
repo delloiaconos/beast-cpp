@@ -1,14 +1,21 @@
 # Convenience wrapper around the CMake build and BEAST developer tools.
 # CMakeLists.txt remains the source of truth for build targets and dependencies.
 
-BUILD_DIR ?= build
-BUILD_TYPE ?= Debug
-BEAST_BUILD_APPS ?= ON
-BEAST_BUILD_TESTS ?= ON
-BEAST_BUILD_DOCS ?= OFF
-CMAKE ?= cmake
-CTEST ?= ctest
-M4 ?= m4
+BUILD_DIR 			?= build
+BUILD_TYPE 			?= Debug
+TOOLS_DIR 			?= tools
+
+# CMake options
+BEAST_BUILD_APPS 	?= ON
+BEAST_BUILD_TESTS 	?= ON
+BEAST_BUILD_REGS	?= OFF
+BEAST_BUILD_DOCS 	?= OFF
+
+# Tools
+CMAKE	 			?= cmake
+CTEST 				?= ctest
+M4 					?= m4
+FMPP 				?= $(shell command -v fmpp 2>/dev/null || echo "$(TOOLS_DIR)/fmpp_0.9.16/bin/fmpp")
 
 # Metadata used by the M4 class generators. Values can be overridden on the
 # make command line. Empty git values are handled by the generator scripts.
@@ -23,11 +30,20 @@ CMAKE_CONFIGURE_ARGS = \
 	-DCMAKE_BUILD_TYPE="$(BUILD_TYPE)" \
 	-DBEAST_BUILD_APPS="$(BEAST_BUILD_APPS)" \
 	-DBEAST_BUILD_TESTS="$(BEAST_BUILD_TESTS)" \
-	-DBEAST_BUILD_DOCS="$(BEAST_BUILD_DOCS)"
+	-DBEAST_BUILD_DOCS="$(BEAST_BUILD_DOCS)" \
+	-DBEAST_BUILD_REGS="$(BEAST_BUILD_REGS)"
 
 .PHONY: all configure build test docs clean distclean rebuild install \
 	beast-estimator beast-model-info debug release \
-	generate-cell-model generate-estimator help
+	generate-cell-model generate-estimator help prepare
+
+prepare:
+	@if [ ! -x "$(FMPP)" ]; then \
+		@echo "FMPP not found or not executable. Installing..."; \
+		$(TOOLS_DIR)/get_fmpp.sh; \
+	fi
+	@echo 'Testing fmpp version'
+	$(FMPP) --version
 
 all: build
 
@@ -37,7 +53,8 @@ configure:
 build: configure
 	$(CMAKE) --build "$(BUILD_DIR)" --parallel
 
-build-templates: configure
+build-templates:
+	$(MAKE) configure BEAST_BUILD_REGS=ON
 	$(CMAKE) --build-templates "$(BUILD_DIR)" --parallel
 
 test: build
@@ -52,8 +69,8 @@ docs:
 
 generate-cell-model:
 	@test -n "$(NAME)" || { \
-		echo 'Usage: make generate-cell-model NAME=<model-name>'; \
-		exit 2; \
+		@echo 'Usage: make generate-cell-model NAME=<model-name>'; \
+		@exit 2; \
 	}
 	@M4="$(M4)" \
 		BEAST_AUTHOR="$(BEAST_AUTHOR)" \
@@ -64,8 +81,8 @@ generate-cell-model:
 
 generate-estimator:
 	@test -n "$(NAME)" || { \
-		echo 'Usage: make generate-estimator NAME=<estimator-name>'; \
-		exit 2; \
+		@echo 'Usage: make generate-estimator NAME=<estimator-name>'; \
+		@exit 2; \
 	}
 	@M4="$(M4)" \
 		BEAST_AUTHOR="$(BEAST_AUTHOR)" \
@@ -87,7 +104,7 @@ clean:
 	@if [ -d "$(BUILD_DIR)" ]; then \
 		$(CMAKE) --build "$(BUILD_DIR)" --target clean; \
 	else \
-		echo "Nothing to clean: $(BUILD_DIR) does not exist."; \
+		@echo "Nothing to clean: $(BUILD_DIR) does not exist."; \
 	fi
 
 distclean:

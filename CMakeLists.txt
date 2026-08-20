@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.16)
 
 project(beast-cpp VERSION 0.2.0 LANGUAGES C CXX)
 
-option(BEAST_BUILD_TEMPLATES "Build BEAST cpp/h/hpp files from templates" OFF)
 option(BEAST_BUILD_APPS "Build BEAST command-line utilities" ON)
 option(BEAST_BUILD_TESTS "Build BEAST tests" ON)
+option(BEAST_BUILD_REGS "Build BEAST cpp/h/hpp files from registry and templates" OFF)
 option(BEAST_BUILD_DOCS "Enable BEAST Doxygen documentation target" OFF)
 
 file(GLOB CELL_MODEL_SOURCES CONFIGURE_DEPENDS
@@ -58,7 +58,7 @@ else()
 endif()
 
 
-if(BEAST_BUILD_TEMPLATES)
+if(BEAST_BUILD_REGS)
     find_program(XMLLINT_BIN xmllint)
     if(NOT XMLLINT_BIN)
         message(FATAL_ERROR "xmllint utility not found! Please install libxml2-utils.")
