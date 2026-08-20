@@ -8,7 +8,7 @@ cmake-build-*/
 *.exe
 
 # Tools
-tools/fmpp/fmpp_*
+tools/fmpp_*
 
 # Temporary files
 *.bck
