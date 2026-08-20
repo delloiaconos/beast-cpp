@@ -33,9 +33,11 @@ CMAKE_CONFIGURE_ARGS = \
 	-DBEAST_BUILD_DOCS="$(BEAST_BUILD_DOCS)" \
 	-DBEAST_BUILD_REGS="$(BEAST_BUILD_REGS)"
 
-.PHONY: all configure build test docs clean distclean rebuild install \
-	beast-estimator beast-model-info debug release \
-	generate-cell-model generate-estimator help prepare
+.PHONY: info all \
+	configure build test docs clean distclean rebuild install debug release \
+	beast-estimator beast-model-info  \
+	generate-cell-model generate-estimator registry-validate \
+	prepare
 
 prepare:
 	@if [ ! -x "$(FMPP)" ]; then \
@@ -53,9 +55,9 @@ configure:
 build: configure
 	$(CMAKE) --build "$(BUILD_DIR)" --parallel
 
-build-templates:
+registry-validate:
 	$(MAKE) configure BEAST_BUILD_REGS=ON
-	$(CMAKE) --build-templates "$(BUILD_DIR)" --parallel
+	$(CMAKE) --build "$(BUILD_DIR)" --target registry-validate
 
 test: build
 	$(CTEST) --test-dir "$(BUILD_DIR)" --output-on-failure

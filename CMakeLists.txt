@@ -83,23 +83,6 @@ if(BEAST_BUILD_REGS)
         COMMENT "Checking XML schema validity"
     )
 
-    # ==========================================
-    # GENERAZIONE FMPP (Target Manuale)
-    # ==========================================
-    # Usiamo un custom command per tracciare le modifiche ai file
-    add_custom_command(
-        OUTPUT ${OUTPUT_MARKER}
-        COMMAND echo "Generating beast-cpp c/cpp/h/hpp files from templates..."
-        COMMAND ${FMPP_BIN}
-        DEPENDS ${XML_MAIN_FILE} "${CMAKE_CURRENT_SOURCE_DIR}/config.fmpp"
-        COMMENT "Running FMPP template processor"
-    )
-
-    # Target manuale per FMPP
-    add_custom_target(templates-build DEPENDS ${OUTPUT_MARKER})
-
-    # Collegamento logico: la generazione richiede che la validazione passi per prima
-    add_dependencies(templates-build registry-validate)
 endif()
 
 if(BEAST_BUILD_APPS)
