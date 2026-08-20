@@ -59,14 +59,21 @@ endif()
 
 
 if(BEAST_BUILD_REGS)
+    set(FMPP_LOCAL "${CMAKE_CURRENT_SOURCE_DIR}/tools/fmpp/fmpp_0.9.16/bin/fmpp" )
+
     find_program(XMLLINT_BIN xmllint)
     if(NOT XMLLINT_BIN)
         message(FATAL_ERROR "xmllint utility not found! Please install libxml2-utils.")
     endif()
 
-    find_program(FMPP_BIN ${CMAKE_CURRENT_SOURCE_DIR}/tools/fmpp/fmpp_0.9.16/bin/fmpp)
+    find_program(FMPP_BIN NAMES fmpp)
+
+    if(NOT FMPP_BIN AND EXISTS "${FMPP_LOCAL}")
+        set(FMPP_BIN "${FMPP_LOCAL}")
+    endif()
+
     if(NOT FMPP_BIN)
-        message(FATAL_ERROR "FMPP not found! Ensure it is in your PATH.")
+        message(FATAL_ERROR "FMPP not found in your PATH! Install it using `make prepare`")
     endif()
 
     # Percorsi dei file
@@ -82,7 +89,7 @@ if(BEAST_BUILD_REGS)
         COMMAND ${XMLLINT_BIN} --noent --schema ${XSD_FILE} ${XML_MAIN_FILE} --noout
         COMMENT "Checking XML schema validity"
     )
-
+    
 endif()
 
 if(BEAST_BUILD_APPS)
