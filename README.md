@@ -1,12 +1,28 @@
 # BEAST C++
 
-**BEAST — Battery Estimation Architecture and Simulation Toolkit**
+**C++ implementation of BEAST — Battery Estimation Algorithms and Simulation Toolkit**
 
-`beast-cpp` is the C++ implementation of BEAST, a framework for battery modeling,
-simulation, and state/parameter estimation. The repository is organized around a
-reusable C++ library plus independent command-line utilities that link against it.
+`beast-cpp` is the native C++ implementation of the BEAST battery modelling and
+estimation framework.
 
-The equivalent Python implementation is maintained separately as `beast-py`.
+For the general project introduction, history, battery-model documentation, and
+links to the other implementations, see the main
+[BEAST repository](https://github.com/delloiaconos/beast.git).
+
+## About this implementation
+
+The C++ project is designed around a reusable library containing battery cell
+models, estimators, numerical utilities, and runtime support. Independent
+command-line applications link against the library rather than embedding
+application entry points in the reusable source tree.
+
+The implementation is intended for:
+
+- native C++ simulation and research software;
+- reusable battery-model and estimator components;
+- performance-sensitive applications;
+- development toward embedded or real-time targets;
+- comparison with the Python and MATLAB BEAST implementations.
 
 ## Repository structure
 
